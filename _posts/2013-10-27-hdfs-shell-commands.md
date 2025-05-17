@@ -3,7 +3,7 @@ id: 118
 title: 'Top 10 Hadoop Shell Commands to manage HDFS'
 date: '2013-10-27T22:32:09-07:00'
 author: saurzcode
-layout: post
+layout: single
 guid: 'https://saurzcode.in//?p=118'
 permalink: /2013/10/hdfs-shell-commands/
 publicize_google_plus_url:
@@ -36,116 +36,181 @@ tags:
     - storage
 ---
 
-<div dir="ltr">
-<blockquote>So you already know what <em>Hadoop</em> is? Why it is used for ? and  What problems you can solve with it?  and you want to know how you can deal with files on <em>HDFS</em>?  Don't worry, you are in the right place.</blockquote>
-In this article I will present Top 10 basic <em>Hadoop HDFS</em> operations managed through shell commands which are useful to manage files on <em>HDFS</em> clusters, For testing purposes, you can invoke this commands using either some of the VMs from <em>Cloudera</em>, <em>Hortonworks</em> etc or if you have your own setup of a pseudo-distributed cluster.
+So you already know what *Hadoop* is? Why it is used for? What problems you can solve with it? And you want to know how you can deal with files on *HDFS*? Don't worry, you are in the right place.
+
+In this article I will present **Top 10 basic Hadoop HDFS operations managed through shell commands** which are useful to manage files on *HDFS* clusters. For testing purposes, you can invoke these commands using either some of the VMs from *Cloudera*, *Hortonworks*, etc., or if you have your own setup of a pseudo-distributed cluster.
 
 Let's get started.
 
-<strong><span style="color: #993366;">1. Create a directory in HDFS at the given path(s).</span></strong>
-<pre>Usage:
-hadoop fs -mkdir &lt;paths&gt;
-Example:
-hadoop fs -mkdir /user/saurzcode/dir1 /user/saurzcode/dir2</pre>
-<span style="color: #993366;"><strong>2.  List the contents of a directory.</strong></span>
-<pre>Usage :
-hadoop fs -ls &lt;args&gt;
-Example:
-hadoop fs -ls /user/saurzcode</pre>
-<strong><span style="color: #993366;">3. Upload and download a file in HDFS.</span></strong>
+## 1. Create a directory in HDFS at the given path(s).
 
-<span style="text-decoration: underline;"><em>Upload</em></span>:
+**Usage:**
+```
+hadoop fs -mkdir <paths>
+```
+**Example:**
+```
+hadoop fs -mkdir /user/saurzcode/dir1 /user/saurzcode/dir2
+```
 
-<strong>hadoop fs -put:</strong>
+## 2. List the contents of a directory.
+
+**Usage:**
+```
+hadoop fs -ls <args>
+```
+**Example:**
+```
+hadoop fs -ls /user/saurzcode
+```
+
+## 3. Upload and download a file in HDFS.
+
+### Upload
+**hadoop fs -put:**
 
 Copy a single src file, or multiple src files from local file system to the Hadoop data file system
-<pre>Usage:
-hadoop fs -put &lt;localsrc&gt; ... &lt;HDFS_dest_Path&gt;
-Example:
-hadoop fs -put /home/saurzcode/Samplefile.txt  /user/saurzcode/dir3/</pre>
-<span style="text-decoration: underline;"><em>Download:</em></span>
 
-<strong>hadoop fs -get:</strong>
+**Usage:**
+```
+hadoop fs -put <localsrc> ... <HDFS_dest_Path>
+```
+**Example:**
+```
+hadoop fs -put /home/saurzcode/Samplefile.txt /user/saurzcode/dir3/
+```
+
+### Download
+**hadoop fs -get:**
 
 Copies/Downloads files to the local file system
-<pre>Usage:
-hadoop fs -get &lt;hdfs_src&gt; &lt;localdst&gt;
-Example:
-hadoop fs -get /user/saurzcode/dir3/Samplefile.txt /home/</pre>
-<span style="color: #993366;"><strong>4. See contents of a file</strong></span>
+
+**Usage:**
+```
+hadoop fs -get <hdfs_src> <localdst>
+```
+**Example:**
+```
+hadoop fs -get /user/saurzcode/dir3/Samplefile.txt /home/
+```
+
+## 4. See contents of a file
 
 Same as UNIX cat command:
-<pre>Usage:
-hadoop fs -cat &lt;path[filename]&gt;
-Example:
-hadoop fs -cat /user/saurzcode/dir1/abc.txt</pre>
-<span style="color: #993366;"><strong>5. Copy a file from source to destination</strong></span>
+
+**Usage:**
+```
+hadoop fs -cat <path[filename]>
+```
+**Example:**
+```
+hadoop fs -cat /user/saurzcode/dir1/abc.txt
+```
+
+## 5. Copy a file from source to destination
 
 This command allows multiple sources as well in which case the destination must be a directory.
-<pre>Usage:
-hadoop fs -cp &lt;source&gt; &lt;dest&gt;
-Example:
-hadoop fs -cp /user/saurzcode/dir1/abc.txt /user/saurzcode/dir2</pre>
-<span style="color: #993366;"><strong>6. Copy a file from/To Local file system to HDFS </strong></span>
 
-<strong>copyFromLocal</strong>
-<pre>Usage:
-hadoop fs -copyFromLocal &lt;localsrc&gt; URI
-Example:
-hadoop fs -copyFromLocal /home/saurzcode/abc.txt  /user/saurzcode/abc.txt</pre>
-Similar to put command, except that the source is restricted to a local file reference.
+**Usage:**
+```
+hadoop fs -cp <source> <dest>
+```
+**Example:**
+```
+hadoop fs -cp /user/saurzcode/dir1/abc.txt /user/saurzcode/dir2
+```
 
-<strong>copyToLocal</strong>
-<pre>Usage:
-hadoop fs -copyToLocal [-ignorecrc] [-crc] URI &lt;localdst&gt;</pre>
-Similar to get command, except that the destination is restricted to a local file reference.
+## 6. Copy a file from/To Local file system to HDFS
 
-<span style="color: #993366;"><strong>7. Move files from source to destination.</strong></span>
+### copyFromLocal
+**Usage:**
+```
+hadoop fs -copyFromLocal <localsrc> URI
+```
+**Example:**
+```
+hadoop fs -copyFromLocal /home/saurzcode/abc.txt /user/saurzcode/abc.txt
+```
+Similar to `put` command, except that the source is restricted to a local file reference.
 
-Note:- Moving files across the filesystem is not permitted.
-<pre>Usage :
-hadoop fs -mv &lt;src&gt; &lt;dest&gt;
-Example:
-hadoop fs -mv /user/saurzcode/dir1/abc.txt /user/saurzcode/dir2</pre>
-<span style="color: #993366;"><strong>8. Remove a file or directory in HDFS.</strong></span>
+### copyToLocal
+**Usage:**
+```
+hadoop fs -copyToLocal [-ignorecrc] [-crc] URI <localdst>
+```
+Similar to `get` command, except that the destination is restricted to a local file reference.
+
+## 7. Move files from source to destination.
+
+Note: Moving files across the filesystem is not permitted.
+
+**Usage:**
+```
+hadoop fs -mv <src> <dest>
+```
+**Example:**
+```
+hadoop fs -mv /user/saurzcode/dir1/abc.txt /user/saurzcode/dir2
+```
+
+## 8. Remove a file or directory in HDFS.
 
 Remove files specified as argument. Deletes directory only when it is empty
-<pre>Usage :
-hadoop fs -rm &lt;arg&gt;
-Example:
-hadoop fs -rm /user/saurzcode/dir1/abc.txt</pre>
-<span style="text-decoration: underline;"><em>The recursive version of delete.</em></span>
-<pre>Usage :
-hadoop fs -rmr &lt;arg&gt;
-Example:
-hadoop fs -rmr /user/saurzcode/</pre>
-<strong><span style="color: #993366;">9. Display the last few lines of a file.</span></strong>
+
+**Usage:**
+```
+hadoop fs -rm <arg>
+```
+**Example:**
+```
+hadoop fs -rm /user/saurzcode/dir1/abc.txt
+```
+
+### The recursive version of delete.
+**Usage:**
+```
+hadoop fs -rmr <arg>
+```
+**Example:**
+```
+hadoop fs -rmr /user/saurzcode/
+```
+
+## 9. Display the last few lines of a file.
 
 Similar to tail command in Unix.
-<pre>Usage :
-hadoop fs -tail &lt;path[filename]&gt;
-Example:
-hadoop fs -tail /user/saurzcode/dir1/abc.txt</pre>
-<strong><span style="color: #993366;">10. Display the aggregate length of a file.</span></strong>
-<pre>Usage :
-hadoop fs -du &lt;path&gt;
-Example:
-hadoop fs -du /user/saurzcode/dir1/abc.txt</pre>
-&nbsp;
+
+**Usage:**
+```
+hadoop fs -tail <path[filename]>
+```
+**Example:**
+```
+hadoop fs -tail /user/saurzcode/dir1/abc.txt
+```
+
+## 10. Display the aggregate length of a file.
+
+**Usage:**
+```
+hadoop fs -du <path>
+```
+**Example:**
+```
+hadoop fs -du /user/saurzcode/dir1/abc.txt
+```
+
+---
 
 Please comment on which of these commands you found most useful while dealing with Hadoop /HDFS.
 
-</div>
-Reference - <a href="https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HDFSCommands.html" target="_blank" rel="noopener noreferrer">https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HDFSCommands.html</a>
-<div dir="ltr">
+Reference: [https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HDFSCommands.html](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HDFSCommands.html)
 
-<hr />
+---
 
-<span style="text-decoration: underline;"><em><strong>Related articles : </strong></em></span>
-<ul>
- 	<li><em><span style="text-decoration: underline;"><a title="How to Become a Hadoop Certified Developer ?" href="https://saurzcode.in//2014/05/31/hadoop-certifications/" target="_blank" rel="noopener noreferrer"><span style="text-decoration: underline; color: #3366ff;">How to become Hadoop Certified Developer?</span></a></span></em></li>
- 	<li><a title="Getting Started with Hadoop : Free Online Hadoop Trainings" href="https://saurzcode.in//2014/04/21/free-online-hadoop-trainings/" target="_blank" rel="noopener noreferrer"><em><span style="color: #3366ff; text-decoration: underline;">Free Online Hadoop Trainings</span></em></a></li>
- 	<li><a title="Reading List : Hadoop and Big Data Books" href="https://saurzcode.in//2014/06/01/reading-list-hadoop/" target="_blank" rel="noopener noreferrer"><em><span style="color: #3366ff; text-decoration: underline;">Reading List: Hadoop and Big Data Books</span></em></a></li>
- 	<li><em><span style="text-decoration: underline;"><a title="Recommended Readings for Hadoop" href="https://saurzcode.in//2014/02/04/recommended-readings-for-hadoop/" target="_blank" rel="noopener noreferrer"><span style="color: #3366ff; text-decoration: underline;">Recommended Readings for Hadoop</span></a></span></em></li>
-</ul>
-</div>
+## Related articles
+
+- [How to become Hadoop Certified Developer?](https://saurzcode.in//2014/05/31/hadoop-certifications/)
+- [Free Online Hadoop Trainings](https://saurzcode.in//2014/04/21/free-online-hadoop-trainings/)
+- [Reading List: Hadoop and Big Data Books](https://saurzcode.in//2014/06/01/reading-list-hadoop/)
+- [Recommended Readings for Hadoop](https://saurzcode.in//2014/02/04/recommended-readings-for-hadoop/)
