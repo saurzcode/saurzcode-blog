@@ -3,7 +3,7 @@ id: 5
 title: 'About Me'
 date: '2011-05-09T10:46:33-07:00'
 author: saurzcode
-layout: page
+layout: post
 guid: 'https://saurzcode.in//?page_id=2'
 meta-checkbox:
     - 'yes'

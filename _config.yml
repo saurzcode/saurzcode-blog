@@ -26,12 +26,16 @@ baseurl: ""
 url: "https://saurzcode.in"
 
 # Build settings
-theme: minimal-mistakes-jekyll
+#theme: minimal-mistakes-jekyll
+#remote_theme: wowthemesnet/mediumish-theme-jekyll
+theme: just-the-docs
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-feed
-  - jekyll-lunr-js-search # for search        
+  - jekyll-remote-theme
+  
+#- jekyll-lunr-js-search # for search        
 
 
 # Exclude from processing.
@@ -58,7 +62,7 @@ highlighter: rouge
 
 
 # Exclude search.md from search
-lunr_search_exclude: [search.md]
+#lunr_search_exclude: [search.md]
 
 exclude:
   - Gemfile.lock

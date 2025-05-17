@@ -313,13 +313,13 @@ dbt seed
 <h3 data-start="5794" data-end="5808"><strong data-start="5798" data-end="5808">Macros</strong></h3>
 <p data-start="5809" data-end="5828">Reusable SQL logic:</p>
 
-<div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary">
-<div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none rounded-t-[5px]">
-<pre class="EnlighterJSRAW" data-enlighter-language="sql">-- macros/is_even.sql
+{% raw %}
+-- macros/is_even.sql
 {% macro is_even(column_name) %}
   MOD({{ column_name }}, 2) = 0
-{% endmacro %}</pre>
-&nbsp;
+{% endmacro %}
+
+{% endraw %}
 
 </div>
 </div>

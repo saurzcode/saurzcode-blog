@@ -44,32 +44,32 @@ I highly recommend going over videos explaining the implementation in more detai
 I thought of giving it a try on some of the models and find below the snapshot of how this can be used  for Spark and full source code is available here at my GitHub link - <a href="https://github.com/saurzcode/catboost-spark-examples">https://github.com/saurzcode/catboost-spark-examples</a>
 
 You just need to add this dependency in your POM and you should be okay, please look at GitHub sample above for all set of dependencies needed for end to end spark code -
-<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="dracula">&lt;dependency&gt;     
-  &lt;groupId&gt;ai.catboost&lt;/groupId&gt;     
-  &lt;artifactId&gt;catboost-spark_2.4_2.12&lt;/artifactId&gt;     
+<pre class="EnlighterJSRAW" data-enlighter-language="xml" data-enlighter-theme="dracula">&lt;dependency&gt;    
+  &lt;groupId&gt;ai.catboost&lt;/groupId&gt;    
+  &lt;artifactId&gt;catboost-spark_2.4_2.12&lt;/artifactId&gt;    
   &lt;version&gt;0.25&lt;/version&gt;
- &lt;/dependency&gt;</pre>
+&lt;/dependency&gt;</pre>
 And then we can use CatBoost classes below in spark code to train or score the model as follows.
 <h5>Catboost Binary Classification Model -</h5>
-<pre class="EnlighterJSRAW" data-enlighter-language="scala" data-enlighter-theme="dracula">val srcDataSchema = Seq(   StructField("features", SQLDataTypes.VectorType),   StructField("label", StringType) )
-  
+<pre class="EnlighterJSRAW" data-enlighter-language="scala" data-enlighter-theme="dracula">val srcDataSchema = Seq(  StructField("features", SQLDataTypes.VectorType),  StructField("label", StringType))
+
 //training data containing features and label.
-val trainData = Seq(   Row(Vectors.dense(0.11, 0.22, 0.13, 0.45, 0.89), "0"),   Row(Vectors.dense(0.99, 0.82, 0.33, 0.89, 0.97), "1"),   Row(Vectors.dense(0.12, 0.21, 0.23, 0.42, 0.24), "1"),   Row(Vectors.dense(0.81, 0.63, 0.02, 0.55, 0.65), "0") )
+val trainData = Seq(  Row(Vectors.dense(0.11, 0.22, 0.13, 0.45, 0.89), "0"),  Row(Vectors.dense(0.99, 0.82, 0.33, 0.89, 0.97), "1"),  Row(Vectors.dense(0.12, 0.21, 0.23, 0.42, 0.24), "1"),  Row(Vectors.dense(0.81, 0.63, 0.02, 0.55, 0.65), "0"))
 
-  val trainDf = spark.createDataFrame(spark.sparkContext.parallelize(trainData), StructType(srcDataSchema)) 
+val trainDf = spark.createDataFrame(spark.sparkContext.parallelize(trainData), StructType(srcDataSchema))
 
-val trainPool = new Pool(trainDf)  
+val trainPool = new Pool(trainDf)
 //evaluation data containing features and label.
-val evalData = Seq(   Row(Vectors.dense(0.22, 0.34, 0.9, 0.66, 0.99), "1"),   Row(Vectors.dense(0.16, 0.1, 0.21, 0.67, 0.46), "0"),   Row(Vectors.dense(0.78, 0.0, 0.0, 0.22, 0.12), "1") )  
+val evalData = Seq(  Row(Vectors.dense(0.22, 0.34, 0.9, 0.66, 0.99), "1"),  Row(Vectors.dense(0.16, 0.1, 0.21, 0.67, 0.46), "0"),  Row(Vectors.dense(0.78, 0.0, 0.0, 0.22, 0.12), "1"))
 
 val evalDf = spark.createDataFrame(spark.sparkContext.parallelize(evalData), StructType(srcDataSchema))
- val evalPool = new Pool(evalDf)  
-val classifier = new CatBoostClassifier   // train model
+val evalPool = new Pool(evalDf)
+val classifier = new CatBoostClassifier // train model
 
- val model: CatBoostClassificationModel = classifier.fit(trainPool, Array[Pool](evalPool))  // apply model 
+val model: CatBoostClassificationModel = classifier.fit(trainPool, Array[Pool](evalPool))// apply model
 val predictions: DataFrame = model.transform(evalPool.data)
 
- println("predictions") 
+println("predictions")
 
 predictions.show(false)</pre>
 <h6>Output</h6>
@@ -80,17 +80,17 @@ predictions.show(false)</pre>
 
 <strong>prediction</strong> class of 0 or 1 basis probability of &gt;0.5 assigned as the probability of 1.
 <h5>Saving the Model -</h5>
-<pre class="EnlighterJSRAW" data-enlighter-language="scala" data-enlighter-theme="dracula">// save model   
-val savedModelPath = "models/binclass_model"   
-model.write.overwrite().save(savedModelPath)    // save model as local file in CatBoost native format   
-val savedNativeModelPath = "models/binclass_model.cbm"   
+<pre class="EnlighterJSRAW" data-enlighter-language="scala" data-enlighter-theme="dracula">// save model  
+val savedModelPath = "models/binclass_model"  
+model.write.overwrite().save(savedModelPath)  // save model as local file in CatBoost native format  
+val savedNativeModelPath = "models/binclass_model.cbm"  
 model.saveNativeModel(savedNativeModelPath)</pre>
 <h5>Catboost Model Feature Importance Calculation -</h5>
 <pre class="EnlighterJSRAW" data-enlighter-language="scala" data-enlighter-theme="dracula">val loadedModel = CatBoostClassificationModel.loadNativeModel("models/binclass_model.cbm")
-  val featureImportance = loadedModel.getFeatureImportancePrettified()
-  featureImportance.foreach(fi =&gt; println("[" + fi.featureName + "," + fi.importance + "]"))</pre>
+val featureImportance = loadedModel.getFeatureImportancePrettified()
+featureImportance.foreach(fi =&gt; println("[" + fi.featureName + "," + fi.importance + "]"))</pre>
 <h6>Output - Feature Importance % for each feature in the model.</h6>
-<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="dracula">[2,47.25978201414037] [4,30.27449225598115] [1,12.306202235604536] [3,10.159523494273953] [0,0.0]</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="dracula">[2,47.25978201414037][4,30.27449225598115][1,12.306202235604536][3,10.159523494273953][0,0.0]</pre>
 &nbsp;
 
 Please feel free to comment with any questions.

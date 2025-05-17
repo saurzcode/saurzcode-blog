@@ -3,7 +3,7 @@ id: 1220
 title: 'BigData, Hadoop, Spark and Machine Learning'
 date: '2018-06-10T22:25:59-07:00'
 author: saurzcode
-layout: page
+layout: post
 guid: 'https://saurzcode.in/?page_id=1220'
 meta-checkbox:
     - 'yes'
