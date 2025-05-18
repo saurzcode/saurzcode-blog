@@ -114,6 +114,3 @@ footer_links:
   - title: GitHub
     url: https://github.com/saurzcode
     icon: fab fa-github-square
-  - title: Feed
-    url: atom.xml
-    icon: fas fa-rss-square
