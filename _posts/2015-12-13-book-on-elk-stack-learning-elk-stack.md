@@ -30,7 +30,7 @@ tags:
 ## Learning ELK Stack
 
 
-I am writing this post to announce the general availability of my book on ELK stack titled " Learning ELK Stack " with PacktPub publications. Book aims to provide individuals/technologists who seek to implement their own log and data analytics solutions using opensource stack of Elasticsearch, Logstash and Kibana popularly known as ELK stack. This is the first book ever published which covers ELK stack. \[caption id="attachment\_1002" align="aligncenter" width="250"\]![ELK]({{site.baseurl}}/assets/uploads/2015/12/Learning-Elk-250x300.png) Learning ELK Stack by Saurabh Chhajed\[/caption\] ![](http://ir-in.amazon-adsystem.com/e/ir?t=saurzcode-21&l=as2&o=31&a=B0146WY5QM)  
+I am writing this post to announce the general availability of my book on ELK stack titled " Learning ELK Stack " with PacktPub publications. Book aims to provide individuals/technologists who seek to implement their own log and data analytics solutions using opensource stack of Elasticsearch, Logstash and Kibana popularly known as ELK stack. This is the first book ever published which covers ELK stack. [caption id="attachment\_1002" align="aligncenter" width="250"]![ELK]({{site.baseurl}}/assets/uploads/2015/12/Learning-Elk-250x300.png) Learning ELK Stack by Saurabh Chhajed[caption] ![](http://ir-in.amazon-adsystem.com/e/ir?t=saurzcode-21&l=as2&o=31&a=B0146WY5QM)  
 <!--more-->
 ### Details about the Book -
 
