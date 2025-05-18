@@ -54,8 +54,3 @@ hive.exec.dynamic.partition.mode=strict
 This is a default setting and prevents all partitions to be dynamic and requires at least one static partition.
 
 ---
-
-You may also like:
-
-- [Top 20 Hadoop Big Data Books](https://saurzcode.in//2014/06/top-20-hadoop-bigdatabooks/)
-- [Hive : SORT BY, DISTRIBUTE BY, CLUSTER BY](https://saurzcode.in//2015/01/hive-sort-vs-order-vs-distribute-vs-cluster/)

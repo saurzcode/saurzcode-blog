@@ -102,9 +102,3 @@ If you like this post you will love to read my book on ELK stack: [https://www.p
 - [http://rashidkpc.github.io/Kibana/about.html](http://rashidkpc.github.io/Kibana/about.html)
 
 ---
-
-### Related Articles
-
-- [Hadoop Certification](https://saurzcode.in//2014/05/31/hadoop-certifications/)
-- [Getting Started with Apache Pig](https://saurzcode.in//2014/06/28/getting-started-with-pig/)
-- [Hadoop Reading List](https://saurzcode.in//2014/06/01/reading-list-hadoop/)

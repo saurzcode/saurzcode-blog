@@ -175,6 +175,5 @@ You may also be interested in some other BigData posts:
 - [CatBoost on Spark - Machine Learning](https://saurzcode.in/2021/05/how-to-train-and-score-catboost-model-on-spark/)
 - [Spark: How to Run Spark Applications on Windows](https://saurzcode.in/2019/09/running-spark-application-on-windows/)
 - [Getting started with Spark Development](https://saurzcode.in/2017/10/configure-spark-application-eclipse/)
-- [Getting started with MapReduce development](https://saurzcode.in//2015/01/setup-development-environment-hadoop-mapreduce/)
 - [Multithreaded Mappers in MapReduce](https://wp.me/p5pWDa-iX)
 - [Spark Dataframe Operations](https://saurzcode.in/2018/06/spark-common-dataframe-operations/)
