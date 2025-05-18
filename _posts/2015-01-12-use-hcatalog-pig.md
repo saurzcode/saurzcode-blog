@@ -3,7 +3,7 @@ id: 820
 title: 'How-To : Use HCatalog with Pig'
 date: '2015-01-12T14:06:25-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=820'
 permalink: /2015/01/use-hcatalog-pig/
 meta-checkbox:

@@ -3,7 +3,7 @@ id: 792
 title: 'How-To : Connect HiveServer2 service with JDBC Client ?'
 date: '2015-01-07T22:56:45-07:00'
 author: saurzcode
-layout: post
+
 guid: 'https://saurzcode.in//?p=792'
 permalink: /2015/01/connect-hiveserver2-service-jdbc-client/
 meta-checkbox:
@@ -27,7 +27,7 @@ HiveServer2 (HS2) is a server interface that enables remote clients to execute q
 
 <!--more-->
 
-![images](https://saurzcode.in//assets/uploads/2015/01/images.jpg)
+![images]({{site.baseurl}}/assets/uploads/2015/01/images.jpg)
 
 In this post, we will see how we can start HiveServer2 and connect to it with a JDBC Client:
 
@@ -45,7 +45,7 @@ $HIVE_HOME/bin/hive --service hiveserver2
 
 You should see something like this on console:
 
-![HiveServer2](https://saurzcode.in//assets/uploads/2015/01/HiveServer2.jpg)
+![HiveServer2]({{site.baseurl}}/assets/uploads/2015/01/HiveServer2.jpg)
 
 A quick way to check if HiveServer2 is running is to use the `netstat` command to see if port `10000` is open and listening to connections:
 
@@ -235,7 +235,7 @@ Running: select count(1) from testHiveDriverTable
 
 And on the HiveServer2 Screen you should see corresponding output and processing of MapReduce Jobs for each query, something like this:
 
-![HiveServer2QueryOutput](assets/uploads/2015/01/HiveServer2QueryOutput.jpg)
+![HiveServer2QueryOutput]({{site.baseurl}}/assets/uploads/2015/01/HiveServer2QueryOutput.jpg)
 
 That's it! We are all set with a HiveServer2 running and successfully connected with a JDBC Client.
 
@@ -246,10 +246,3 @@ Happy Learning!!
 ### References
 
 1. [HiveServer2 Clients (Apache Hive Documentation)](https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Clients)
-
----
-
-**Interesting Reads:**
-
-- [Multithreaded Mappers in MapReduce](https://wp.me/p5pWDa-iX)
-- [Spark Dataframe Operations](https://saurzcode.in/2018/06/spark-common-dataframe-operations/)

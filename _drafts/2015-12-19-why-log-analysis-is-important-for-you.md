@@ -3,7 +3,7 @@ id: 1045
 title: 'Why Log analysis is important for you ?'
 date: '2015-12-19T19:06:01-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=1045'
 permalink: /2015/12/why-log-analysis-is-important-for-you/
 meta-checkbox:
@@ -119,6 +119,6 @@ People interested in getting the required Business centric information out of lo
 
 ELK platform is complete log analytics solutions, built on a combination of three open source tools Elasticsearch, Logstash and Kibana. It tries to address all problems and challenges that we saw in above section .ELK stack is currently maintained and actively supported by company called <a href="elastic.co">Elastic</a> (formerly Elasticsearch).
 
-The above post is an excerpt from my <a href="https://saurzcode.in//2015/12/book-on-elk-stack-learning-elk-stack/" target="_blank" rel="noopener noreferrer">Book on ELK stack</a>. To know more about ELK stack or in general how to use ELK stack to design your own Log analytic solutions please read the book.<a href="https://saurzcode.in//assets/uploads/2015/12/Learning-Elk.png"><img class="alignright wp-image-1002" src="https://saurzcode.in//assets/uploads/2015/12/Learning-Elk-250x300.png" alt="Learning Elk" width="140" height="168"></a>
+The above post is an excerpt from my <a href="https://saurzcode.in//2015/12/book-on-elk-stack-learning-elk-stack/" target="_blank" rel="noopener noreferrer">Book on ELK stack</a>. To know more about ELK stack or in general how to use ELK stack to design your own Log analytic solutions please read the book.<a href="{{ site.baseurl }}/assets/uploads/2015/12/Learning-Elk.png"><img class="alignright wp-image-1002" src="{{ site.baseurl }}/assets/uploads/2015/12/Learning-Elk-250x300.png" alt="Learning Elk" width="140" height="168"></a>
 
 You can purchase the book on Amazon here – <a href="http://www.amazon.in/gp/product/B0146WY5QM/ref=as_li_tl?ie=UTF8&amp;camp=3626&amp;creative=24822&amp;creativeASIN=B0146WY5QM&amp;linkCode=as2&amp;tag=saurzcode-21" target="_blank" rel="noopener noreferrer">Learning ELK Stack Book on Amazon</a>&nbsp; &nbsp;or from the Publisher itself –&nbsp;<a href="https://www.packtpub.com/big-data-and-business-intelligence/learning-elk-stack" target="_blank" rel="noopener noreferrer">Learning ELK Stack Book on PacktPub</a>

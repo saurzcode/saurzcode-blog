@@ -3,12 +3,11 @@ id: 1192
 title: 'Dataframe Operations in  Spark using Scala'
 date: '2018-06-07T20:42:30-07:00'
 author: saurzcode
-layout: post
+
 guid: 'https://saurzcode.in/?p=1192'
 permalink: /2018/06/spark-common-dataframe-operations/
 meta-checkbox:
     - ''
-image: assets/uploads/2017/10/spark-logo.png
 categories:
     - 'Big Data'
     - Scala
@@ -21,22 +20,58 @@ tags:
     - spark
 ---
 
-Dataframe in Apache Spark is a distributed collection of data, organized in the form of columns. Dataframes can be transformed into various forms using DSL operations defined in [Dataframes API](https://spark.apache.org/docs/1.6.1/api/scala/index.html#org.apache.spark.sql.DataFrame), and its various functions. In this post, let's understand various join operations, that are regularly used while working with Dataframes - To understand these operations lets create a set of dataframes -
+# DataFrame Operations in Spark using Scala
 
+A comprehensive, developer-friendly guide to common DataFrame operations in Apache Spark using Scala, with code examples and explanations for each join type.
+
+---
+
+## Table of Contents
+
+- [DataFrame Operations in Spark using Scala](#dataframe-operations-in-spark-using-scala)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Creating Example DataFrames](#creating-example-dataframes)
+  - [Join Operations](#join-operations)
+    - [Cartesian Join](#cartesian-join)
+    - [Inner Join (Single Column)](#inner-join-single-column)
+    - [Inner Join (Multiple Columns)](#inner-join-multiple-columns)
+    - [Left Outer Join (Multiple Columns)](#left-outer-join-multiple-columns)
+    - [Left Semi Join (Multiple Columns)](#left-semi-join-multiple-columns)
+    - [Outer Join (Multiple Columns)](#outer-join-multiple-columns)
+    - [Right Outer Join (Multiple Columns)](#right-outer-join-multiple-columns)
+    - [Inner Join (Join Expressions)](#inner-join-join-expressions)
+    - [Outer Join (Join Expressions)](#outer-join-join-expressions)
+    - [Left Outer Join (Join Expressions)](#left-outer-join-join-expressions)
+    - [Right Outer Join (Join Expressions)](#right-outer-join-join-expressions)
+    - [Left Semi Join (Join Expressions)](#left-semi-join-join-expressions)
+  - [Summary](#summary)
+
+---
+
+## Introduction
+
+A DataFrame in Apache Spark is a distributed collection of data organized into named columns. DataFrames can be transformed and queried using a rich set of operations provided by the Spark DataFrame API. This guide covers the most common join operations you'll use when working with DataFrames in Scala.
+
+---
+
+## Creating Example DataFrames
+
+Let's create some example DataFrames to use in our join operations:
+
+```scala
 val saurzDF1 = Seq(
-(101, "sachin",40),
-(102, "zahir",41),
-(103, "virat",29),
-(104, "saurav",41),
-(105,"rohit",30)
-).toDF("id", "name","age")
-
-saurzDF1: org.apache.spark.sql.DataFrame = \[id: int, name: string, age: int\]
-
+  (101, "sachin", 40),
+  (102, "zahir", 41),
+  (103, "virat", 29),
+  (104, "saurav", 41),
+  (105, "rohit", 30)
+).toDF("id", "name", "age")
 
 saurzDF1.show()
+```
 
-
+```
 +---+------+---+
 | id| name|age|
 +---+------+---+
@@ -46,19 +81,20 @@ saurzDF1.show()
 |104|saurav| 41|
 |105| rohit| 30|
 +---+------+---+
+```
 
+```scala
 val saurzDF2 = Seq(
-(101, "batsman"),
-(102, "bowler"),
-(103, "batsman"),
-(104, "batsman")
+  (101, "batsman"),
+  (102, "bowler"),
+  (103, "batsman"),
+  (104, "batsman")
 ).toDF("id", "skill")
 
-
-saurzDF2: org.apache.spark.sql.DataFrame = \[id: int, skill: string\]
-
 saurzDF2.show()
+```
 
+```
 +---+-------+
 | id| skill|
 +---+-------+
@@ -67,18 +103,20 @@ saurzDF2.show()
 |103|batsman|
 |104|batsman|
 +---+-------+
+```
 
+```scala
 val saurzDF3 = Seq(
-  (101, "sachin",100),
-  (103, "virat",50),
-  (104,  "saurav",45),
-  (105,"rohit",35)
-).toDF("id", "name","centuries")
-
-saurzDF3: org.apache.spark.sql.DataFrame = \[id: int, name: string, centuries: int\]
+  (101, "sachin", 100),
+  (103, "virat", 50),
+  (104, "saurav", 45),
+  (105, "rohit", 35)
+).toDF("id", "name", "centuries")
 
 saurzDF3.show()
+```
 
+```
 +---+------+---------+
 | id|  name|centuries|
 +---+------+---------+
@@ -87,226 +125,123 @@ saurzDF3.show()
 |104|saurav|       45|
 |105| rohit|       35|
 +---+------+---------+
+```
 
-* * *
+---
 
-Now our dataframes are ready , lets try out some operations -
+## Join Operations
 
-JOIN Operations on Dataframe
-----------------------------
+### Cartesian Join
 
-### Cartesion Join
+Creates all possible combinations (m * n) of rows from both DataFrames. **Use with caution!**
 
-This join is very expensive to perform as it creates (m\*n) combination of rows , where m is number of rows in DF1 and n is number of rows in DF2.
-
+```scala
 val saurzJoinDF1 = saurzDF1.join(saurzDF2)
 saurzJoinDF1.show()
+```
 
-+---+------+---+---+-------+
-| id|  name|age| id|  skill|
-+---+------+---+---+-------+
-|101|sachin| 40|101|batsman|
-|102| zahir| 41|101|batsman|
-|103| virat| 29|101|batsman|
-|104|saurav| 41|101|batsman|
-|105| rohit| 30|101|batsman|
-|101|sachin| 40|102| bowler|
-|102| zahir| 41|102| bowler|
-|103| virat| 29|102| bowler|
-|104|saurav| 41|102| bowler|
-|105| rohit| 30|102| bowler|
-|101|sachin| 40|103|batsman|
-|102| zahir| 41|103|batsman|
-|103| virat| 29|103|batsman|
-|104|saurav| 41|103|batsman|
-|105| rohit| 30|103|batsman|
-|101|sachin| 40|104|batsman|
-|102| zahir| 41|104|batsman|
-|103| virat| 29|104|batsman|
-|104|saurav| 41|104|batsman|
-|105| rohit| 30|104|batsman|
-+---+------+---+---+-------+
+### Inner Join (Single Column)
 
-### Inner Join Using Column
+Equivalent to SQL INNER JOIN. The join column appears only once in the result.
 
-This join behaves exactly like INNER join in SQL and in the result, join column will appear exactly once.
-
-val saurzJoinDF2 = saurzDF1.join(saurzDF2,"id")
+```scala
+val saurzJoinDF2 = saurzDF1.join(saurzDF2, "id")
 saurzJoinDF2.show()
+```
 
-+---+------+---+-------+
-| id|  name|age|  skill|
-+---+------+---+-------+
-|101|sachin| 40|batsman|
-|102| zahir| 41| bowler|
-|103| virat| 29|batsman|
-|104|saurav| 41|batsman|
-+---+------+---+-------+
+### Inner Join (Multiple Columns)
 
-### Inner Join using Sequence of Columns
+Equivalent to SQL INNER JOIN using multiple columns.
 
-This is also equivalent to SQL INNER Join, but using a sequence of columns, and join columns will appear exactly once.
-
-val saurzJoinDF8= saurzDF1.join(saurzDF3,Seq("id", "name"))
+```scala
+val saurzJoinDF8 = saurzDF1.join(saurzDF3, Seq("id", "name"))
 saurzJoinDF8.show()
+```
 
-+---+------+---+---------+
-| id|  name|age|centuries|
-+---+------+---+---------+
-|101|sachin| 40|      100|
-|103| virat| 29|       50|
-|104|saurav| 41|       45|
-|105| rohit| 30|       35|
-+---+------+---+---------+
+### Left Outer Join (Multiple Columns)
 
-### Left Outer Join Using Sequence of columns
+Equivalent to SQL LEFT OUTER JOIN using multiple columns.
 
-This is also equivalent to SQL LEFT OUTER Join, but using a sequence of columns, and join columns will appear exactly once.
-
-val saurzJoinDF9= saurzDF1.join(saurzDF3,Seq("id", "name"),"left\_outer")
+```scala
+val saurzJoinDF9 = saurzDF1.join(saurzDF3, Seq("id", "name"), "left_outer")
 saurzJoinDF9.show()
+```
 
-+---+------+---+---------+
-| id|  name|age|centuries|
-+---+------+---+---------+
-|101|sachin| 40|      100|
-|102| zahir| 41|     null|
-|103| virat| 29|       50|
-|104|saurav| 41|       45|
-|105| rohit| 30|       35|
-+---+------+---+---------+
+### Left Semi Join (Multiple Columns)
 
-### Left Semi Join using Sequence of Columns
+Equivalent to SQL LEFT SEMI JOIN. Only columns from the left DataFrame are included.
 
-This is also equivalent to SQL LEFT SEMI Join, and the output contains only columns from left data frame.
-
-val saurzJoinDF10= saurzDF1.join(saurzDF3,Seq("id", "name"),"leftsemi")
+```scala
+val saurzJoinDF10 = saurzDF1.join(saurzDF3, Seq("id", "name"), "leftsemi")
 saurzJoinDF10.show()
+```
 
-+---+------+---+
-| id|  name|age|
-+---+------+---+
-|101|sachin| 40|
-|103| virat| 29|
-|104|saurav| 41|
-|105| rohit| 30|
-+---+------+---+
+### Outer Join (Multiple Columns)
 
-### Outer Join Using Sequence of Columns
+Equivalent to SQL OUTER JOIN using multiple columns.
 
-This is also equivalent to SQL OUTER Join, but using a sequence of columns, and join columns will appear exactly once.
-
-val saurzJoinDF11= saurzDF1.join(saurzDF3,Seq("id", "name"),"outer")
+```scala
+val saurzJoinDF11 = saurzDF1.join(saurzDF3, Seq("id", "name"), "outer")
 saurzJoinDF11.show()
+```
 
-+---+------+---+---------+
-| id|  name|age|centuries|
-+---+------+---+---------+
-|104|saurav| 41|       45|
-|103| virat| 29|       50|
-|101|sachin| 40|      100|
-|102| zahir| 41|     null|
-|105| rohit| 30|       35|
-+---+------+---+---------+
+### Right Outer Join (Multiple Columns)
 
-### Right Outer Join Using Sequence of Columns
+Equivalent to SQL RIGHT OUTER JOIN using multiple columns.
 
-This is also equivalent to SQL RIGHT OUTER JOIN, but using a sequence of columns, and join columns will appear exactly once.
-
-val saurzJoinDF12= saurzDF1.join(saurzDF3,Seq("id", "name"),"right\_outer")
+```scala
+val saurzJoinDF12 = saurzDF1.join(saurzDF3, Seq("id", "name"), "right_outer")
 saurzJoinDF12.show()
+```
 
-+---+------+---+---------+
-| id|  name|age|centuries|
-+---+------+---+---------+
-|101|sachin| 40|      100|
-|103| virat| 29|       50|
-|104|saurav| 41|       45|
-|105| rohit| 30|       35|
-+---+------+---+---------+
+### Inner Join (Join Expressions)
 
-### Inner join Using Join Expressions
+Performs an INNER JOIN using a join expression. Both DataFrames' join columns are included in the result.
 
-It performs INNER join operation using a join expression. Joins using expressions, produce join columns from both data frames and it is required to explicitly select the columns from output or the undesired column can be dropped later.
-
-val saurzJoinDF7= saurzDF1.join(saurzDF2,saurzDF1("id")===saurzDF2("id"),"inner")
+```scala
+val saurzJoinDF7 = saurzDF1.join(saurzDF2, saurzDF1("id") === saurzDF2("id"), "inner")
 saurzJoinDF7.show()
+```
 
-+---+------+---+---+-------+
-| id|  name|age| id|  skill|
-+---+------+---+---+-------+
-|101|sachin| 40|101|batsman|
-|102| zahir| 41|102| bowler|
-|103| virat| 29|103|batsman|
-|104|saurav| 41|104|batsman|
-+---+------+---+---+-------+
+### Outer Join (Join Expressions)
 
-### Outer Join Using Join Expressions
+Performs an OUTER JOIN using a join expression.
 
-Similar to above, it performs  OUTER JOIN.
-
-val saurzJoinDF3 = saurzDF1.join(saurzDF2,saurzDF1("id")===saurzDF2("id"),"outer")
+```scala
+val saurzJoinDF3 = saurzDF1.join(saurzDF2, saurzDF1("id") === saurzDF2("id"), "outer")
 saurzJoinDF3.show()
+```
 
-+---+------+---+----+-------+
-| id|  name|age|  id|  skill|
-+---+------+---+----+-------+
-|101|sachin| 40| 101|batsman|
-|102| zahir| 41| 102| bowler|
-|103| virat| 29| 103|batsman|
-|104|saurav| 41| 104|batsman|
-|105| rohit| 30|null|   null|
-+---+------+---+----+-------+
+### Left Outer Join (Join Expressions)
 
-### Left Outer Join using Join Expressions
+Performs a LEFT OUTER JOIN using a join expression.
 
-Similar to above, it performs LEFT OUTER JOIN.
-
-val saurzJoinDF4 = saurzDF1.join(saurzDF2,saurzDF1("id")===saurzDF2("id"),"left\_outer")
+```scala
+val saurzJoinDF4 = saurzDF1.join(saurzDF2, saurzDF1("id") === saurzDF2("id"), "left_outer")
 saurzJoinDF4.show()
+```
 
-+---+------+---+----+-------+
-| id|  name|age|  id|  skill|
-+---+------+---+----+-------+
-|101|sachin| 40| 101|batsman|
-|102| zahir| 41| 102| bowler|
-|103| virat| 29| 103|batsman|
-|104|saurav| 41| 104|batsman|
-|105| rohit| 30|null|   null|
-+---+------+---+----+-------+
+### Right Outer Join (Join Expressions)
 
-### Right Outer Join using Join Expressions
+Performs a RIGHT OUTER JOIN using a join expression.
 
-Similar to above , it performs RIGHT OUTER JOIN.
-
-val saurzJoinDF5 = saurzDF1.join(saurzDF2,saurzDF1("id")===saurzDF2("id"),"right\_outer")
+```scala
+val saurzJoinDF5 = saurzDF1.join(saurzDF2, saurzDF1("id") === saurzDF2("id"), "right_outer")
 saurzJoinDF5.show()
+```
 
-+---+------+---+---+-------+
-| id|  name|age| id|  skill|
-+---+------+---+---+-------+
-|101|sachin| 40|101|batsman|
-|102| zahir| 41|102| bowler|
-|103| virat| 29|103|batsman|
-|104|saurav| 41|104|batsman|
-+---+------+---+---+-------+
+### Left Semi Join (Join Expressions)
 
-### Left Semi Join using Join Expressions
+Performs a LEFT SEMI JOIN using a join expression. Only columns from the left DataFrame are included.
 
-Similar to above, it performs LEFT SEMI JOIN. Please note the difference between LEFT SEMI JOIN and INNER JOIN here - LEFT SEMI JOIN , will do an inner join and only give columns from the left data frame, while INNER join will give columns from both the data frames.
-
-val saurzJoinDF6= saurzDF1.join(saurzDF2,saurzDF1("id")===saurzDF2("id"),"leftsemi")
+```scala
+val saurzJoinDF6 = saurzDF1.join(saurzDF2, saurzDF1("id") === saurzDF2("id"), "leftsemi")
 saurzJoinDF6.show()
+```
 
-+---+------+---+
-| id|  name|age|
-+---+------+---+
-|101|sachin| 40|
-|102| zahir| 41|
-|103| virat| 29|
-|104|saurav| 41|
-+---+------+---+
+---
 
-In this post, we saw various types of JOIN operations that can be performed on data frames. Please also, check some interesting posts below - [How to Configure Spark Application ( Scala and Java 8 Version with Maven ) in Eclipse.](https://saurzcode.in/2017/10/configure-spark-application-eclipse/) 
-[How to Use MultiThreadedMapper in MapReduce](https://saurzcode.in/2018/05/how-to-use-multithreadedmapper-in-mapreduce/) 
-[What is RDD in Spark ? and Why do we need it?](https://saurzcode.in/2015/10/what-is-rdd-in-spark-and-why-do-we-need-it/)
+## Summary
+
+In this post, we explored various types of JOIN operations that can be performed on Spark DataFrames using Scala. Each join type is useful for different scenarios, and understanding them will help you write more efficient and expressive Spark code.
+

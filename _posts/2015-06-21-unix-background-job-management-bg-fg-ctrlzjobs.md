@@ -3,7 +3,7 @@ id: 944
 title: 'Unix Job Control Commands &#8211; bg, fg, Ctrl+Z,jobs'
 date: '2015-06-21T21:58:36-07:00'
 author: saurzcode
-layout: post
+
 guid: 'https://saurzcode.in//?p=944'
 permalink: /2015/06/unix-background-job-management-bg-fg-ctrlzjobs/
 meta-checkbox:
@@ -22,75 +22,168 @@ tags:
     - unix
 ---
 
-Since Hadoop jobs are often long running, its difficult for newbies to manage the processes in Unix unless they know some useful Unix commands to do so, so that they can increase their efficiency.
+# Unix Job Control Commands: `bg`, `fg`, `Ctrl+Z`, `jobs`
 
-In this post, I will explain some of the commands that are very useful while executing some long running jobs .We will see how to execute a job in background, bring it back to foreground, stopping the execution and starting it back and kill a job.
+A practical guide for developers and data engineers to manage long-running jobs in Unix, especially useful when working with Hadoop or other big data tools.
 
-<!--more-->
-<h2>Executing a Job in background</h2>
-Just append <span style="color: #0000ff;"><i><b>&amp;</b></i> </span>at the end of any command to put the execution of that command in background.
+---
 
-For example -
+## Table of Contents
+
+- [Unix Job Control Commands: `bg`, `fg`, `Ctrl+Z`, `jobs`](#unix-job-control-commands-bg-fg-ctrlz-jobs)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Running a Job in the Background](#running-a-job-in-the-background)
+  - [Listing Background Jobs: `jobs` Command](#listing-background-jobs-jobs-command)
+  - [Bringing a Job to Foreground: `fg` Command](#bringing-a-job-to-foreground-fg-command)
+  - [Stopping a Foreground Job: `Ctrl+Z`](#stopping-a-foreground-job-ctrlz)
+  - [Resuming a Stopped Job in Background: `bg` Command](#resuming-a-stopped-job-in-background-bg-command)
+  - [Killing a Job: `kill` Command](#killing-a-job-kill-command)
+  - [Summary Table](#summary-table)
+  - [Further Reading](#further-reading)
+
+---
+
+## Introduction
+
+When running long Hadoop or other data processing jobs on Unix, it's important to know how to manage processes efficiently. This guide covers essential Unix job control commands to help you:
+
+- Run jobs in the background
+- Bring jobs to the foreground
+- Pause and resume jobs
+- List and kill jobs
+
+---
+
+## Running a Job in the Background
+
+To run any command in the background, append `&` at the end:
+
 ```sh
-$ hadoop jar examples.jar param1 param2 &
+hadoop jar examples.jar param1 param2 &
 ```
-We can see all the jobs running in background by executing <span style="color: #0000ff;"><i><b>jobs</b></i><i> </i></span>command.
-```sh
-$jobs
 
+This allows you to continue using the terminal while the job runs.
+
+---
+
+## Listing Background Jobs: `jobs` Command
+
+To see all jobs running in the background:
+
+```sh
+jobs
+```
+
+Example output:
+
+```sh
 [1] Running      hadoop jar examples.jar param1 param2 &
 ```
-<h2>Jobs Command</h2>
-When we run jobs command it gives a list of all the jobs with their status. The general syntax of output is -
+
+- `[1]` is the job ID
+- `Running` is the status
+- The command is shown at the end
+
+The output format is:
+
 ```sh
 [job_id] +/- <status> command
 ```
-<b>job_id</b> is id of the current job.
 
-<b>status</b> represents the status of the job and can be one of RUNNING, STOPPED, EXIT, and DONE.
+- `+` marks the default job for `fg`/`bg`
+- `-` marks the next default if the current one exits
 
-The character <b>'+'</b>  represents the job which will be used as default in <b>bg and fg commands</b>.
+Example with multiple jobs:
 
-The character <b>'-'</b> represents the job which would become default when current default job exits.
-
-For example -
 ```sh
 [1]   Running                 tar -zxvf file.tar.gz ../path/ &
 [2]-  Running                 tar -zxvf file2.tar.gz ../path2 &
 [3]+  Running                 tar -zxvf file3.tar.gz ../path3/ &
 ```
-<h2>fg command</h2>
-Also, we can bring the job in foreground with <span style="color: #0000ff;"><i><b>fg</b></i> command. <span style="color: #000000;">When executed without any argument, it will bring most recent background job in foreground.</span></span>
+
+---
+
+## Bringing a Job to Foreground: `fg` Command
+
+To bring the most recent background job to the foreground:
+
 ```sh
-$fg
+fg
 ```
-Now, if job is running in foreground and you want to stop the execution of job, without killing it, press <span style="color: #3366ff;"><i><b>Ctrl-Z</b></i></span> on keyboard and you will see an output like this -
+
+To bring a specific job (e.g., job 1):
+
+```sh
+fg %1
+```
+
+---
+
+## Stopping a Foreground Job: `Ctrl+Z`
+
+If a job is running in the foreground and you want to pause (stop) it without killing it, press:
+
+```
+Ctrl+Z
+```
+
+You'll see output like:
+
 ```sh
 [1]   STOPPED                 tar -zxvf file.tar.gz ../path/ &
 ```
-<h2>bg command</h2>
-Now, current status of job is STOPPED, we can again start the job in background using it's job_id using<span style="color: #3366ff;"><i><b> bg command.</b></i></span>
+
+---
+
+## Resuming a Stopped Job in Background: `bg` Command
+
+To resume a stopped job in the background (e.g., job 1):
+
 ```sh
-$ bg %1
+bg %1
 ```
-And , you can again see job running in background using jobs.
+
+Check status again:
+
 ```sh
-$jobs
+jobs
 [1]   Running                 tar -zxvf file.tar.gz ../path/ &
 ```
-<h2>Killing a Job</h2>
-We can kill a running job using kill command with it's job_id.
 
-For example -
+---
+
+## Killing a Job: `kill` Command
+
+To kill a running or stopped job (e.g., job 1):
+
 ```sh
-$ kill %1
+kill %1
+```
 
+Example output:
+
+```sh
 [1]   Exit                tar -zxvf file.tar.gz ../path/ &
 ```
-That's it !! In the upcoming posts , we will see about how we can execute  job in background even when we are logged out of system using <i><b>nohup</b></i><i> </i>command.
 
+---
 
+## Summary Table
 
-Interesting Reads -
+| Command         | Description                                      |
+|----------------|--------------------------------------------------|
+| `jobs`         | List all background jobs                         |
+| `fg [%job_id]` | Bring job to foreground                          |
+| `bg [%job_id]` | Resume stopped job in background                 |
+| `kill [%job_id]`| Kill a job                                      |
+| `Ctrl+Z`       | Pause (stop) a foreground job                    |
+| `&`            | Run a command in the background                  |
 
-<a href="https://wp.me/p5pWDa-iX">Multithreaded Mappers in MapReduce</a>
+---
+
+## Further Reading
+
+- [Multithreaded Mappers in MapReduce](https://wp.me/p5pWDa-iX)
+
+In upcoming posts, we'll cover how to keep jobs running even after logout using `nohup`.

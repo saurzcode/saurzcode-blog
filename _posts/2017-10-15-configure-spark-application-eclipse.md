@@ -3,7 +3,7 @@ id: 1101
 title: 'How to Configure Spark Application ( Scala and Java 8 Version with Maven ) in Eclipse.'
 date: '2017-10-15T23:46:09-07:00'
 author: saurzcode
-layout: post
+
 guid: 'https://saurzcode.in/?p=1101'
 permalink: /2017/10/configure-spark-application-eclipse/
 meta-checkbox:
@@ -26,25 +26,64 @@ tags:
     - spark
 ---
 
-![saurzcode-spark-eclipse](http://saurzcode.in/assets/uploads/2017/10/spark-logo.png) Apache Spark is becoming very popular among organizations looking to leverage its fast, in-memory computing capability for big-data processing. This article is for beginners to get started with Spark Setup on Eclipse/Scala IDE and getting familiar with Spark terminologies in general - Hope you have read the previous article on [RDD basics](https://saurzcode.in/2015/10/what-is-rdd-in-spark-and-why-do-we-need-it/), to get a basic understanding of Spark RDD.
+# How to Configure Spark Application (Scala and Java 8 Version with Maven) in Eclipse
 
-#### Tools Used :
+A step-by-step, developer-friendly guide to setting up Apache Spark applications in Eclipse/Scala IDE using Maven, with both Java and Scala examples.
 
-*   Scala IDE for Eclipse - Download the latest version of Scala IDE from [here](http://scala-ide.org/download/sdk.html). Here, I used Scala IDE 4.7.0 Release, which support both Scala and Java
-*   Scala Version - 2.11 ( make sure scala compiler is set to this version as well)
-*   Spark Version 2.2 ( provided in maven dependency)
-*   Java Version 1.8
-*   Maven Version 3.3.9 ( Embedded in Eclipse)
-*   winutils.exe
+---
 
-> For running in Windows environment , you need hadoop binaries in windows format. winutils provides that and we need to set hadoop.home.dir system property to bin path inside which winutils.exe is present. You can download **winutils.exe** [here](http://public-repo-1.hortonworks.com/hdp-win-alpha/winutils.exe) and place at path like this - **c:/hadoop/bin/winutils.exe .** Read [this](https://saurzcode.in/2019/09/running-spark-application-on-windows/) for more information.
+## Table of Contents
 
-#### Creating a Sample Application in Eclipse -
+- [How to Configure Spark Application (Scala and Java 8 Version with Maven) in Eclipse](#how-to-configure-spark-application-scala-and-java-8-version-with-maven-in-eclipse)
+	- [Table of Contents](#table-of-contents)
+	- [Introduction](#introduction)
+	- [Tools and Prerequisites](#tools-and-prerequisites)
+	- [Windows Note: winutils.exe](#windows-note-winutilsexe)
+	- [Creating a Sample Spark Application in Eclipse](#creating-a-sample-spark-application-in-eclipse)
+		- [Maven Project Setup](#maven-project-setup)
+		- [Java WordCount Example](#java-wordcount-example)
+		- [Scala WordCount Example](#scala-wordcount-example)
+	- [Running the Code in Eclipse](#running-the-code-in-eclipse)
+	- [Output](#output)
 
-In Scala IDE, create a new Maven Project - ![saurzcode-eclipse-spark](http://saurzcode.in/assets/uploads/2017/10/2.png) ![saurzcode-eclipse-spark](http://saurzcode.in/assets/uploads/2017/10/3.png) ![saurzcode-eclipse-spark](http://saurzcode.in/assets/uploads/2017/10/4.png) Replace POM.XML as below -
+---
 
-##### POM.XML
+## Introduction
 
+Apache Spark is a popular big data processing engine known for its fast, in-memory computation. This guide will help you set up a Spark project in Eclipse (Scala IDE), configure Maven, and run sample Java and Scala Spark applications.
+
+---
+
+## Tools and Prerequisites
+
+- **Scala IDE for Eclipse** ([Download](http://scala-ide.org/download/sdk.html))
+    - Example: Scala IDE 4.7.0 (supports both Scala and Java)
+- **Scala Version:** 2.11 (ensure your compiler matches this)
+- **Spark Version:** 2.2 (set in Maven dependency)
+- **Java Version:** 1.8
+- **Maven Version:** 3.3.9 (embedded in Eclipse)
+- **winutils.exe** (for Windows only)
+
+---
+
+## Windows Note: winutils.exe
+
+If running on Windows, you need Hadoop binaries in Windows format. `winutils.exe` provides this functionality. Set the `hadoop.home.dir` system property to the `bin` path containing `winutils.exe`.
+
+- [Download winutils.exe](http://public-repo-1.hortonworks.com/hdp-win-alpha/winutils.exe)
+- Place it at: `C:/hadoop/bin/winutils.exe`
+- See [this guide]({{site.baseurl}}/2019/09/running-spark-application-on-windows/) for more details.
+
+---
+
+## Creating a Sample Spark Application in Eclipse
+
+### Maven Project Setup
+
+1. In Scala IDE, create a new Maven Project.
+2. Replace the generated `pom.xml` with the following:
+
+```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -60,37 +99,95 @@ In Scala IDE, create a new Maven Project - ![saurzcode-eclipse-spark](http://sau
 		</dependency>
 	</dependencies>
 </project>
+```
 
-For creating a Java WordCount program, create a new Java Class and copy the code below -
+---
 
-#### Java Code for WordCount
+### Java WordCount Example
 
+Create a new Java class (e.g., `JavaWordCount`) and use the following code:
+
+```java
 package com.saurzcode.spark;
 
-import java.util.Arrays; import org.apache.spark.SparkConf; import org.apache.spark.api.java.JavaPairRDD; import org.apache.spark.api.java.JavaRDD; import org.apache.spark.api.java.JavaSparkContext; import scala.Tuple2; public class JavaWordCount { public static void main(String\[\] args) throws Exception { String inputFile = "src/main/resources/input.txt"; //To set HADOOP\_HOME. System.setProperty("hadoop.home.dir", "c://hadoop//"); //Initialize Spark Context JavaSparkContext sc = new JavaSparkContext(new SparkConf().setAppName("wordCount").setMaster("local\[4\]")); // Load data from Input File. JavaRDD<String> input = sc.textFile(inputFile); // Split up into words. JavaPairRDD<String, Integer> counts = input.flatMap(line -> Arrays.asList(line.split(" ")).iterator()) .mapToPair(word -> new Tuple2<>(word, 1)).reduceByKey((a, b) -> a + b); System.out.println(counts.collect()); sc.stop(); sc.close(); } }
+import java.util.Arrays;
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaPairRDD;
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
+import scala.Tuple2;
 
-#### Scala Version
+public class JavaWordCount {
+	public static void main(String[] args) throws Exception {
+		String inputFile = "src/main/resources/input.txt";
+		// Set HADOOP_HOME for Windows
+		System.setProperty("hadoop.home.dir", "c://hadoop//");
+		// Initialize Spark Context
+		JavaSparkContext sc = new JavaSparkContext(new SparkConf().setAppName("wordCount").setMaster("local[4]"));
+		// Load data from Input File
+		JavaRDD<String> input = sc.textFile(inputFile);
+		// Split up into words and count
+		JavaPairRDD<String, Integer> counts = input
+			.flatMap(line -> Arrays.asList(line.split(" ")).iterator())
+			.mapToPair(word -> new Tuple2<>(word, 1))
+			.reduceByKey((a, b) -> a + b);
+		System.out.println(counts.collect());
+		sc.stop();
+		sc.close();
+	}
+}
+```
 
-For running the Scala version of WordCount program in scala, create a new Scala Object and use the code below -
+---
 
-> You may need to set project as scala project to run this, and make sure scala compiler version matches Scala version in your Spark dependency, by setting in build path -
-> 
-> ![saurzcode-eclipse-spark](http://saurzcode.in/assets/uploads/2017/10/SparkVersion.png)
+### Scala WordCount Example
 
+Create a new Scala object (e.g., `ScalaWordCount`) and use the following code:
+
+```scala
 package com.saurzcode.spark
 
-import org.apache.spark.SparkConf import org.apache.spark.SparkContext object ScalaWordCount { def main(args: Array\[String\]) { //To set HADOOP\_HOME. System.setProperty("hadoop.home.dir", "c://hadoop//"); // create Spark context with Spark configuration val sc = new SparkContext(new SparkConf().setAppName("Spark WordCount").setMaster("local\[4\]")) //Load inputFile val inputFile = sc.textFile("src/main/resources/input.txt") val counts = inputFile.flatMap(line => line.split(" ")).map(word => (word, 1)).reduceByKey((a, b) => a + b) counts.foreach(println) sc.stop() } } So, your final setup will look like this - ![saurzcode-eclipse-spark](http://saurzcode.in/assets/uploads/2017/10/eclipse.png)
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext
 
-#### Running the code in Eclipse
+object ScalaWordCount {
+	def main(args: Array[String]): Unit = {
+		// Set HADOOP_HOME for Windows
+		System.setProperty("hadoop.home.dir", "c://hadoop//")
+		// Create Spark context
+		val sc = new SparkContext(new SparkConf().setAppName("Spark WordCount").setMaster("local[4]"))
+		// Load input file
+		val inputFile = sc.textFile("src/main/resources/input.txt")
+		val counts = inputFile
+			.flatMap(line => line.split(" "))
+			.map(word => (word, 1))
+			.reduceByKey(_ + _)
+		counts.foreach(println)
+		sc.stop()
+	}
+}
+```
 
-You can run the above code in Scala or Java as simple Run As Scala or Java Application in eclipse to see the output.
+> **Tip:** Make sure your project is set as a Scala project and the Scala compiler version matches the version in your Spark dependency. You can set this in the build path.
 
-#### Output
+---
 
-Now you should be able to see the word count output, along with log lines generated using default Spark log4j properties. ![saurzcode-eclipse-spark](http://saurzcode.in/assets/uploads/2017/10/output.png) In the next post, I will explain how you can open Spark WebUI and look at various stages, tasks on Spark code execution internally. You may also be interested in some other BigData posts -
+## Running the Code in Eclipse
 
-*   [Concept of RDDs in Spark](https://saurzcode.in//2015/10/what-is-rdd-in-spark-and-why-do-we-need-it/)
-*   [Getting started with MapReduce development](https://saurzcode.in//2015/01/setup-development-environment-hadoop-mapreduce/)
-*   [Top 20 BigData Books](https://saurzcode.in//2014/06/top-20-hadoop-bigdatabooks/)
-*   [Spark Dataframe Operations - Part I](https://saurzcode.in/2018/06/spark-common-dataframe-operations/)
-*   Spark ; How to Run Spark Applications on Windows
+- Run the Java or Scala code as a standard Java or Scala Application in Eclipse.
+- You should see the word count output and Spark log lines in the console.
+
+---
+
+## Output
+
+You should see output similar to:
+
+```
+(hello, 3)
+(world, 2)
+(example, 1)
+...
+```
+
+---

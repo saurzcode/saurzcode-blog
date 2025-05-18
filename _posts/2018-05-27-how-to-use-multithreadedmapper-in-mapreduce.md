@@ -3,7 +3,7 @@ id: 1175
 title: 'How to Use MultiThreadedMapper in MapReduce'
 date: '2018-05-27T11:40:21-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in/?p=1175'
 permalink: /2018/05/how-to-use-multithreadedmapper-in-mapreduce/
 meta-checkbox:
@@ -18,8 +18,59 @@ tags:
     - MultithreadedMapper
 ---
 
-In simple MapReduce Job each instance of Mapper.map() method is invoked by a single thread and key value pair are passed serially. MultithreadedMapper class is used instead of default Mapper when tasks are CPU bound and multiple threads running a map tasks can help to speed up the tasks, based on availability of cores in the system. In case of MultithreadedMapper implementation , there will be multiple threads running the Mapper.map() method in single Mapper instance. Threads from a thread pool invoke a queue of key value pairs in parallel in a single Mapper Class instance.One thing in particular to keep in mind is, the map implementation must be thread safe. Here are the steps needed to create a [MultithreadedMapper](https://hadoop.apache.org/docs/r3.0.0/api/org/apache/hadoop/mapreduce/lib/map/MultithreadedMapper.html) implementation in your MapReduce Driver Code -
+# How to Use MultiThreadedMapper in MapReduce
 
+A practical, developer-focused guide to using Hadoop's `MultithreadedMapper` for parallelizing map tasks and improving performance in CPU-bound jobs.
+
+---
+
+## Table of Contents
+
+- [How to Use MultiThreadedMapper in MapReduce](#how-to-use-multithreadedmapper-in-mapreduce)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Why Use MultithreadedMapper?](#why-use-multithreadedmapper)
+  - [How MultithreadedMapper Works](#how-multithreadedmapper-works)
+  - [Configuring MultithreadedMapper in Your Job](#configuring-multithreadedmapper-in-your-job)
+    - [Via Configuration Properties](#via-configuration-properties)
+    - [Via MultithreadedMapper Methods](#via-multithreadedmapper-methods)
+  - [Thread Safety Considerations](#thread-safety-considerations)
+  - [Example: Using MultithreadedMapper](#example-using-multithreadedmapper)
+  - [Use Cases](#use-cases)
+  - [Summary](#summary)
+
+---
+
+## Introduction
+
+In a standard MapReduce job, each call to `Mapper.map()` is handled by a single thread, and key-value pairs are processed serially. However, for CPU-bound tasks, you can speed up processing by running multiple threads within a single mapper task using Hadoop's `MultithreadedMapper` class.
+
+---
+
+## Why Use MultithreadedMapper?
+
+- **Parallelism:** Utilize multiple CPU cores by running several threads per mapper task
+- **Performance:** Speed up CPU-bound map operations
+- **Flexibility:** Control the number of threads per mapper
+
+**Note:** Your `Mapper` implementation must be thread-safe!
+
+---
+
+## How MultithreadedMapper Works
+
+- `MultithreadedMapper` creates a thread pool within each mapper task
+- Each thread runs the `map()` method on a subset of the input split
+- Threads process key-value pairs in parallel, improving throughput
+- The number of threads is configurable
+
+---
+
+## Configuring MultithreadedMapper in Your Job
+
+### Via Configuration Properties
+
+```java
 Configuration conf = new Configuration();
 Job job = new Job(conf);
 job.setMapperClass(MultithreadedMapper.class);
@@ -27,53 +78,78 @@ conf.set("mapred.map.multithreadedrunner.class", WordCountMapper.class.getCanoni
 conf.set("mapred.map.multithreadedrunner.threads", "8");
 job.setJarByClass(WordCountMapper.class);
 job.waitForCompletion(true);
+```
 
-#### Properties
+- `mapred.map.multithreadedrunner.class`: The actual `Mapper` class to run in parallel
+- `mapred.map.multithreadedrunner.threads`: Number of threads (default: 10)
 
-_mapred.map.multithreadedrunner.class_ property is used to set the Mapper class whose instance will be invoked by multiple threads in parallel. _mapred.map.multithreadedrunner.threads_ property is used to define number of threads in thread pool that will run the map function. Default value is 10. Properties can also be set using methods in MultithreadedMapper class as follows -
+### Via MultithreadedMapper Methods
 
+```java
 MultithreadedMapper.setMapperClass(job, WordCountMapper.class);
 MultithreadedMapper.setNumberOfThreads(job, 8);
+```
 
-Internally, MultithreadedMapper class overridedes run method to create multiple threads, each to run a map() function on a subrecord of input in inputsplit.
+---
 
-/\*\*
-\* Run the application's maps using a thread pool.
-\*/
+## Thread Safety Considerations
+
+- The `map()` method and any shared resources must be thread-safe
+- Avoid using mutable shared state in your `Mapper`
+- Use local variables inside `map()` whenever possible
+
+---
+
+## Example: Using MultithreadedMapper
+
+Here's a simplified example of how `MultithreadedMapper` manages threads internally:
+
+```java
+/**
+ * Run the application's maps using a thread pool.
+ */
 @Override
 public void run(Context context) throws IOException, InterruptedException {
-outer = context;
-int numberOfThreads = getNumberOfThreads(context);
-mapClass = getMapperClass(context);
-if (LOG.isDebugEnabled()) {
-LOG.debug("Configuring multithread runner to use " + numberOfThreads + 
-" threads");
+    outer = context;
+    int numberOfThreads = getNumberOfThreads(context);
+    mapClass = getMapperClass(context);
+    runners = new ArrayList<MapRunner>(numberOfThreads);
+    for(int i=0; i < numberOfThreads; ++i) {
+        MapRunner thread = new MapRunner(context);
+        thread.start();
+        runners.add(i, thread);
+    }
+    for(int i=0; i < numberOfThreads; ++i) {
+        MapRunner thread = runners.get(i);
+        thread.join();
+        Throwable th = thread.throwable;
+        if (th != null) {
+            if (th instanceof IOException) {
+                throw (IOException) th;
+            } else if (th instanceof InterruptedException) {
+                throw (InterruptedException) th;
+            } else {
+                throw new RuntimeException(th);
+            }
+        }
+    }
 }
+```
 
-runners = new ArrayList<MapRunner>(numberOfThreads);
-for(int i=0; i < numberOfThreads; ++i) {
-MapRunner thread = new MapRunner(context);
-thread.start();
-runners.add(i, thread);
-}
-for(int i=0; i < numberOfThreads; ++i) {
-MapRunner thread = runners.get(i);
-thread.join();
-Throwable th = thread.throwable;
-if (th != null) {
-if (th instanceof IOException) {
-throw (IOException) th;
-} else if (th instanceof InterruptedException) {
-throw (InterruptedException) th;
-} else {
-throw new RuntimeException(th);
-}
-}
-}
-}
+---
 
-Some of the use cases where you can use this is, to load data in HBase using a Map only MapReduce Job, in this case, your data loads can be significantly faster than a single threaded job. But please keep in mind of the fact that your HBase cluster should be able to handle the increased load. Please let me know in comments, where else you have used MultithreadedMapper in your jobs. Happy Learning !
+## Use Cases
 
-##### Related -
+- **HBase Bulk Loads:** Speed up data loading in HBase using a map-only job
+- **CPU-bound Map Tasks:** Any map operation that is CPU-intensive and can benefit from parallelism
+- **Custom Data Processing:** When you want to maximize CPU utilization within a single mapper
 
-[Top 20 Hadoop and Big Data Books](https://saurzcode.in/2014/06/top-20-hadoop-bigdatabooks/) [How to Configure Spark Application ( Scala and Java 8 Version with Maven ) in Eclipse.](https://saurzcode.in/2017/10/configure-spark-application-eclipse/)
+**Caution:** Ensure your downstream systems (e.g., HBase) can handle the increased load from parallel mappers.
+
+---
+
+## Summary
+
+- `MultithreadedMapper` allows you to run multiple threads per mapper task for parallel map processing
+- Use it for CPU-bound workloads where thread safety can be guaranteed
+- Configure the number of threads via properties or helper methods

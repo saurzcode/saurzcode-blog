@@ -3,7 +3,7 @@ id: 1011
 title: 'Top 20 Hadoop MapReduce Interview Questions'
 date: '2015-12-19T18:17:10-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=1011'
 permalink: /2015/12/hadoop-mapreduce-interview-questions/
 meta-checkbox:
@@ -29,7 +29,7 @@ tags:
 
 BigData and Data analytics Jobs are the most sought after jobs of current time. It is important to understand the basics before you appear for interview. In this post, I am covering few of the basic MapReduce interview questions for Hadoop MapReduce.
 
-<a href="https://saurzcode.in//assets/uploads/2014/06/hadoop.jpg"><img class=" wp-image-571 aligncenter" src="https://saurzcode.in//assets/uploads/2014/06/hadoop-300x166.jpg" alt="saurzcode_hadoop" width="468" height="259" /></a><!--more-->
+<a href="{{ site.baseurl }}/assets/uploads/2014/06/hadoop.jpg"><img class=" wp-image-571 aligncenter" src="{{ site.baseurl }}/assets/uploads/2014/06/hadoop-300x166.jpg" alt="saurzcode_hadoop" width="468" height="259" /></a><!--more-->
 <ol>
  	<li>What is MapReduce ?
 

@@ -3,7 +3,7 @@ id: 861
 title: 'How-To : Setup  Development Environment for  Hadoop MapReduce'
 date: '2015-01-23T06:14:56-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=861'
 permalink: /2015/01/setup-development-environment-hadoop-mapreduce/
 meta-checkbox:

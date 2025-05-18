@@ -3,7 +3,7 @@ id: 174
 title: 'Getting Started with Hadoop : Free Online Hadoop Trainings'
 date: '2014-04-21T16:50:01-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=174'
 permalink: /2014/04/free-online-hadoop-trainings/
 geo_public:
@@ -23,7 +23,7 @@ tags:
     - training
 ---
 
-<a class="vt-p" href="https://saurzcode.in//assets/uploads/2014/06/hadoop-trainings.png"><img class="aligncenter  wp-image-576" src="https://saurzcode.in//assets/uploads/2014/06/hadoop-trainings.png" alt="Hadoop Trainings" width="745" height="198" /></a>
+<a class="vt-p" href="{{ site.baseurl }}/assets/uploads/2014/06/hadoop-trainings.png"><img class="aligncenter  wp-image-576" src="{{ site.baseurl }}/assets/uploads/2014/06/hadoop-trainings.png" alt="Hadoop Trainings" width="745" height="198" /></a>
 <p style="text-align: left;"><em>Oh Yes! It's Free !!!</em></p>
 <p style="padding-left: 30px; text-align: left;"><em>With the rising popularity , increase in demand and lack of experts in Big Data and Hadoop technologies, various  paid training courses and certifications are available from various Enterprise Hadoop providers like Cloudera, Hortonworks , IBM, MapR etc .But if you don't want to shell out some money and want to learn at your comfort and pace, you should definitely take a look at these online courses available online and explore the world of Hadoop and Big Data. Happy Hadooping :)</em></p>
 

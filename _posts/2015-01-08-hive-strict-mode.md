@@ -3,7 +3,7 @@ id: 802
 title: 'Hive Strict Mode'
 date: '2015-01-08T14:31:44-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=802'
 permalink: /2015/01/hive-strict-mode/
 meta-checkbox:
@@ -21,7 +21,7 @@ tags:
     - hive
 ---
 
-![Sort By vs Order By vs Group By vs Cluster By in Hive](https://saurzcode.in//assets/uploads/2015/01/images.jpg)
+![Sort By vs Order By vs Group By vs Cluster By in Hive]{{site.baseurl}}/assets/uploads/2015/01/images.jpg)
 
 # What is Hive Strict Mode?
 

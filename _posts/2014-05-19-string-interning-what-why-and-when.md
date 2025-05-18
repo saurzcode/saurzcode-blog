@@ -3,7 +3,7 @@ id: 273
 title: 'String Interning &#8211; What ,Why and When ?'
 date: '2014-05-19T10:41:07-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=273'
 permalink: /2014/05/string-interning-what-why-and-when/
 geo_public:

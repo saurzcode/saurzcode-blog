@@ -3,7 +3,7 @@ id: 997
 title: 'Top 15 HDFS Interview Questions'
 date: '2015-12-19T18:42:49-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=997'
 permalink: /2015/12/hdfs-interview-questions/
 meta-checkbox:
@@ -21,7 +21,7 @@ tags:
     - interview
 ---
 
-HDFS is the distributed file system used in Hadoop and helps to achieve the purpose of storing very larger files on a commodity Hardware. While working on Hadoop and BigData in general it is very important to understand the basic concepts of they underlying file system, i.e. HDFS in case of Hadoop. When you are appearing in BigData Interviews , it is important to know these concepts. Let's see some of the basic HDFS interview questions -<a href="https://saurzcode.in//2015/12/hadoop-mapreduce-interview-questions/"><img class=" wp-image-571 aligncenter" src="https://saurzcode.in//assets/uploads/2014/06/hadoop-300x166.jpg" alt="saurzcode_hadoop" width="457" height="253" /></a><!--more-->
+HDFS is the distributed file system used in Hadoop and helps to achieve the purpose of storing very larger files on a commodity Hardware. While working on Hadoop and BigData in general it is very important to understand the basic concepts of they underlying file system, i.e. HDFS in case of Hadoop. When you are appearing in BigData Interviews , it is important to know these concepts. Let's see some of the basic HDFS interview questions -<a href="https://saurzcode.in//2015/12/hadoop-mapreduce-interview-questions/"><img class=" wp-image-571 aligncenter" src="{{ site.baseurl }}/assets/uploads/2014/06/hadoop-300x166.jpg" alt="saurzcode_hadoop" width="457" height="253" /></a><!--more-->
 <ol>
  	<li>What is HDFS
 

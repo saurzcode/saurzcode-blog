@@ -3,7 +3,7 @@ id: 872
 title: 'Hive : SORT BY vs ORDER BY vs DISTRIBUTE BY vs CLUSTER BY'
 date: '2015-01-27T06:43:20-07:00'
 author: saurzcode
-layout: post
+
 guid: 'https://saurzcode.in//?p=872'
 permalink: /2015/01/hive-sort-order-distribute-cluster/
 meta-checkbox:
@@ -37,7 +37,7 @@ tags:
 
 In Apache Hive HQL, you can decide to order or sort your data differently based on ordering and distribution requirement. In this post we will look at how **SORT BY**, **ORDER BY**, **DISTRIBUTE BY** and **CLUSTER BY** behave differently in Hive. Let's get started -
 
-![Sort By vs Order By vs Group By vs Cluster By in Hive](https://saurzcode.in/assets/uploads/2015/01/images.jpg)
+![Sort By vs Order By vs Group By vs Cluster By in Hive]({{base.url}}/assets/uploads/2015/01/images.jpg)
 
 ## SORT BY
 

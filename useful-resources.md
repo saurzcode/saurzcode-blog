@@ -3,7 +3,7 @@ id: 836
 title: 'Useful Resources'
 date: '2015-01-15T12:27:38-07:00'
 author: saurzcode
-layout: post
+
 guid: 'https://saurzcode.in//?page_id=836'
 meta-checkbox:
     - ''

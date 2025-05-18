@@ -22,13 +22,35 @@ title: SaurzCode
 email: mail2saurzcode@gmail.com
 description: >-
   Big Data and Spark tutorials.
-baseurl: ""
+baseurl: "/"
 url: "https://saurzcode.in"
+read_time: true
+words_per_minute: # 200
+google_fonts:
+  - name: "Source Sans Pro"
+    weights: "400,400i,700,700i"
+  - name: "Lora"
+    weights: "400,400i,700,700i"
+
+
+category_archive_path: "/categories/#"
+tag_archive_path: "/tags/#"
+
+defaults:
+  # Post defaults
+  - scope:
+      path: "_posts"
+      type: posts
+    values:
+      layout: post
+      comments: true
+      share: true
 
 # Build settings
 #theme: minimal-mistakes-jekyll
 #remote_theme: wowthemesnet/mediumish-theme-jekyll
-theme: just-the-docs
+#theme: just-the-docs
+theme: jekyll-theme-so-simple
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
@@ -59,6 +81,7 @@ plugins:
 #   - vendor/ruby/
 markdown: kramdown
 highlighter: rouge
+input: GFM
 
 
 # Exclude search.md from search

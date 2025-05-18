@@ -3,7 +3,7 @@ id: 913
 title: 'How-To : Write a Kafka Producer using Twitter Stream ( Twitter HBC Client)'
 date: '2015-02-12T00:47:49-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=913'
 permalink: /2015/02/kafka-producer-using-twitter-stream/
 meta-checkbox:
@@ -24,221 +24,209 @@ tags:
     - twitter
 ---
 
-<!-- wp:paragraph -->
-<p>Twitter open-sourced its Hosebird client (hbc), a robust Java HTTP library for consuming Twitter's <a href="https://dev.twitter.com/docs/streaming-apis" target="_blank" rel="noreferrer noopener">Streaming API</a>. In this post, I am going to present a demo of how we can use <em>hbc </em>to create a Kafka twitter stream producer, which tracks a few terms in Twitter statuses and produces a Kafka stream out of it, which can be utilised later for counting the terms, or sending that data from Kafka to Storm (Kafka-Storm pipeline) or HDFS ( as we will see in next post about using Camus API).</p>
-<!-- /wp:paragraph -->
+# How-To: Write a Kafka Producer using Twitter Stream (Twitter HBC Client)
 
-<!-- wp:paragraph -->
-<p>You can download and run a complete Sample <a href="https://github.com/saurzcode/twitter-stream/" target="_blank" rel="noreferrer noopener">here</a>.</p>
-<!-- /wp:paragraph -->
+A step-by-step guide to building a Kafka producer that streams live tweets using Twitter's Hosebird Client (HBC) and publishes them to a Kafka topic. This is a practical, developer-focused walkthrough with code, configuration, and troubleshooting tips.
 
-<!-- wp:more -->
-<p><!--more--></p>
-<!-- /wp:more -->
+---
 
-<!-- wp:heading -->
-<h2>Requirements</h2>
-<!-- /wp:heading -->
+## Table of Contents
 
-<!-- wp:list -->
-<ul>
-<li>Apache Kafka 2.6.0</li>
-<li>Twitter Developer account ( for API Key, Secret etc.)</li>
-<li>Apache Zookeeper ( required for Kafka)</li>
-<li>Oracle JDK 1.8 (64 bit )</li>
-</ul>
-<!-- /wp:list -->
+- [How-To: Write a Kafka Producer using Twitter Stream (Twitter HBC Client)](#how-to-write-a-kafka-producer-using-twitter-stream-twitter-hbc-client)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Requirements](#requirements)
+  - [Build Environment](#build-environment)
+  - [Generating Twitter API Keys](#generating-twitter-api-keys)
+  - [Kafka \& Zookeeper Setup](#kafka--zookeeper-setup)
+    - [Start Zookeeper](#start-zookeeper)
+    - [Start Kafka](#start-kafka)
+      - [On macOS with Homebrew](#on-macos-with-homebrew)
+  - [Creating a Kafka Topic](#creating-a-kafka-topic)
+  - [Kafka Producer with Twitter HBC](#kafka-producer-with-twitter-hbc)
+    - [Maven Dependencies](#maven-dependencies)
+    - [Kafka Producer Properties](#kafka-producer-properties)
+    - [Twitter HBC Client Setup](#twitter-hbc-client-setup)
+    - [Producing Tweets to Kafka](#producing-tweets-to-kafka)
+  - [Running the Example](#running-the-example)
+  - [References \& Further Reading](#references--further-reading)
 
-<!-- wp:heading -->
-<h2>Build Environment</h2>
-<!-- /wp:heading -->
+---
 
-<!-- wp:list -->
-<ul>
-<li>Eclipse</li>
-<li>Apache Maven 2/3</li>
-</ul>
-<!-- /wp:list -->
+## Introduction
 
-<!-- wp:heading -->
-<h2>How to Generate Twitter API Keys Using Developer Account</h2>
-<!-- /wp:heading -->
+[Twitter's Hosebird Client (HBC)](https://github.com/twitter/hbc) is a robust Java HTTP library for consuming Twitter's [Streaming API](https://dev.twitter.com/docs/streaming-apis). In this guide, you'll learn how to use HBC to create a Kafka producer that streams tweets matching specific terms and publishes them to a Kafka topic. This data can then be used for analytics, real-time processing (e.g., with Storm), or further pipelined to HDFS.
 
-<!-- wp:list {"ordered":true} -->
-<ol>
-<li>Go to <a href="https://dev.twitter.com/apps/new">https://dev.twitter.com/apps/new</a> and log in, if necessary.</li>
-<li>Enter your Application Name, Description, and your website address. You can leave the callback URL empty.</li>
-<li>Accept the TOS.</li>
-<li>Submit the form by clicking the <strong>Create your Twitter Application.</strong></li>
-<li>Copy the consumer key (API key) and consumer secret from the screen into your application.</li>
-<li>After creating your Twitter Application, you have to give access to your Twitter Account to use this Application. To do this, click the <strong>Create my Access Token.</strong></li>
-<li>Now you will have <em>Consumer Key, Consumer Secret, Acess token, Access Token Secret</em> to be used in streaming API calls.</li>
-</ol>
-<!-- /wp:list -->
+You can find a complete sample project [here](https://github.com/saurzcode/twitter-stream/).
 
-<!-- wp:heading -->
-<h2>Steps to Run the Sample</h2>
-<!-- /wp:heading -->
+---
 
-<!-- wp:paragraph -->
-<p>1. Start the Zookeeper server in Kafka using the following script in your Kafka installation folder  –</p>
-<!-- /wp:paragraph -->
+## Requirements
 
-<!-- wp:code -->
-<pre class="EnlighterJSRAW" data-enlighter-language="shell">$bin/zookeeper-server-start.sh config/zookeeper.properties &amp;amp;</pre>
-<!-- /wp:code -->
+- **Apache Kafka 2.6.0**
+- **Twitter Developer Account** (for API Key, Secret, etc.)
+- **Apache Zookeeper** (required for Kafka)
+- **Oracle JDK 1.8 (64-bit)**
 
-<!-- wp:paragraph -->
-<p>and, verify if it is running on default port 2181 using –</p>
-<!-- /wp:paragraph -->
+## Build Environment
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>$netstat -anlp | grep 2181</code></pre>
-<!-- /wp:code -->
+- **Eclipse** (or your preferred IDE)
+- **Apache Maven 2/3**
 
-<!-- wp:paragraph -->
-<p>2. Start Kafka server using the following script –</p>
-<!-- /wp:paragraph -->
+---
 
-<!-- wp:paragraph -->
-<p><code>$bin/kafka-server-start.sh config/server.properties  &amp;</code></p>
-<!-- /wp:paragraph -->
+## Generating Twitter API Keys
 
-<!-- wp:paragraph -->
-<p>and, verify if it is running on default port 9092</p>
-<!-- /wp:paragraph -->
+To access the Twitter Streaming API, you need API keys and tokens:
 
-<!-- wp:paragraph -->
-<p><em>If you are on a mac, and you have brew installed, both can be done with simple brew commands.</em></p>
-<!-- /wp:paragraph -->
+1. Go to [https://dev.twitter.com/apps/new](https://dev.twitter.com/apps/new) and log in.
+2. Enter your Application Name, Description, and website address (callback URL can be left empty).
+3. Accept the Terms of Service and create your application.
+4. Copy the **Consumer Key (API key)** and **Consumer Secret**.
+5. Click **Create my Access Token** to generate your **Access Token** and **Access Token Secret**.
+6. You now have all four credentials needed for OAuth authentication.
 
-<!-- wp:paragraph -->
-<p><code>$brew install kafka</code>   # this internally installs zookeeper too</p>
-<!-- /wp:paragraph -->
+---
 
-<!-- wp:paragraph -->
-<p><code>$brew services start zookeeper</code></p>
-<!-- /wp:paragraph -->
+## Kafka & Zookeeper Setup
 
-<!-- wp:paragraph -->
-<p>$kafka-server-start  /usr/local/etc/kafka/server.properties</p>
-<!-- /wp:paragraph -->
+Start Zookeeper and Kafka servers. Replace `$KAFKA_HOME` with your Kafka installation directory.
 
-<!-- wp:paragraph -->
-<p>3. Create Topic</p>
-<!-- /wp:paragraph -->
+### Start Zookeeper
 
-<!-- wp:paragraph -->
-<p><code>$bin/kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic twitter-topic</code></p>
-<!-- /wp:paragraph -->
+```sh
+$KAFKA_HOME/bin/zookeeper-server-start.sh $KAFKA_HOME/config/zookeeper.properties &
+```
 
-<!-- wp:paragraph -->
-<p>4. Validate the Topic</p>
-<!-- /wp:paragraph -->
+Verify Zookeeper is running (default port 2181):
 
-<!-- wp:paragraph -->
-<p><code>$bin/kafka-topics --describe --zookeeper localhost:2181 --topic twitter-topic</code></p>
-<!-- /wp:paragraph -->
+```sh
+netstat -anlp | grep 2181
+```
 
-<!-- wp:paragraph -->
-<p>3. Now, when we are all set with Kafka running and ready to accept messages on the topic we just created., we will create a <a href="https://github.com/saurzcode/twitter-stream/blob/master/src/main/java/com/saurzcode/twitter/TwitterKafkaProducer.java" target="_blank" rel="noreferrer noopener">Kafka Producer</a>, which makes use of <em>hbc client API</em> to get twitter stream for tracking terms and puts on the topic named as "<em>twitter-topic</em>".</p>
-<!-- /wp:paragraph -->
+### Start Kafka
 
-<!-- wp:list -->
-<ul>
-<li>First, we need to give maven dependencies for hbc-core for latest version and some other dependencies needed for Kafka –</li>
-</ul>
-<!-- /wp:list -->
+```sh
+$KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties &
+```
 
-<!-- wp:preformatted -->
-<p class="wp-block-preformatted EnlighterJSRAW" data-enlighter-language="generic"><code>&lt;dependency&gt;</code><br /><code>   &lt;groupId&gt;com.twitter&lt;/groupId&gt;</code><br /><code>   &lt;artifactId&gt;hbc-core&lt;/artifactId&gt; &lt;!-- or hbc-twitter4j --&gt;</code><br /><code>   &lt;version&gt;2.2.0&lt;/version&gt; &lt;!-- or whatever the latest version is --&gt;</code><br /><code>&lt;/dependency&gt;</code><br /><code>&lt;dependency&gt;</code><br /><code>   &lt;groupId&gt;org.apache.kafka&lt;/groupId&gt;</code><br /><code>   &lt;artifactId&gt;kafka-clients&lt;/artifactId&gt;</code><br /><code>   &lt;version&gt;2.6.0&lt;/version&gt;</code><br /><code>&lt;/dependency&gt;</code></p>
-<!-- /wp:preformatted -->
+Verify Kafka is running (default port 9092).
 
-<!-- wp:list -->
-<ul>
-<li>  Then, we need to set properties to configure our Kafka Producer to publish messages to the topic –</li>
-</ul>
-<!-- /wp:list -->
+#### On macOS with Homebrew
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>Properties properties = new Properties();
-properties.put(ProducerConfig.&lt;em&gt;BOOTSTRAP_SERVERS_CONFIG&lt;/em&gt;, TwitterKafkaConfig.&lt;em&gt;SERVERS&lt;/em&gt;);
-properties.put(ProducerConfig.&lt;em&gt;ACKS_CONFIG&lt;/em&gt;, "1");
-properties.put(ProducerConfig.&lt;em&gt;LINGER_MS_CONFIG&lt;/em&gt;, 500);
-properties.put(ProducerConfig.&lt;em&gt;RETRIES_CONFIG&lt;/em&gt;, 0);
-properties.put(ProducerConfig.&lt;em&gt;KEY_SERIALIZER_CLASS_CONFIG&lt;/em&gt;, LongSerializer.class.getName());
-properties.put(ProducerConfig.&lt;em&gt;VALUE_SERIALIZER_CLASS_CONFIG&lt;/em&gt;, StringSerializer.class.getName());</code></pre>
-<!-- /wp:code -->
+```sh
+brew install kafka  # Installs Zookeeper too
+brew services start zookeeper
+kafka-server-start /usr/local/etc/kafka/server.properties
+```
 
-<!-- wp:list -->
-<ul>
-<li>Set up a <em>StatusFilterEndpoint</em>, which will set up track terms to be tracked on recent status messages, as in the example -<br /><br />StatusesFilterEndpoint endpoint = new StatusesFilterEndpoint();</li>
-<li>endpoint.trackTerms(Lists.newArrayList(term));</li>
-<li>Provide authentication parameters for OAuth ( we are getting them using command line parameters for this program, so don't forget to pass those as VM arguments when you run it on IDE) for using twitter that we generated earlier and create the client using endpoint and auth –</li>
-</ul>
-<!-- /wp:list -->
+---
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>Authentication auth = new OAuth1(consumerKey, consumerSecret, token,
-        secret);
+## Creating a Kafka Topic
 
-Client client = new ClientBuilder().hosts(Constants.&lt;em&gt;STREAM_HOST&lt;/em&gt;)
-        .endpoint(endpoint).authentication(auth)
-        .processor(new StringDelimitedProcessor(queue)).build();</code></pre>
-<!-- /wp:code -->
+Create a topic named `twitter-topic`:
 
-<!-- wp:list -->
-<ul>
-<li>Last step, connect to the client, fetch messages from the queue and send through Kafka Producer –</li>
-</ul>
-<!-- /wp:list -->
+```sh
+$KAFKA_HOME/bin/kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic twitter-topic
+```
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>client.connect();
-try (Producer&amp;lt;Long, String&gt; producer = &lt;em&gt;getProducer&lt;/em&gt;()) {
-while (true) {
-ProducerRecord&amp;lt;Long, String&gt; message = new ProducerRecord&amp;lt;&gt;(TwitterKafkaConfig.&lt;em&gt;TOPIC&lt;/em&gt;, queue.take());
-producer.send(message);
-}
+Validate the topic:
+
+```sh
+$KAFKA_HOME/bin/kafka-topics --describe --zookeeper localhost:2181 --topic twitter-topic
+```
+
+---
+
+## Kafka Producer with Twitter HBC
+
+Now, let's build a Kafka producer that streams tweets using HBC and publishes them to `twitter-topic`.
+
+### Maven Dependencies
+
+Add these dependencies to your `pom.xml`:
+
+```xml
+<dependency>
+   <groupId>com.twitter</groupId>
+   <artifactId>hbc-core</artifactId> <!-- or hbc-twitter4j -->
+   <version>2.2.0</version> <!-- or latest -->
+</dependency>
+<dependency>
+   <groupId>org.apache.kafka</groupId>
+   <artifactId>kafka-clients</artifactId>
+   <version>2.6.0</version>
+</dependency>
+```
+
+### Kafka Producer Properties
+
+Configure your Kafka producer:
+
+```java
+Properties properties = new Properties();
+properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, TwitterKafkaConfig.SERVERS);
+properties.put(ProducerConfig.ACKS_CONFIG, "1");
+properties.put(ProducerConfig.LINGER_MS_CONFIG, 500);
+properties.put(ProducerConfig.RETRIES_CONFIG, 0);
+properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, LongSerializer.class.getName());
+properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+```
+
+### Twitter HBC Client Setup
+
+Set up the HBC client to track terms and authenticate:
+
+```java
+StatusesFilterEndpoint endpoint = new StatusesFilterEndpoint();
+endpoint.trackTerms(Lists.newArrayList(term));
+
+Authentication auth = new OAuth1(consumerKey, consumerSecret, token, secret);
+
+Client client = new ClientBuilder()
+    .hosts(Constants.STREAM_HOST)
+    .endpoint(endpoint)
+    .authentication(auth)
+    .processor(new StringDelimitedProcessor(queue))
+    .build();
+```
+
+### Producing Tweets to Kafka
+
+Connect to the Twitter stream, fetch messages from the queue, and send them to Kafka:
+
+```java
+client.connect();
+try (Producer<Long, String> producer = getProducer()) {
+    while (true) {
+        ProducerRecord<Long, String> message = new ProducerRecord<>(TwitterKafkaConfig.TOPIC, queue.take());
+        producer.send(message);
+    }
 } catch (InterruptedException e) {
-e.printStackTrace();
+    e.printStackTrace();
 } finally {
-client.stop();
-}</code></pre>
-<!-- /wp:code -->
+    client.stop();
+}
+```
 
-<!-- wp:paragraph -->
-<p>To run the complete example run <a href="https://github.com/saurzcode/twitter-stream/blob/master/src/main/java/com/saurzcode/twitter/TwitterKafkaProducer.java">TwitterKafkaProducer.java </a>class as a Java Application in your favorite IDE and don't forget to pass the arguments with your API keys and terms. Read detailed instructions <a href="https://github.com/saurzcode/twitter-stream/blob/master/README.md" target="_blank" rel="noreferrer noopener">here</a>.</p>
-<!-- /wp:paragraph -->
+---
 
-<!-- wp:paragraph -->
-<p>Also, to see how you can integrate Kafka with HDFS using camus from LinkedIn, you can visit the blog <a href="http://saurzcode.in/2015/02/integrate-kafka-hdfs-using-camus-twitter-stream-example/">here</a>.</p>
-<!-- /wp:paragraph -->
+## Running the Example
 
-<!-- wp:paragraph -->
-<p>Happy Learning !!</p>
-<!-- /wp:paragraph -->
+- Run the `TwitterKafkaProducer.java` class as a Java application in your IDE.
+- Pass your Twitter API keys and search terms as arguments (VM arguments or program arguments).
+- For a complete runnable example and detailed instructions, see the [GitHub repository](https://github.com/saurzcode/twitter-stream/).
 
-<!-- wp:paragraph -->
-<p>References:-</p>
-<!-- /wp:paragraph -->
+---
 
-<!-- wp:paragraph -->
-<p>[1] https://kafka.apache.org/quickstart.html</p>
-<!-- /wp:paragraph -->
+## References & Further Reading
 
-<!-- wp:paragraph -->
-<p>[2] https://github.com/twitter/hbc</p>
-<!-- /wp:paragraph -->
+- [Kafka Quickstart](https://kafka.apache.org/quickstart.html)
+- [Twitter HBC](https://github.com/twitter/hbc)
+- [How to generate Twitter API keys](https://themepacific.com/how-to-generate-api-key-consumer-token-access-key-for-twitter-oauth/994/)
+- [Integrate Kafka with HDFS using Camus (blog)](http://saurzcode.in/2015/02/integrate-kafka-hdfs-using-camus-twitter-stream-example/)
+- [Multithreaded Mappers in MapReduce](https://wp.me/p5pWDa-iX)
 
-<!-- wp:paragraph -->
-<p>[3] https://themepacific.com/how-to-generate-api-key-consumer-token-access-key-for-twitter-oauth/994/</p>
-<!-- /wp:paragraph -->
+---
 
-<!-- wp:paragraph -->
-<p>Interesting Reads -</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p><a href="https://wp.me/p5pWDa-iX">Multithreaded Mappers in Mapreduce</a></p>
-<!-- /wp:paragraph -->
+Happy Learning!

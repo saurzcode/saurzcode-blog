@@ -3,7 +3,7 @@ id: 842
 title: 'How-to : Write a CoProcessor in HBase'
 date: '2015-01-27T18:06:55-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=842'
 permalink: /2015/01/write-coprocessor-hbase/
 meta-checkbox:

@@ -3,7 +3,7 @@ id: 118
 title: 'Top 10 Hadoop Shell Commands to manage HDFS'
 date: '2013-10-27T22:32:09-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=118'
 permalink: /2013/10/hdfs-shell-commands/
 publicize_google_plus_url:
@@ -22,7 +22,6 @@ ampforwp_custom_content_editor_checkbox:
     - ''
 ampforwp-amp-on-off:
     - default
-image: /assets/uploads/2013/10/hadoop-hdfs-post.jpg
 categories:
     - 'Big Data'
     - Technology
@@ -206,11 +205,3 @@ Please comment on which of these commands you found most useful while dealing wi
 
 Reference: [https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HDFSCommands.html](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HDFSCommands.html)
 
----
-
-## Related articles
-
-- [How to become Hadoop Certified Developer?](https://saurzcode.in//2014/05/31/hadoop-certifications/)
-- [Free Online Hadoop Trainings](https://saurzcode.in//2014/04/21/free-online-hadoop-trainings/)
-- [Reading List: Hadoop and Big Data Books](https://saurzcode.in//2014/06/01/reading-list-hadoop/)
-- [Recommended Readings for Hadoop](https://saurzcode.in//2014/02/04/recommended-readings-for-hadoop/)

@@ -3,7 +3,7 @@ id: 602
 title: 'Hadoop : Getting Started with Pig'
 date: '2014-06-28T19:10:39-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=602'
 permalink: /2014/06/getting-started-with-pig/
 geo_public:
@@ -36,7 +36,7 @@ Through the User Defined Functions (UDF) facility in Pig, it can invoke code in 
 
 ## Architecture
 
-[![Pig Architecture](assets/uploads/2014/06/pig-achitecture.jpg)](assets/uploads/2014/06/pig-achitecture.jpg)
+[![Pig Architecture]({{site.baseurl}}/assets/uploads/2014/06/pig-achitecture.jpg)]({{site.baseurl}}/assets/uploads/2014/06/pig-achitecture.jpg)
 
 ## How It is being Used?
 
@@ -130,9 +130,3 @@ Happy Learning!!
 - [http://pig.apache.org](http://pig.apache.org)
 
 ---
-
-### Related articles:
-
-- *[Recommended readings for Hadoop](https://saurzcode.in//2014/02/04/recommended-readings-for-hadoop/)*
-- *[Free Online Hadoop Trainings](https://saurzcode.in//2014/04/21/free-online-hadoop-trainings/)*
-- *[How to become a Hadoop Certified Developer ?](https://saurzcode.in//2014/05/31/everything-about-hadoop-certifications/)*

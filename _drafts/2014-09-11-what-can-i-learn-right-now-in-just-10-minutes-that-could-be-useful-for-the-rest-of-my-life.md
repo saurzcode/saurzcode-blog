@@ -3,7 +3,7 @@ id: 686
 title: 'What can I learn right now in just 10 minutes that could be useful for the rest of my life?'
 date: '2014-09-11T15:35:30-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=686'
 permalink: /2014/09/what-can-i-learn-right-now-in-just-10-minutes-that-could-be-useful-for-the-rest-of-my-life/
 publicize_google_plus_url:

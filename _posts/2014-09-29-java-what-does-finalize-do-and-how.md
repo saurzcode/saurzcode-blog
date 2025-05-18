@@ -3,7 +3,7 @@ id: 691
 title: 'Java : What does finalize do and How?'
 date: '2014-09-29T10:07:05-07:00'
 author: saurzcode
-layout: post
+
 guid: 'https://saurzcode.in//?p=691'
 permalink: /2014/09/java-what-does-finalize-do-and-how/
 publicize_google_plus_url:

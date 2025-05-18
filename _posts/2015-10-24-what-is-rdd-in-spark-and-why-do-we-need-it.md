@@ -3,7 +3,7 @@ id: 982
 title: 'What is RDD in Spark ? and Why do we need it ?'
 date: '2015-10-24T09:50:10-07:00'
 author: saurzcode
-layout: post
+
 guid: 'https://saurzcode.in//?p=982'
 permalink: /2015/10/what-is-rdd-in-spark-and-why-do-we-need-it/
 meta-checkbox:
@@ -21,64 +21,145 @@ tags:
     - spark
 ---
 
-Resilient Distributed Datasets -RDDs in Spark
----------------------------------------------
+# What is RDD in Spark? And Why Do We Need It?
 
-Apcahe Spark has already taken over Hadoop (MapReduce) because of plenty of benefits it provides in terms of faster execution in iterative processing algorithms such as Machine learning. In this post, we will try to understand what makes Spark RDDs so useful in batch analytics .
+A developer-friendly guide to understanding Resilient Distributed Datasets (RDDs) in Apache Spark, their properties, and why they are fundamental for fast, fault-tolerant distributed computing.
 
-Why RDD ?
----------
+---
 
-When it comes to iterative distributed computing, i.e. processing data over multiple jobs in computations such as Logistic Regression, K-means clustering, Page rank algorithms, it is fairly common to reuse or share the data among multiple jobs or it may involve multiple ad-hoc queries over a shared data set.This makes it very important to have a very good data sharing architecture so that we can perform fast computations. There is an underlying problem with data reuse or data sharing in existing distributed computing systems (such as MapReduce) and that is , you need to store data in some intermediate stable distributed store such as HDFS or Amazon S3. This makes the overall computations of jobs slower since it involves multiple IO operations, replications and serializations in the process. \[caption id="attachment\_983" width="708" align="aligncenter"\][![Spark-HDFS-Write](https://saurzcode.in//assets/uploads/2015/10/Spark-HDFS-Write.png)](https://saurzcode.in//assets/uploads/2015/10/Spark-HDFS-Write.png) Iterative Processing in MapReduce\[/caption\] RDDs , try to solve these problems by enabling fault tolerant distributed In-memory computations. \[caption id="attachment\_985" width="711" align="aligncenter"\][![Spark-RDD](https://saurzcode.in//assets/uploads/2015/10/Spark-RDD.png)](https://saurzcode.in//assets/uploads/2015/10/Spark-RDD.png) Iterative Processing in Spark\[/caption\] Now, lets understand what is RDD and how it helps to achieve fast and fault tolerant In-memory computations.
+## Table of Contents
 
-RDD - Resilient Distributed Datasets
-------------------------------------
+- [What is RDD in Spark? And Why Do We Need It?](#what-is-rdd-in-spark-and-why-do-we-need-it)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Why RDD?](#why-rdd)
+  - [What is an RDD?](#what-is-an-rdd)
+  - [Key Properties of RDDs](#key-properties-of-rdds)
+    - [Immutability and Partitioning](#immutability-and-partitioning)
+    - [Coarse-Grained Operations](#coarse-grained-operations)
+    - [Transformations and Actions](#transformations-and-actions)
+    - [Fault Tolerance and Lineage](#fault-tolerance-and-lineage)
+    - [Lazy Evaluation](#lazy-evaluation)
+    - [Persistence](#persistence)
+  - [RDDs vs. MapReduce](#rdds-vs-mapreduce)
+  - [Summary](#summary)
+  - [References \& Related Reading](#references--related-reading)
 
-RDDs are huge collections of records with following properties -
+---
 
-*   Immutable
-*   Partitioned
-*   Fault tolerant
-*   Created by coarse grained operations
-*   Lazily evaluated
-*   Can be persisted
+## Introduction
 
-Let's try to understand these characteristics -
+Apache Spark has become a popular alternative to Hadoop MapReduce for big data processing, especially for iterative algorithms in machine learning and analytics. The core abstraction that enables Spark's speed and flexibility is the **Resilient Distributed Dataset (RDD)**.
 
-### Immutability and partitioning
+---
 
-RDDs composed of collection of records which are partitioned. Partition is basic unit of parallelism in a RDD, and each partition is one logical division of data which is immutable and created through some transformations on existing partitions.Immutability helps to achieve consistency in computations. Users can define their own criteria for partitioning based on keys on which they want to join multiple datasets if needed.
+## Why RDD?
 
-### Coarse grained operations
+In iterative distributed computing (e.g., logistic regression, k-means clustering, PageRank), it's common to reuse or share data across multiple jobs or queries. Traditional systems like MapReduce require storing intermediate data in distributed storage (HDFS, S3), which slows down computation due to repeated I/O, replication, and serialization.
 
-Coarse grained operations are operations which are applied to all elements in datasets. For example - a map, or filter or groupBy operation which will be performed on all elements in a partition of RDD.
+**Problem with MapReduce:**
+- Data sharing between jobs is slow due to reliance on disk-based storage
+- Multiple I/O operations and serialization overhead
 
-### Transformations and actions
+**Spark's Solution:**
+- RDDs enable fast, fault-tolerant, in-memory computations
+- Reduce the need for repeated disk I/O
 
-RDDs can only be created by reading data from a stable storage such as HDFS or by transformations on existing RDDs. All computations on RDDs are either transformations or actions.
+---
 
-### [![saurzcode-rdd-transformation-action](https://saurzcode.in//assets/uploads/2015/10/saurzcode_RDD_Transformation_Action-final.png)](https://saurzcode.in//assets/uploads/2015/10/saurzcode_RDD_Transformation_Action-final.png)
+## What is an RDD?
 
-### Fault Tolerance
+An **RDD (Resilient Distributed Dataset)** is a fundamental data structure in Spark representing an immutable, distributed collection of objects that can be processed in parallel.
 
-Since RDDs are created over a set of transformations , it logs those transformations, rather than actual data.Graph of these transformations to produce one RDD is called as _Lineage Graph_. For example -
+---
 
-firstRDD=spark.textFile("hdfs://...")
+## Key Properties of RDDs
 
-secondRDD=firstRDD.filter(someFunction);
+### Immutability and Partitioning
 
-thirdRDD = secondRDD.map(someFunction);
+- RDDs are **immutable**: once created, they cannot be changed
+- Data is **partitioned** across the cluster for parallel processing
+- Each partition is a logical chunk of data processed independently
+- Users can define custom partitioning (e.g., by key)
 
-result = thirdRDD.count()
+### Coarse-Grained Operations
 
-\[caption id="attachment\_987" width="173" align="alignleft"\][![RDD](https://saurzcode.in//assets/uploads/2015/10/RDD.png)](https://saurzcode.in//assets/uploads/2015/10/RDD.png) Spark RDD Lineage Graph\[/caption\] In case of we lose some partition of RDD , we can replay the transformation on that partition in lineage to achieve the same computation, rather than doing data replication across multiple nodes.This characteristic is biggest benefit of RDD , because it saves a lot of efforts in data management and replication and thus achieves faster computations.
+- Operations are **coarse-grained**: applied to all elements in the dataset
+- Examples: `map`, `filter`, `groupBy`
+- These operations are performed on each partition in parallel
 
-### Lazy evaluations
+### Transformations and Actions
 
-Spark computes RDDs lazily the first time they are used in an action, so that it can pipeline transformations. So , in above example RDD will be evaluated only when _count(_) action is invoked.
+- **Transformations** create a new RDD from an existing one (e.g., `map`, `filter`)
+- **Actions** trigger computation and return a result (e.g., `count`, `collect`)
+- RDDs are created by reading data from storage or by transforming other RDDs
+
+**Example:**
+
+```scala
+val textRDD = spark.textFile("hdfs://...")
+val filteredRDD = textRDD.filter(line => line.contains("error"))
+val count = filteredRDD.count()
+```
+
+### Fault Tolerance and Lineage
+
+- RDDs track the sequence of transformations (the **lineage graph**) used to build them
+- If a partition is lost, Spark can recompute it using the lineage
+- No need for data replication across nodes
+
+**Example Lineage:**
+
+```scala
+val firstRDD = spark.textFile("hdfs://...")
+val secondRDD = firstRDD.filter(someFunction)
+val thirdRDD = secondRDD.map(someFunction)
+val result = thirdRDD.count()
+```
+
+If a partition of `thirdRDD` is lost, Spark can recompute it by replaying the transformations from `firstRDD`.
+
+### Lazy Evaluation
+
+- Transformations are **lazy**: Spark doesn't compute them until an action is called
+- Allows Spark to optimize the execution plan and pipeline transformations
 
 ### Persistence
 
-Users can indicate which RDDs they will reuse and choose a storage strategy for them (e.g., in-memory storage or on Disk etc.) These properties of RDDs make them useful for fast computations. Reference: [https://www.usenix.org/system/files/conference/nsdi12/nsdi12-final138.pdf](https://www.usenix.org/system/files/conference/nsdi12/nsdi12-final138.pdf) 
+- RDDs can be **persisted** (cached) in memory or on disk
+- Users can choose the storage strategy (e.g., memory-only, memory-and-disk)
+- Useful for iterative algorithms that reuse the same data
 
-Related - [Spark Dataframe Operations](https://saurzcode.in/2018/06/spark-common-dataframe-operations/)
+**Example:**
+
+```scala
+val cachedRDD = filteredRDD.persist()
+```
+
+---
+
+## RDDs vs. MapReduce
+
+| Feature                | RDD (Spark)         | MapReduce (Hadoop)   |
+|------------------------|---------------------|----------------------|
+| Data Sharing           | In-memory, fast     | Disk-based, slow     |
+| Fault Tolerance        | Lineage-based       | Data replication     |
+| Computation Model      | Transformations     | Map/Reduce steps     |
+| Iterative Processing   | Efficient           | Inefficient          |
+| API                    | Functional, rich    | Limited, verbose     |
+
+---
+
+## Summary
+
+- RDDs are the core abstraction in Spark for fast, fault-tolerant, distributed data processing
+- They enable in-memory computation, lazy evaluation, and efficient data sharing
+- RDDs are ideal for iterative algorithms and interactive analytics
+
+---
+
+## References & Related Reading
+
+- [Spark RDD Programming Guide](https://spark.apache.org/docs/latest/rdd-programming-guide.html)
+- [USENIX Paper: Resilient Distributed Datasets](https://www.usenix.org/system/files/conference/nsdi12/nsdi12-final138.pdf)
+- [Spark DataFrame Operations](https://saurzcode.in/2018/06/spark-common-dataframe-operations/)

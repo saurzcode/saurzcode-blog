@@ -3,7 +3,7 @@ id: 1622
 title: 'Unlock Data Transformation Power: A Comprehensive Guide to dbt and BigQuery'
 date: '2025-05-16T06:14:23-07:00'
 author: saurzcode
-layout: post
+
 guid: 'https://saurzcode.in/?p=1622'
 permalink: /2025/05/dbt-bigquery-tutorial-guide/
 meta-checkbox:

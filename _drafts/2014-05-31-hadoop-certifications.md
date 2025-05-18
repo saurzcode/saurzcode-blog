@@ -3,7 +3,7 @@ id: 403
 title: 'How-To :Become a Hadoop Certified Developer ?'
 date: '2014-05-31T16:27:13-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=403'
 permalink: /2014/05/hadoop-certifications/
 publicize_linkedin_url:
@@ -29,7 +29,7 @@ tags:
     - mapr
 ---
 
-<a class="vt-p" href="https://saurzcode.in//assets/uploads/2014/06/hadoop.jpg"><img class="aligncenter wp-image-571" style="border: 1px solid #000000;" src="https://saurzcode.in//assets/uploads/2014/06/hadoop.jpg" alt="Hadoop" width="855" height="275" /></a>
+<a class="vt-p" href="{{ site.baseurl }}/assets/uploads/2014/06/hadoop.jpg"><img class="aligncenter wp-image-571" style="border: 1px solid #000000;" src="{{ site.baseurl }}/assets/uploads/2014/06/hadoop.jpg" alt="Hadoop" width="855" height="275" /></a>
 <blockquote> Apache Hadoop is an open source framework for distributed storing and processing of large sets of data on commodity hardware. Hadoop enables businesses to gain insight from massive amounts of structured and unstructured data quickly.</blockquote>
 <em>Hadoop</em> and <em>Big Data</em> are the hot trends of the Industry these days. Most of the companies are already implementing these or they have at least started to show interest to remain competitive in the market.<em> Big Data and Analytic</em> are certainly one of the great concepts for current and forthcoming IT generation as most of the innovation is driven by vast amount of data that is being generated exponentially.
 

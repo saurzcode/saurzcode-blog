@@ -3,7 +3,7 @@ id: 1257
 title: 'Git : How to Split Sub-Directory to Separate Repository'
 date: '2019-09-15T13:30:58-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=1257'
 permalink: /2019/09/git-how-to-split-subdirectory-to-separate-repository/
 meta-checkbox:
@@ -33,7 +33,7 @@ For both the steps below let's assume following tree structure of folders that e
 - **Original repository with subdirectories:** `https://github.com/USER/REPOSITORY-A.GIT`
 - **Sub-directory to be migrated to the new repository:** `folder-b`
 
-![git sub-directory structure](assets/uploads/2019/09/Screenshot-2019-09-15-at-2.05.39-PM.png)
+![git sub-directory structure]({{site.baseurl}}/assets/uploads/2019/09/Screenshot-2019-09-15-at-2.05.39-PM.png)
 
 ## Approach#1 - Moving along with branches and tags and commit history.
 
@@ -131,8 +131,3 @@ Please comment below, If you face any issues or if you have any questions on abo
 **References:**
 - [https://stackoverflow.com/questions/359424/detach-move-subdirectory-into-separate-git-repository](https://stackoverflow.com/questions/359424/detach-move-subdirectory-into-separate-git-repository)
 - [https://help.github.com/en/articles/splitting-a-subfolder-out-into-a-new-repository](https://help.github.com/en/articles/splitting-a-subfolder-out-into-a-new-repository)
-
-**More Interesting articles on saurzcode:**
-- [Hive : SORT BY vs ORDER BY vs DISTRIBUTE BY vs CLUSTER BY](https://saurzcode.in/2015/01/hive-sort-order-distribute-cluster/)
-- [Spark - How to Run Spark Applications on Windows](https://saurzcode.in/2019/09/running-spark-application-on-windows/)
-- [How to Configure Spark Application ( Scala and Java 8 Version with Maven ) in Eclipse.](https://saurzcode.in/2017/10/configure-spark-application-eclipse/)

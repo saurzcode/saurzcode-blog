@@ -3,7 +3,7 @@ id: 915
 title: 'How-To : Integrate Kafka with HDFS using Camus (Twitter Stream Example)'
 date: '2015-02-12T17:53:51-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=915'
 permalink: /2015/02/integrate-kafka-hdfs-using-camus-twitter-stream-example/
 meta-checkbox:
@@ -23,270 +23,221 @@ tags:
     - linkedin
 ---
 
-<h3 style="text-align: left;"><strong>Simple String Example for Setting up Camus for Kafka-HDFS Data Pipeline</strong></h3>
-I came across Camus while building a Lambda Architecture framework recently. I couldn't find a good Illustration of getting started with Kafk-HDFS pipeline ,  In this post we will see how we can use Camus to build a Kafka-HDFS data pipeline using a twitter stream produced by Kafka Producer as mentioned in last <a class="vt-p" href="https://saurzcode.in//2015/02/kafka-producer-using-twitter-stream/">post</a> .
-<h4><strong>What is Camus?</strong></h4>
-Camus is LinkedIn's <a class="vt-p" href="http://kafka.apache.org/">Kafka</a>-&gt;HDFS pipeline. It is a mapreduce job that does distributed data loads out of Kafka. It includes the following features:<!--more-->
-<ul>
-	<li>Automatic discovery of topics</li>
-	<li>Avro schema management / In progress</li>
-	<li>Date partitioning</li>
-</ul>
-More details on overview of the projects is available on Camus READ ME <a class="vt-p" href="https://github.com/linkedin/camus">page</a> on github.
+# Integrate Kafka with HDFS using Camus (Twitter Stream Example)
 
-<hr />
+A step-by-step guide to building a Kafka-to-HDFS data pipeline using [Camus](https://github.com/linkedin/camus) and a Twitter stream. This guide is aimed at developers looking for a practical, detailed walkthrough.
 
-<h2> <strong>Setting up Camus</strong></h2>
-<h4><strong>Requirements:</strong></h4>
-<ul>
-	<li>Apache Hadoop 2+</li>
-	<li>Apache Kafka 0.8</li>
-	<li>Twitter Developer account ( for API Key, Secret etc.)</li>
-	<li>Apache Zookeeper ( required for Kafka)</li>
-	<li>Oracle JDK 1.7 (64 bit )</li>
-</ul>
-<h4><strong>Build Environment:</strong></h4>
-<ul>
-	<li>Eclipse</li>
-	<li>Apache Maven 2/3</li>
-</ul>
-<h4>Building Camus Jar</h4>
-To build Camus:
-<ul>
-	<li>Clone the Git Repo from <a class="vt-p" href="https://github.com/linkedin/camus">https://github.com/linkedin/camus</a> or download the complete project.</li>
-	<li>Change the version of hadoop-client library in camus/pom.xml to match your hadoop version, In our case it's 2.6.0 so we will change that to as follows -</li>
-</ul>
-```xml
-<dependency>
-<groupId>org.apache.hadoop</groupId>
-<artifactId>hadoop-client</artifactId>
-<version>2.6.0</version>
-</dependency>
-```
-<ul>
-	<li>Build using
+---
+
+## Table of Contents
+
+- [Integrate Kafka with HDFS using Camus (Twitter Stream Example)](#integrate-kafka-with-hdfs-using-camus-twitter-stream-example)
+	- [Table of Contents](#table-of-contents)
+	- [Introduction](#introduction)
+	- [What is Camus?](#what-is-camus)
+	- [Requirements](#requirements)
+	- [Build Environment](#build-environment)
+	- [Building Camus](#building-camus)
+	- [Camus Essentials: Decoder and RecordWriterProvider](#camus-essentials-decoder-and-recordwriterprovider)
+	- [Configuring and Running Camus](#configuring-and-running-camus)
+		- [Start Hadoop and JobHistory Server](#start-hadoop-and-jobhistory-server)
+		- [Kafka and Twitter Setup](#kafka-and-twitter-setup)
+		- [Camus Properties Configuration](#camus-properties-configuration)
+			- [Sample camus.properties](#sample-camusproperties)
+		- [Running Camus](#running-camus)
+	- [Troubleshooting \& Tips](#troubleshooting--tips)
+	- [Conclusion](#conclusion)
+
+---
+
+## Introduction
+
+When building data pipelines, it's common to need to move data from Kafka to HDFS for further processing or analytics. [Camus](https://github.com/linkedin/camus) is LinkedIn's open-source tool for this purpose. This guide will walk you through setting up a pipeline that ingests a Twitter stream into Kafka and then uses Camus to write that data to HDFS.
+
+## What is Camus?
+
+Camus is a MapReduce job that pulls data from Kafka and writes it to HDFS, supporting features like:
+
+- Automatic topic discovery
+- Avro schema management (in progress)
+- Date-based partitioning
+
+For more details, see the [Camus README](https://github.com/linkedin/camus).
+
+## Requirements
+
+- **Apache Hadoop 2+**
+- **Apache Kafka 0.8**
+- **Twitter Developer Account** (for API keys)
+- **Apache Zookeeper** (required for Kafka)
+- **Oracle JDK 1.7 (64-bit)**
+
+## Build Environment
+
+- **Eclipse** (or your preferred IDE)
+- **Apache Maven 2/3**
+
+## Building Camus
+
+1. **Clone the Camus repository:**
+
+    ```sh
+    git clone https://github.com/linkedin/camus.git
+    cd camus
+    ```
+
+2. **Update Hadoop version:**
+
+    Edit `camus/pom.xml` to match your Hadoop version. For Hadoop 2.6.0, update the dependency:
+
+    ```xml
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-client</artifactId>
+      <version>2.6.0</version>
+    </dependency>
+    ```
+
+3. **Build the project:**
+
+    ```sh
+    mvn clean package -DskipTests
+    ```
+
+    Wait for the `BUILD SUCCESS` message. The first build may take some time.
+
+## Camus Essentials: Decoder and RecordWriterProvider
+
+Camus uses two main components:
+
+1. **MessageDecoder**: Decodes messages read from Kafka. Camus provides several decoders (e.g., `JsonStringMessageDecoder`, `StringMessageDecoder`). You can also implement your own by extending `com.linkedin.camus.coders.MessageDecoder`.
+
+2. **RecordWriterProvider**: Writes messages to HDFS. Implementations extend `com.linkedin.camus.etl.RecordWriterProvider`. Camus provides several, such as `StringRecordWriterProvider`.
+
+## Configuring and Running Camus
+
+### Start Hadoop and JobHistory Server
+
+Make sure Hadoop and the JobHistory server are running. From your Hadoop installation's `sbin` directory:
+
 ```sh
-mvn clean package -DskipTests
+start-dfs.sh
+start-yarn.sh
+mr-jobhistory-daemon.sh start historyserver
 ```
-And wait for <span style="color: #99cc00;">BUILD SUCCESS</span> message, be patient as it may take some time while building first time.</li>
-</ul>
-<h1>Camus Essentials - Decoder and RecordWriterProvider</h1>
-Camus needs two main components for reading and decoding data from Kafka and writing data to HDFS -
-<ol>
-	<li><strong>Decoding Messages read from Kafka</strong>  -  Camus has a set of Decoders which helps in decoding messages coming from Kafka,  Decoders basically extends<span style="color: #3366ff;"> com.linkedin.camus.coders.MessageDecoder</span> which implements logic to partition data based on timestamp. A set of predefined Decoders are present in this directory and you can write  your own based on these.             <em>camus/camus-kafka-coders/src/main/java/com/linkedin/camus/etl/kafka/coders/</em></li>
-</ol>
-<ol start="2">
-	<li><strong>Writing messages  to HDFS</strong> - Camus needs a set of RecordWriterProvider classes  which extends <span style="color: #3366ff;">com.linkedin.camus.etl.RecordWriterProvider</span> that will tell Camus what's the payload that should be written to HDFS.A set of predefined RecordWriterProvider are present in this directory and you can write your own based on these.</li>
-</ol>
-<em>camus-etl-kafka/src/main/java/com/linkedin/camus/etl/kafka/common</em>
-<h1>Configuring and Running Camus</h1>
-Camus needs Hadoop and JobHistory server to be running ,So let's get it up -
-<ol>
-	<li>Start Hadoop and JobHistory Server Daemon , inside your Hadoop installation directory sbin folder -</li>
-</ol>
-```sh
-$ start-dfs.sh
 
-$ start-yarn.sh
+### Kafka and Twitter Setup
 
-$ mr-jobhistory-daemon.sh start historyserver
-```
-2.  Also, setup Kafka and Twitter configuration as mentioned in <a class="vt-p" title="How-To : Write a Kafka Producer using Twitter Stream ( Twitter HBC Client)" href="https://saurzcode.in//2015/02/kafka-producer-using-twitter-stream/">previous post </a> , which specifies topic as "twitter-topic" and client id as "camus" ( which we'll configure in camus.properties too later ) and keep it running .
+- Set up Kafka and configure a producer to ingest Twitter data. See [this guide](https://saurzcode.in//2015/02/kafka-producer-using-twitter-stream/) for details.
+- Use topic: `twitter-topic`
+- Set client id: `camus`
+- Keep the producer running to generate data.
 
-3. <strong>Configuring Camus Properties</strong> -  We'll use<em> camus.properties</em> as present <a class="vt-p" href="https://github.com/linkedin/camus/blob/master/camus-example/src/main/resources/camus.properties">here </a>and customize as per our need and configuration
-<ul>
-	<li>Specify <span style="color: #3366ff;">JsonStringMessageDecoder</span> as decoder for messages on "twitter-topic" and <span style="color: #3366ff;">StringRecordWriterProvider</span> for writing output -</li>
-</ul>
+### Camus Properties Configuration
+
+Camus uses a properties file (commonly `camus.properties`) for configuration. Key settings include:
+
+- **Decoder and Writer:**
+
+    ```properties
+    camus.message.decoder.class.twitter-topic=com.linkedin.camus.etl.kafka.coders.JsonStringMessageDecoder
+    etl.record.writer.provider.class=com.linkedin.camus.etl.kafka.common.StringRecordWriterProvider
+    ```
+
+- **Kafka and HDFS paths:**
+
+    ```properties
+    kafka.client.name=camus
+    kafka.brokers=localhost:9092
+    etl.destination.path=/user/hduser/topics
+    etl.execution.base.path=/user/hduser/exec
+    etl.execution.history.path=/user/hduser/camus/exec/history
+    ```
+
+- **Timestamp extraction:**
+
+    ```properties
+    camus.message.timestamp.field=created_at
+    camus.message.timestamp.format=ISO-8601
+    ```
+
+#### Sample camus.properties
+
+Below is a sample `camus.properties` file with common settings:
+
 ```properties
-camus.message.decoder.class.twitter-topic=com.linkedin.camus.etl.kafka.coders.JsonStringMessageDecoder
-
-etl.record.writer.provider.class=com.linkedin.camus.etl.kafka.common.StringRecordWriterProvider
-```
-<ul>
-	<li>Configure  Kafka broker list, etl destination path ( destination where actual data from kafka will be written based on date partitioning) , base execution and execution history path.</li>
-</ul>
-```properties
-kafka.client.name=camus
-
-kafka.brokers=localhost:9092
-
-etl.destination.path = /user/hduser/topic/
-
-etl.execution.base.path=/user/hduser/exec/
-
-etl.execution.history.path=/user/hduser/camus/exec/history
-```
-<ul>
-	<li>  Specify "created_at" field present in twitter json as the timestamp field and timestamp format as ISO-8601</li>
-</ul>
-```properties
-camus.message.timestamp.field=created_at
-
-camus.message.timestamp.format=ISO-8601
-```
-I am also presenting complete<em> camus.properties</em> files -
-```properties
-# Needed Camus properties, more cleanup to come
-#
-# Almost all properties have decent default properties. When in doubt, comment out the property.
-#
-
-# The job name.
+# Job name
 camus.job.name=Camus Job
 
-# final top-level data output directory, sub-directory will be dynamically created for each topic pulled
+# Output directories
 etl.destination.path=/user/hduser/topics
-# HDFS location where you want to keep execution files, i.e. offsets, error logs, and count files
 etl.execution.base.path=/user/hduser/exec
-# where completed Camus job output directories are kept, usually a sub-dir in the base.path
 etl.execution.history.path=/user/hduser/camus/exec/history
 
-# Concrete implementation of the Encoder class to use (used by Kafka Audit, and thus optional for now)
-#camus.message.encoder.class=com.linkedin.camus.etl.kafka.coders.DummyKafkaMessageEncoder
+# Decoder for twitter-topic
+camus.message.decoder.class.twitter-topic=com.linkedin.camus.etl.kafka.coders.JsonStringMessageDecoder
 
-# Concrete implementation of the Decoder class to use.
-# Out of the box options are:
-#  com.linkedin.camus.etl.kafka.coders.JsonStringMessageDecoder - Reads JSON events, and tries to extract timestamp.
-#  com.linkedin.camus.etl.kafka.coders.KafkaAvroMessageDecoder - Reads Avro events using a schema from a configured schema repository.
-#  com.linkedin.camus.etl.kafka.coders.LatestSchemaKafkaAvroMessageDecoder - Same, but converts event to latest schema for current topic.
-camus.message.decoder.class.twitter-topic=com.linkedin.camus.etl.kafka.coders.StringMessageDecoder
-
-# Decoder class can also be set on a per topic basis.
-#camus.message.decoder.class.&lt;topic-name&gt;=com.your.custom.MessageDecoder
-
-# Used by avro-based Decoders (KafkaAvroMessageDecoder and LatestSchemaKafkaAvroMessageDecoder) to use as their schema registry.
-# Out of the box options are:
-# com.linkedin.camus.schemaregistry.FileSchemaRegistry
-# com.linkedin.camus.schemaregistry.MemorySchemaRegistry
-# com.linkedin.camus.schemaregistry.AvroRestSchemaRegistry
-# com.linkedin.camus.example.schemaregistry.DummySchemaRegistry
-#kafka.message.coder.schema.registry.class=com.linkedin.camus.schemaregistry.AvroRestSchemaRegistry
-
-# Used by JsonStringMessageDecoder when extracting the timestamp
-# Choose the field that holds the time stamp (default "timestamp")
+# Timestamp extraction
 camus.message.timestamp.field=created_at
-# What format is the timestamp in? Out of the box options are:
-# "unix" or "unix_seconds": The value will be read as a long containing the seconds since epoc
-# "unix_milliseconds": The value will be read as a long containing the milliseconds since epoc
-# "ISO-8601": Timestamps will be fed directly into org.joda.time.DateTime constructor, which reads ISO-8601
-# All other values will be fed into the java.text.SimpleDateFormat constructor, which will be used to parse the timestamps
-# Default is "[dd/MMM/yyyy:HH:mm:ss Z]"
-#camus.message.timestamp.format=yyyy-MM-dd_HH:mm:ss
 camus.message.timestamp.format=ISO-8601
 
-# Used by the committer to arrange .avro files into a partitioned scheme. This will be the default partitioner for all
-# topic that do not have a partitioner specified.
-# Out of the box options are (for all options see the source for configuration options):
-# com.linkedin.camus.etl.kafka.partitioner.HourlyPartitioner, groups files in hourly directories
-# com.linkedin.camus.etl.kafka.partitioner.DailyPartitioner, groups files in daily directories
-# com.linkedin.camus.etl.kafka.partitioner.TimeBasedPartitioner, groups files in very configurable directories
-# com.linkedin.camus.etl.kafka.partitioner.DefaultPartitioner, like HourlyPartitioner but less configurable
-# com.linkedin.camus.etl.kafka.partitioner.TopicGroupingPartitioner
-#etl.partitioner.class=com.linkedin.camus.etl.kafka.partitioner.HourlyPartitioner
+# Kafka settings
+kafka.client.name=camus
+kafka.brokers=localhost:9092
 
-# Partitioners can also be set on a per-topic basis. (Note though that configuration is currently not per-topic.)
-#etl.partitioner.class.&lt;topic-name&gt;=com.your.custom.CustomPartitioner
+# Record writer
+etl.record.writer.provider.class=com.linkedin.camus.etl.kafka.common.StringRecordWriterProvider
 
-# all files in this dir will be added to the distributed cache and placed on the classpath for hadoop tasks
-# hdfs.default.classpath.dir=
-
-# max hadoop tasks to use, each task can pull multiple topic partitions
+# MapReduce settings
 mapred.map.tasks=5
-# max historical time that will be pulled from each partition based on event timestamp
 kafka.max.pull.hrs=1
-# events with a timestamp older than this will be discarded.
 kafka.max.historical.days=3
-# Max minutes for each mapper to pull messages (-1 means no limit)
 kafka.max.pull.minutes.per.task=-1
 
-# if whitelist has values, only whitelisted topic are pulled. Nothing on the blacklist is pulled
-kafka.blacklist.topics=
-kafka.whitelist.topics=
-log4j.configuration=true
-
-# Name of the client as seen by kafka
-kafka.client.name=camus
-# The Kafka brokers to connect to, format: kafka.brokers=host1:port,host2:port,host3:port
-kafka.brokers=localhost:9092
-# Fetch request parameters:
-#kafka.fetch.buffer.size=
-#kafka.fetch.request.correlationid=
-#kafka.fetch.request.max.wait=
-#kafka.fetch.request.min.bytes=
-#kafka.timeout.value=
-
-#Stops the mapper from getting inundated with Decoder exceptions for the same topic
-#Default value is set to 10
-max.decoder.exceptions.to.print=5
-
-#Controls the submitting of counts to Kafka
-#Default value set to true
-post.tracking.counts.to.kafka=true
-#monitoring.event.class=class.that.generates.record.to.submit.counts.to.kafka
-
-# everything below this point can be ignored for the time being, will provide more documentation down the road
-##########################
-etl.run.tracking.post=false
-kafka.monitor.tier=
-etl.counts.path=
-kafka.monitor.time.granularity=10
-
-etl.hourly=hourly
-etl.daily=daily
-
-# Should we ignore events that cannot be decoded (exception thrown by MessageDecoder)?
-# `false` will fail the job, `true` will silently drop the event.
-etl.ignore.schema.errors=false
-
-# configure output compression for deflate or snappy. Defaults to deflate
+# Compression (set to true in production)
 mapred.output.compress=false
 etl.output.codec=deflate
 etl.deflate.level=6
-#etl.output.codec=snappy
 
+# Timezone
 etl.default.timezone=America/Los_Angeles
 etl.output.file.time.partition.mins=60
-etl.keep.count.files=false
-etl.execution.history.max.of.quota=.8
 
-# Configures a customer reporter which extends BaseReporter to send etl data
-#etl.reporter.class
+# Error handling
+etl.ignore.schema.errors=false
+max.decoder.exceptions.to.print=5
 
-mapred.map.max.attempts=1
-
-kafka.client.buffer.size=20971520
-kafka.client.so.timeout=60000
-
-#zookeeper.session.timeout=
-#zookeeper.connection.timeout=
-etl.record.writer.provider.class=com.linkedin.camus.etl.kafka.common.StringRecordWriterProvider
+# Other settings can be left as default or tuned as needed
 ```
-One last thing, in my example I have  set
-```properties
-mapred.output.compress=false
-```
-which, in real scenarios will be set to true and defaults to DEFLATE compression.
-<h3>Running Camus</h3>
-After building camus  in first step, you should see in target folder of camus-example folder a jar named <em>camus-example - camus-example-0.1.0-SNAPSHOT-shaded.jar</em>
 
-Put jar and <em>camus.properties</em> file in a folder and execute this command .
+### Running Camus
+
+After building Camus, you should find a jar file in the `target` folder of the `camus-example` module, e.g.:
+
+```
+camus-example-0.1.0-SNAPSHOT-shaded.jar
+```
+
+To run Camus, place the jar and your `camus.properties` file in the same directory and execute:
+
 ```sh
 hadoop jar camus-example-0.1.0-SNAPSHOT-shaded.jar com.linkedin.camus.etl.kafka.CamusJob -P camus.properties
 ```
-That's It !!
 
-If you see above command to be successfully executed , you should see the records in HDFS at following path -
+If successful, you should see records in HDFS at the path specified in `etl.destination.path` (e.g., `/user/hduser/topics/`).
 
-<em>/user/hduser/topics/</em> or whatever path you have mentioned in your <em>camus.properties</em> file.
+![Camus Kafka HDFS Pipeline]({{site.baseurl}}/assets/uploads/2015/02/camus_kafka_hdfs.png)
 
-<a class="vt-p" href="assets/uploads/2015/02/camus_kafka_hdfs.png"><img class=" wp-image-926 size-full aligncenter" src="assets/uploads/2015/02/camus_kafka_hdfs.png" alt="camus_kafka_hdfs" width="729" height="185" /></a>
+## Troubleshooting & Tips
 
-<strong> </strong>
+- **Compression:** For production, set `mapred.output.compress=true` for better storage efficiency.
+- **Custom Decoders/Writers:** If your data format is custom, implement your own `MessageDecoder` or `RecordWriterProvider`.
+- **Partitioning:** Camus supports hourly/daily partitioning. Adjust `etl.partitioner.class` as needed.
+- **Schema Registry:** For Avro data, configure the schema registry class.
+- **Error Handling:** Set `etl.ignore.schema.errors=true` to skip problematic records instead of failing the job.
 
-&nbsp;
+## Conclusion
 
-Please write back to me in comments if you face any issues while executing this one.
+Camus makes it straightforward to build robust Kafka-to-HDFS pipelines. With the right configuration, you can reliably ingest streaming data (like Twitter feeds) into HDFS for further processing. If you encounter issues, check logs and configuration paths, and feel free to reach out in the comments.
 
-Happy Learning !!
-
-&nbsp;
+Happy Learning!

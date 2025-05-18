@@ -3,7 +3,7 @@ id: 165
 title: 'Recommended Readings for Hadoop'
 date: '2014-02-04T13:40:38-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=165'
 permalink: /2014/02/recommended-readings-for-hadoop/
 geo_public:

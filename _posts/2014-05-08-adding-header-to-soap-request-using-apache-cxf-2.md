@@ -3,7 +3,7 @@ id: 256
 title: 'SOAP Webservices Using Apache CXF : Adding Custom Object as Header in Outgoing Requests'
 date: '2014-05-08T21:26:21-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=256'
 permalink: /2014/05/adding-header-to-soap-request-using-apache-cxf-2/
 geo_public:

@@ -3,7 +3,7 @@ id: 523
 title: 'Top 20 Hadoop and Big Data Books'
 date: '2014-06-01T10:45:57-07:00'
 author: saurzcode
-layout: post
+
 guid: 'https://saurzcode.in//?p=523'
 permalink: /2014/06/top-20-hadoop-bigdatabooks/
 geo_public:
@@ -30,7 +30,7 @@ tags:
     - Reading
 ---
 
-<h4 style="text-align: justify;"><a href="https://saurzcode.in//2014/06/reading-list-hadoop-bigdatabooks/"><img class="wp-image-552 alignright" src="https://saurzcode.in//assets/uploads/2014/06/images-3.jpg" alt="Big Data Books" width="321" height="321" /></a></h4>
+<h4 style="text-align: justify;"><a href="https://saurzcode.in//2014/06/reading-list-hadoop-bigdatabooks/"><img class="wp-image-552 alignright" src="{{ site.baseurl }}/assets/uploads/2014/06/images-3.jpg" alt="Big Data Books" width="321" height="321" /></a></h4>
 <h4></h4>
 <h4><span style="text-decoration: underline;"><a class="vt-p" href="http://www.amazon.in/gp/product/9350237563?ie=UTF8&amp;camp=3626&amp;creativeASIN=9350237563&amp;linkCode=xm2&amp;tag=saurzcode-21" target="_blank"><span style="color: #3366ff; text-decoration: underline;">Hadoop: The Definitive Guide</span></a><img style="border: none !important; margin: 0!important;" src="http://ir-na.amazon-adsystem.com/e/ir?t=saurzcode-20&amp;l=as2&amp;o=1&amp;a=1449311520" alt="" width="1" height="1" border="0" />
 <img style="border: none !important; margin: 0px !important;" src="http://ir-in.amazon-adsystem.com/e/ir?t=saurzcode-21&amp;l=as2&amp;o=31&amp;a=1491901632" alt="" width="1" height="1" border="0" />

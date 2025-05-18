@@ -3,7 +3,7 @@ id: 781
 title: 'How-To : Configure MySQL Metastore for Hive ?'
 date: '2015-01-06T23:16:44-07:00'
 author: saurzcode
-layout: medium
+
 guid: 'https://saurzcode.in//?p=781'
 permalink: /2015/01/configure-mysql-metastore-hive/
 meta-checkbox:
