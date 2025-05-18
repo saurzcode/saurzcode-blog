@@ -1,0 +1,66 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+sitemap: false
+---
+
+@charset "utf-8";
+
+@import "so-simple";
+
+
+/* Related Posts Styling */
+.related-posts {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #f2f2f2;
+  }
+  
+  .related-posts-title {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+  
+  .related-posts-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .related-post-item {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+  }
+  
+  .related-post-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .related-post-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .related-post-info {
+    padding: 0.75rem 0;
+  }
+  
+  .related-post-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+  
+  .related-post-date {
+    font-size: 0.85rem;
+    color: #767676;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .related-posts-list {
+      grid-template-columns: 1fr;
+    }
+  }
