@@ -110,9 +110,3 @@ e.printStackTrace();
 ```
 
 ---
-
-## You may also like:
-
-- [Recommended readings for Hadoop](https://saurzcode.in//2014/02/04/recommended-readings-for-hadoop/)
-- [Free Online Hadoop Trainings](https://saurzcode.in//2014/04/21/free-online-hadoop-trainings/)
-- [How to become a Hadoop Certified Developer ?](https://saurzcode.in//2014/05/31/everything-about-hadoop-certifications/)

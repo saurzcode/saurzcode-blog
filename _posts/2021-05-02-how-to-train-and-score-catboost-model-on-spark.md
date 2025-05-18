@@ -183,4 +183,4 @@ featureImportance.foreach(fi => println(s"[${fi.featureName}, ${fi.importance}]"
 - [CatBoost for Apache Spark introduction (YouTube)](https://www.youtube.com/watch?v=47-mAVms-b8)
 - [CatBoost for Apache Spark Architecture (YouTube)](https://www.youtube.com/watch?v=nrGt5VKZpzc)
 - [CatBoost Spark Examples (GitHub)](https://github.com/saurzcode/catboost-spark-examples)
-- [CatBoost Spark Documentation](https://catboost.ai/en/docs/concepts/spark-quickstart)
+- [CatBoost Spark Documentation](https://catboost.ai/docs/en/concepts/spark-quickstart-scala)

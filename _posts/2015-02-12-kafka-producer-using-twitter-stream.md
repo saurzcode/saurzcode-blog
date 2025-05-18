@@ -225,7 +225,6 @@ try (Producer<Long, String> producer = getProducer()) {
 - [Twitter HBC](https://github.com/twitter/hbc)
 - [How to generate Twitter API keys](https://themepacific.com/how-to-generate-api-key-consumer-token-access-key-for-twitter-oauth/994/)
 - [Integrate Kafka with HDFS using Camus (blog)](http://saurzcode.in/2015/02/integrate-kafka-hdfs-using-camus-twitter-stream-example/)
-- [Multithreaded Mappers in MapReduce](https://wp.me/p5pWDa-iX)
 
 ---
 

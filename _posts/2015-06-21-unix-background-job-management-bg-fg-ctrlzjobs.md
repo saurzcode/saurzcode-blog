@@ -40,7 +40,6 @@ A practical guide for developers and data engineers to manage long-running jobs 
   - [Resuming a Stopped Job in Background: `bg` Command](#resuming-a-stopped-job-in-background-bg-command)
   - [Killing a Job: `kill` Command](#killing-a-job-kill-command)
   - [Summary Table](#summary-table)
-  - [Further Reading](#further-reading)
 
 ---
 
@@ -181,9 +180,3 @@ Example output:
 | `&`            | Run a command in the background                  |
 
 ---
-
-## Further Reading
-
-- [Multithreaded Mappers in MapReduce](https://wp.me/p5pWDa-iX)
-
-In upcoming posts, we'll cover how to keep jobs running even after logout using `nohup`.
