@@ -31,13 +31,21 @@ In this post, I will explain some of the commands that are very useful while exe
 Just append <span style="color: #0000ff;"><i><b>&amp;</b></i> </span>at the end of any command to put the execution of that command in background.
 
 For example -
-<pre class="lang:sh decode:true">$ hadoop jar examples.jar param1 param2 &amp;</pre>We can see all the jobs running in background by executing <span style="color: #0000ff;"><i><b>jobs</b></i><i> </i></span>command.
-<pre class="lang:sh decode:true">$jobs
+```sh
+$ hadoop jar examples.jar param1 param2 &
+```
+We can see all the jobs running in background by executing <span style="color: #0000ff;"><i><b>jobs</b></i><i> </i></span>command.
+```sh
+$jobs
 
-[1] Running      hadoop jar examples.jar param1 param2 &amp;</pre>
+[1] Running      hadoop jar examples.jar param1 param2 &
+```
 <h2>Jobs Command</h2>
 When we run jobs command it gives a list of all the jobs with their status. The general syntax of output is -
-<pre class="lang:sh decode:true">[job_id] +/- &lt;status&gt; command</pre><b>job_id</b> is id of the current job.
+```sh
+[job_id] +/- <status> command
+```
+<b>job_id</b> is id of the current job.
 
 <b>status</b> represents the status of the job and can be one of RUNNING, STOPPED, EXIT, and DONE.
 
@@ -46,25 +54,40 @@ The character <b>'+'</b>  represents the job which will be used as default in <b
 The character <b>'-'</b> represents the job which would become default when current default job exits.
 
 For example -
-<pre class="bbcodeblock" dir="ltr">[1]   Running                 tar -zxvf file.tar.gz ../path/ &amp;
-[2]-  Running                 tar -zxvf file2.tar.gz ../path2 &amp;
-[3]+  Running                 tar -zxvf file3.tar.gz ../path3/ &amp;</pre>
+```sh
+[1]   Running                 tar -zxvf file.tar.gz ../path/ &
+[2]-  Running                 tar -zxvf file2.tar.gz ../path2 &
+[3]+  Running                 tar -zxvf file3.tar.gz ../path3/ &
+```
 <h2>fg command</h2>
 Also, we can bring the job in foreground with <span style="color: #0000ff;"><i><b>fg</b></i> command. <span style="color: #000000;">When executed without any argument, it will bring most recent background job in foreground.</span></span>
-<pre class="lang:sh decode:true">$fg</pre>Now, if job is running in foreground and you want to stop the execution of job, without killing it, press <span style="color: #3366ff;"><i><b>Ctrl-Z</b></i></span> on keyboard and you will see an output like this -
-<pre class="bbcodeblock" dir="ltr">[1]   STOPPED                 tar -zxvf file.tar.gz ../path/ &amp;</pre>
+```sh
+$fg
+```
+Now, if job is running in foreground and you want to stop the execution of job, without killing it, press <span style="color: #3366ff;"><i><b>Ctrl-Z</b></i></span> on keyboard and you will see an output like this -
+```sh
+[1]   STOPPED                 tar -zxvf file.tar.gz ../path/ &
+```
 <h2>bg command</h2>
 Now, current status of job is STOPPED, we can again start the job in background using it's job_id using<span style="color: #3366ff;"><i><b> bg command.</b></i></span>
-<pre class="lang:sh decode:true">$ bg %1</pre>And , you can again see job running in background using jobs.
-<pre class="lang:sh decode:true">$jobs
-[1]   Running                 tar -zxvf file.tar.gz ../path/ &amp;</pre>
+```sh
+$ bg %1
+```
+And , you can again see job running in background using jobs.
+```sh
+$jobs
+[1]   Running                 tar -zxvf file.tar.gz ../path/ &
+```
 <h2>Killing a Job</h2>
 We can kill a running job using kill command with it's job_id.
 
 For example -
-<pre class="lang:sh decode:true">$ kill %1
+```sh
+$ kill %1
 
-[1]   Exit                tar -zxvf file.tar.gz ../path/ &amp;</pre>That's it !! In the upcoming posts , we will see about how we can execute  job in background even when we are logged out of system using <i><b>nohup</b></i><i> </i>command.
+[1]   Exit                tar -zxvf file.tar.gz ../path/ &
+```
+That's it !! In the upcoming posts , we will see about how we can execute  job in background even when we are logged out of system using <i><b>nohup</b></i><i> </i>command.
 
 
 

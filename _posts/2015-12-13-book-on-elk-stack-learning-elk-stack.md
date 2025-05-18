@@ -3,7 +3,7 @@ id: 1001
 title: 'My Book on ELK Stack : Learning ELK Stack'
 date: '2015-12-13T13:30:58-07:00'
 author: saurzcode
-layout: post
+layout: medium
 guid: 'https://saurzcode.in//?p=1001'
 permalink: /2015/12/book-on-elk-stack-learning-elk-stack/
 meta-checkbox:
@@ -16,7 +16,7 @@ ampforwp_custom_content_editor_checkbox:
     - null
 ampforwp-amp-on-off:
     - default
-image: /wp-content/uploads/2015/12/Learning-Elk-516x372.png
+image: assets/uploads/2015/12/Learning-Elk-516x372.png
 categories:
     - 'Big Data'
     - Java
@@ -36,7 +36,7 @@ Book aims to provide individuals/technologists who seek to implement their own l
 
 This is the first book ever published which covers ELK stack.
 
-[caption id="attachment_1002" align="aligncenter" width="250"]<img class="wp-image-1002 size-medium" src="https://saurzcode.in//wp-content/uploads/2015/12/Learning-Elk-250x300.png" alt="ELK" width="250" height="300"> Learning ELK Stack by Saurabh Chhajed[/caption]
+[caption id="attachment_1002" align="aligncenter" width="250"]<img class="wp-image-1002 size-medium" src="assets/uploads/2015/12/Learning-Elk-250x300.png" alt="ELK" width="250" height="300"> Learning ELK Stack by Saurabh Chhajed[/caption]
 
 <img style="border: none !important; margin: 0px !important;" src="http://ir-in.amazon-adsystem.com/e/ir?t=saurzcode-21&amp;l=as2&amp;o=31&amp;a=B0146WY5QM" alt="" width="1" height="1" border="0"><!--more-->
 

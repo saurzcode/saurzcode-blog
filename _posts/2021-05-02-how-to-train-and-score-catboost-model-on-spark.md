@@ -3,14 +3,14 @@ id: 1517
 title: 'How to Train and Score Catboost Model on Spark'
 date: '2021-05-02T09:36:43-07:00'
 author: saurzcode
-layout: post
+layout: medium
 guid: 'https://saurzcode.in/?p=1517'
 permalink: /2021/05/how-to-train-and-score-catboost-model-on-spark/
 meta-checkbox:
     - ''
 classic-editor-remember:
     - classic-editor
-image: /wp-content/uploads/2021/05/Untitledc.png
+image: assets/uploads/2021/05/Untitledc.png
 categories:
     - 'Big Data'
     - Scala
@@ -25,7 +25,7 @@ tags:
 <a href="https://catboost.ai/">Catboost</a> (developed by Yandex)  is one of the great open-source gradient boosting libraries with great performance without a lot of additional tuning. It provides support for categorical features without any need for encoding etc. and predictions are pretty fast as well. No wonder its one of the algorithm which is increasingly popular among data scientists community for a lot of ranking, recommendation, classification and regression problems.
 
 Till now, Catboost supported training only in Python and R and predictions (applying the model) on a multitude of languages - Java( JVM-Packages), Python, C++, and R.
-<h3>Distributed CatBoost Training<img class="wp-image-1539 alignright" src="https://saurzcode.in/wp-content/uploads/2021/05/Untitledc.png" alt="catboost-spark" width="293" height="220" /></h3>
+<h3>Distributed CatBoost Training<img class="wp-image-1539 alignright" src="https://saurzcode.in/assets/uploads/2021/05/Untitledc.png" alt="catboost-spark" width="293" height="220" /></h3>
 There was limited support to train the model in a distributed manner for a big data set on CPU except for some support via GPU training. Catboost team at Yandex started working on the Spark version of the Catboost for the training and inference and they have recently <a href="https://github.com/catboost/catboost/tree/master/catboost/spark/catboost4j-spark">released</a> the spark version and is available in the maven repository to use. Catboost Spark Implementation follows general Spark MLLib implementations and supports Spark ML Pipelines etc.
 
 It supports the following functionalities as of now -
@@ -73,7 +73,7 @@ println("predictions")
 
 predictions.show(false)</pre>
 <h6>Output</h6>
-<h6><img class="aligncenter size-full wp-image-1537" src="https://saurzcode.in/wp-content/uploads/2021/05/Screenshot-2021-05-08-at-1.21.06-PM.png" alt="catboost-spark" width="2114" height="280" /></h6>
+<h6><img class="aligncenter size-full wp-image-1537" src="https://saurzcode.in/assets/uploads/2021/05/Screenshot-2021-05-08-at-1.21.06-PM.png" alt="catboost-spark" width="2114" height="280" /></h6>
 <strong>rawPredictions</strong> - confidence scores for each of the class for the classification model,
 
 <strong>probability</strong> scores, which are sigmoid of raw predictions for each of the class and

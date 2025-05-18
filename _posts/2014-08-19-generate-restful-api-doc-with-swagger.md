@@ -1,110 +1,163 @@
+
 ---
 id: 638
-title: 'How-To : Generate Restful API Documentation with Swagger ?'
-date: '2014-08-19T12:00:47-07:00'
+title: "How-To : Generate Restful API Documentation with Swagger ?"
+date: "2014-08-19T12:00:47-07:00"
 author: saurzcode
-excerpt: 'Swagger is a specification and complete framework implementation for describing, producing, consuming, and visualizing RESTful web services. The goal of Swagger is to enable client and documentation systems to update at the same pace as the server. The documentation of methods, parameters, and models are tightly integrated into the server code, allowing APIs to always stay in sync.'
+excerpt: "Swagger is a specification and complete framework implementation for describing, producing, consuming, and visualizing RESTful web services. The goal of Swagger is to enable client and documentation systems to update at the same pace as the server. The documentation of methods, parameters, and models are tightly integrated into the server code, allowing APIs to always stay in sync."
 layout: post
-guid: 'https://saurzcode.in//?p=638'
+guid: "https://saurzcode.in//?p=638"
 permalink: /2014/08/generate-restful-api-doc-with-swagger/
-meta-checkbox:
-    - ''
-dsq_thread_id:
-    - '3280625809'
-image: /wp-content/uploads/2014/08/swagger-logo-horizontal.png
+image: assets/uploads/2014/08/swagger-logo-horizontal.png
 categories:
-    - Java
-    - Technology
+  - Java
+  - Technology
 tags:
-    - 'Api Docs'
-    - documentation
-    - java
-    - 'REST API'
-    - Spring
-    - 'Spring Boot'
-    - Swagger
+  - "Api Docs"
+  - documentation
+  - java
+  - "REST API"
+  - Spring
+  - "Spring Boot"
+  - Swagger
 ---
 
-<h3>What is Swagger?</h3>
-<blockquote>“Any fool can write code that a computer can understand. Good programmers write code that humans can understand.”
-- Martin Fowler</blockquote>
-<strong>Swagger is based on OPEN API specification and complete framework implementation for describing, producing, consuming, and visualizing RESTful web services by effectively mapping all the resources and operations associated with it.</strong> The goal of Swagger is to enable client and documentation systems to update at the same pace as the server. The documentation of methods, parameters, and models are tightly integrated into the server code, allowing APIs to always stay in sync.
+### What is Swagger?
 
-<img class="wp-image-1255 aligncenter" src="http://saurzcode.in/wp-content/uploads/2014/08/swagger-logo-horizontal.png" alt="Swagger" width="462" height="174" />
-<h3>Why is Swagger useful?</h3>
+> "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."  
+> — Martin Fowler
+
+**Swagger** is based on the **OPEN API specification** and is a complete framework for describing, producing, consuming, and visualizing RESTful web services by effectively mapping all the resources and operations associated with it.  
+The goal of Swagger is to enable client and documentation systems to update at the same pace as the server. The documentation of methods, parameters, and models are tightly integrated into the server code, allowing APIs to always stay in sync.
+
+![Swagger](assets/uploads/2014/08/swagger-logo-horizontal.png)
+
+### Why is Swagger useful?
+
 The framework simultaneously solves the server, client, and documentation/sandbox needs.
 
-With Swagger's declarative resource specification, clients can understand and consume services without the knowledge of server implementation or access to the server code. The Swagger UI framework allows both developers and non-developers to interact with the API in a sandbox UI that gives a clear insight into how the API responds to parameters and options.
+With Swagger's declarative resource specification, clients can understand and consume services without knowledge of server implementation or access to the server code. The Swagger UI allows both developers and non-developers to interact with the API in a sandbox UI that gives a clear insight into how the API responds to parameters and options.
 
-It happily speaks both JSON and XML, with additional formats in the works.
+It supports both **JSON** and **XML**, with additional formats in progress.
 
-Now let's see a working example and how do we configure Swagger, to generate API documentation of our sample REST API created using Spring Boot.
-<h3>How to Enable Swagger in your Spring Boot Web Application?</h3>
-If you are one of those lazy people who hate reading the configurations, download the complete working example <a class="vt-p" href="https://github.com/saurzcode/saurzcode-swagger-spring" target="_blank" rel="noopener">here</a> , otherwise, go on -
-<h4>Step 1: Include Swagger-SpringMVC dependency in Maven</h4>
-<pre class="lang:xhtml decode:true">&lt;dependency&gt;
-    &lt;groupId&gt;com.mangofactory&lt;/groupId&gt;
-    &lt;artifactId&gt;swagger-springmvc&lt;/artifactId&gt;
-    &lt;version&gt;0.8.8&lt;/version&gt;
-&lt;/dependency&gt;</pre>
-<h4>Step 2: Create a Swagger Java Configuration</h4>
-<ul class="task-list">
- 	<li>Use the <code>@EnableSwagger</code> annotation.</li>
- 	<li>Autowire <code>SpringSwaggerConfig</code>.</li>
- 	<li>Define one or more SwaggerSpringMvcPlugin instances using springs <code>@Bean</code> annotation.</li>
-</ul>
-[gist https://gist.github.com/saurzcode/9dcee7110707ff996784/]
-<h4>Step 3: Create Swagger UI using WebJar</h4>
-For using web jar dependency add, following repository and dependency, which will auto-configure swagger UI for you.
-<pre class="lang:xhtml decode:true">&lt;repository&gt;
- &lt;id&gt;oss-jfrog-artifactory&lt;/id&gt;
- &lt;name&gt;oss-jfrog-artifactory-releases&lt;/name&gt;
- &lt;url&gt;http://oss.jfrog.org/artifactory/oss-release-local&lt;/url&gt;
- &lt;/repository&gt;</pre>
-<pre class="lang:xhtml decode:true">&lt;dependency&gt;
- &lt;groupId&gt;org.ajar&lt;/groupId&gt;
- &lt;artifactId&gt;swagger-spring-mvc-ui&lt;/artifactId&gt;
- &lt;version&gt;0.1&lt;/version&gt;
- &lt;scope&gt;compile&lt;/scope&gt;
- &lt;/dependency&gt;</pre>
-&nbsp;
+---
 
-That's it. Now run the<em> Application.java </em>as a java application in your IDE, and you will see the application running in embedded tomcat/jetty server running at default port <em>8080</em>.
+Now let's see a working example and how to configure Swagger to generate API documentation for our sample REST API created using **Spring Boot**.
 
-Verify the API Configuration by pointing your browser at  - http://localhost:8080/api-docs
-<pre class="lang:js decode:true">{"apiVersion":"1.0","swaggerVersion":"1.2","apis":[{"path":"/default/hello-controller","description":"Hello Controller"}],"info":{"title":"SaurzCode API","description":"API for Saurzcode","termsOfServiceUrl":"Saurzcode API terms of service","contact":"mail2saurzcode@gmail.com","license":"Saurzcode API Licence Type","licenseUrl":"Saurzcode API License URL"}}</pre>
-And finally, you can see the Swagger API Docs  and test the APIs at  http://localhost:8080/index.html
+### How to Enable Swagger in your Spring Boot Web Application?
 
-[caption id="attachment_674" align="aligncenter" width="1080"]<a class="vt-p" href="https://saurzcode.in//wp-content/uploads/2014/08/swaggerjpg.jpg"><img class="wp-image-674 size-full" src="https://saurzcode.in//wp-content/uploads/2014/08/swaggerjpg.jpg" alt="Swagger: API Doc for Spring Boot Application" width="1080" height="357" /></a> Swagger: API Doc for RESTful API[/caption]
+If you're one of those lazy people who hate reading configuration, download the complete working example [here](https://github.com/saurzcode/saurzcode-swagger-spring), otherwise, read on:
 
-&nbsp;
+#### Step 1: Include Swagger-SpringMVC dependency in Maven
 
-Also, please note that default URL in web jar files is - http://petstore.swagger.wordnik.com/api/api-docs So you might see an error like this, "Can't read from the server. It may not have the appropriate access-control-origin settings."
+```xml
+<dependency>
+    <groupId>com.mangofactory</groupId>
+    <artifactId>swagger-springmvc</artifactId>
+    <version>0.8.8</version>
+</dependency>
+```
 
-Solution: Just replace the URL [http://petstore.swagger.wordnik.com/api/api-docs] on-screen with [http://localhost:8080/api-docs] and you will see UI as above.
+#### Step 2: Create a Swagger Java Configuration
 
-&nbsp;
+- Use the `@EnableSwagger` annotation.
+- Autowire `SpringSwaggerConfig`.
+- Define one or more `SwaggerSpringMvcPlugin` instances using Spring's `@Bean` annotation.
 
-Again, complete project is available at GitHub.
+👉 Gist: [SwaggerConfig.java](https://gist.github.com/saurzcode/9dcee7110707ff996784/)
 
-<span style="color: #0000ff;"><a class="vt-p" style="color: #0000ff;" href="https://github.com/saurzcode/saurzcode-swagger-spring/" target="_blank" rel="nofollow noopener">https://github.com/saurzcode/saurzcode-swagger-spring/</a></span>
+#### Step 3: Create Swagger UI using WebJar
 
-<span style="text-decoration: underline;">References</span> :
-<ul>
- 	<li><span style="color: #3366ff;"><a class="vt-p" style="color: #3366ff;" href="https://github.com/martypitt/swagger-springmvc" target="_blank" rel="nofollow noopener">https://github.com/martypitt/swagger-springmvc</a></span></li>
- 	<li></li>
- 	<li><span style="color: #3366ff;"><a class="vt-p" style="color: #3366ff;" href="https://helloreverb.com/developers/swagger/" target="_blank" rel="nofollow noopener">https://helloreverb.com/developers/swagger/</a></span></li>
-</ul>
-Do write back in comments,  if you face any issues or concerns !!
+To use the WebJar dependency, add the following repository and dependency, which will auto-configure the Swagger UI for you:
 
-<hr />
+```xml
+<repository>
+  <id>oss-jfrog-artifactory</id>
+  <name>oss-jfrog-artifactory-releases</name>
+  <url>http://oss.jfrog.org/artifactory/oss-release-local</url>
+</repository>
+```
 
-You may also like:-
-<ul>
- 	<li><span style="color: #3366ff;"><a class="vt-p" style="color: #3366ff;" title="How to Setup Realtime Alalytics over Logs with ELK Stack ?" href="https://saurzcode.in//2014/08/09/how-to-setup-realtime-alalytics-over-logs-with-elk-stack/" target="_blank" rel="noopener">Setting up Realtime Analytics over logs using ELK Stack</a></span></li>
- 	<li></li>
- 	<li><span style="color: #3366ff;"><a class="vt-p" style="color: #3366ff;" title="Top 10 Hadoop Shell Commands to manage HDFS" href="https://saurzcode.in//2013/10/27/hadoop-shell-commands/" target="_blank" rel="noopener">Top 10 Hadoop HDFS Shell Commands.</a></span></li>
- 	<li></li>
- 	<li><span style="color: #3366ff;"><a style="color: #3366ff;" href="https://saurzcode.in//2015/01/hive-sort-vs-order-vs-distribute-vs-cluster/">Hive - SORT BY, DISTRIBUTE BY vs CLUSTER BY</a></span></li>
-</ul>
-&nbsp;
+```xml
+<dependency>
+  <groupId>org.ajar</groupId>
+  <artifactId>swagger-spring-mvc-ui</artifactId>
+  <version>0.1</version>
+  <scope>compile</scope>
+</dependency>
+```
+
+---
+
+That's it. Now run the `Application.java` as a Java application in your IDE. The application should start in an embedded Tomcat/Jetty server on default port `8080`.
+
+### Verify the API Configuration
+
+Visit:  
+`http://localhost:8080/api-docs`
+
+Expected output:
+
+```json
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "apis": [
+    {
+      "path": "/default/hello-controller",
+      "description": "Hello Controller"
+    }
+  ],
+  "info": {
+    "title": "SaurzCode API",
+    "description": "API for Saurzcode",
+    "termsOfServiceUrl": "Saurzcode API terms of service",
+    "contact": "mail2saurzcode@gmail.com",
+    "license": "Saurzcode API Licence Type",
+    "licenseUrl": "Saurzcode API License URL"
+  }
+}
+```
+
+And finally, view and test the APIs at:  
+`http://localhost:8080/index.html`
+
+![Swagger: API Doc for RESTful API](https://saurzcode.in//assets/uploads/2014/08/swaggerjpg.jpg)
+
+---
+
+### ⚠️ Note:
+
+The default URL in web jar files is:  
+`http://petstore.swagger.wordnik.com/api/api-docs`
+
+So you might see an error:  
+> "Can't read from the server. It may not have the appropriate access-control-origin settings."
+
+**Solution**:  
+Replace the URL on screen from:  
+`http://petstore.swagger.wordnik.com/api/api-docs`  
+to  
+`http://localhost:8080/api-docs`
+
+---
+
+### 🔗 Complete Project
+
+View the full example here:  
+[https://github.com/saurzcode/saurzcode-swagger-spring](https://github.com/saurzcode/saurzcode-swagger-spring/)
+
+---
+
+### References
+
+- [https://github.com/martypitt/swagger-springmvc](https://github.com/martypitt/swagger-springmvc)
+- [https://helloreverb.com/developers/swagger/](https://helloreverb.com/developers/swagger/)
+
+---
+
+### You may also like:
+
+- [Setting up Realtime Analytics over logs using ELK Stack](https://saurzcode.in//2014/08/09/how-to-setup-realtime-alalytics-over-logs-with-elk-stack/)
+- [Top 10 Hadoop HDFS Shell Commands](https://saurzcode.in//2013/10/27/hadoop-shell-commands/)
+- [Hive - SORT BY, DISTRIBUTE BY vs CLUSTER BY](https://saurzcode.in//2015/01/hive-sort-vs-order-vs-distribute-vs-cluster/)

@@ -3,7 +3,7 @@ id: 118
 title: 'Top 10 Hadoop Shell Commands to manage HDFS'
 date: '2013-10-27T22:32:09-07:00'
 author: saurzcode
-layout: single
+layout: medium
 guid: 'https://saurzcode.in//?p=118'
 permalink: /2013/10/hdfs-shell-commands/
 publicize_google_plus_url:
@@ -22,7 +22,7 @@ ampforwp_custom_content_editor_checkbox:
     - ''
 ampforwp-amp-on-off:
     - default
-image: /wp-content/uploads/2013/10/hadoop-hdfs-post.jpg
+image: /assets/uploads/2013/10/hadoop-hdfs-post.jpg
 categories:
     - 'Big Data'
     - Technology
@@ -45,22 +45,22 @@ Let's get started.
 ## 1. Create a directory in HDFS at the given path(s).
 
 **Usage:**
-```
+```sh
 hadoop fs -mkdir <paths>
 ```
 **Example:**
-```
+```sh
 hadoop fs -mkdir /user/saurzcode/dir1 /user/saurzcode/dir2
 ```
 
 ## 2. List the contents of a directory.
 
 **Usage:**
-```
+```sh
 hadoop fs -ls <args>
 ```
 **Example:**
-```
+```sh
 hadoop fs -ls /user/saurzcode
 ```
 
@@ -72,11 +72,11 @@ hadoop fs -ls /user/saurzcode
 Copy a single src file, or multiple src files from local file system to the Hadoop data file system
 
 **Usage:**
-```
+```sh
 hadoop fs -put <localsrc> ... <HDFS_dest_Path>
 ```
 **Example:**
-```
+```sh
 hadoop fs -put /home/saurzcode/Samplefile.txt /user/saurzcode/dir3/
 ```
 
@@ -86,11 +86,11 @@ hadoop fs -put /home/saurzcode/Samplefile.txt /user/saurzcode/dir3/
 Copies/Downloads files to the local file system
 
 **Usage:**
-```
+```sh
 hadoop fs -get <hdfs_src> <localdst>
 ```
 **Example:**
-```
+```sh
 hadoop fs -get /user/saurzcode/dir3/Samplefile.txt /home/
 ```
 
@@ -99,11 +99,11 @@ hadoop fs -get /user/saurzcode/dir3/Samplefile.txt /home/
 Same as UNIX cat command:
 
 **Usage:**
-```
+```sh
 hadoop fs -cat <path[filename]>
 ```
 **Example:**
-```
+```sh
 hadoop fs -cat /user/saurzcode/dir1/abc.txt
 ```
 
@@ -112,11 +112,11 @@ hadoop fs -cat /user/saurzcode/dir1/abc.txt
 This command allows multiple sources as well in which case the destination must be a directory.
 
 **Usage:**
-```
+```sh
 hadoop fs -cp <source> <dest>
 ```
 **Example:**
-```
+```sh
 hadoop fs -cp /user/saurzcode/dir1/abc.txt /user/saurzcode/dir2
 ```
 
@@ -124,18 +124,18 @@ hadoop fs -cp /user/saurzcode/dir1/abc.txt /user/saurzcode/dir2
 
 ### copyFromLocal
 **Usage:**
-```
+```sh
 hadoop fs -copyFromLocal <localsrc> URI
 ```
 **Example:**
-```
+```sh
 hadoop fs -copyFromLocal /home/saurzcode/abc.txt /user/saurzcode/abc.txt
 ```
 Similar to `put` command, except that the source is restricted to a local file reference.
 
 ### copyToLocal
 **Usage:**
-```
+```sh
 hadoop fs -copyToLocal [-ignorecrc] [-crc] URI <localdst>
 ```
 Similar to `get` command, except that the destination is restricted to a local file reference.
@@ -145,11 +145,11 @@ Similar to `get` command, except that the destination is restricted to a local f
 Note: Moving files across the filesystem is not permitted.
 
 **Usage:**
-```
+```sh
 hadoop fs -mv <src> <dest>
 ```
 **Example:**
-```
+```sh
 hadoop fs -mv /user/saurzcode/dir1/abc.txt /user/saurzcode/dir2
 ```
 
@@ -158,21 +158,21 @@ hadoop fs -mv /user/saurzcode/dir1/abc.txt /user/saurzcode/dir2
 Remove files specified as argument. Deletes directory only when it is empty
 
 **Usage:**
-```
+```sh
 hadoop fs -rm <arg>
 ```
 **Example:**
-```
+```sh
 hadoop fs -rm /user/saurzcode/dir1/abc.txt
 ```
 
 ### The recursive version of delete.
 **Usage:**
-```
+```sh
 hadoop fs -rmr <arg>
 ```
 **Example:**
-```
+```sh
 hadoop fs -rmr /user/saurzcode/
 ```
 
@@ -181,22 +181,22 @@ hadoop fs -rmr /user/saurzcode/
 Similar to tail command in Unix.
 
 **Usage:**
-```
+```sh
 hadoop fs -tail <path[filename]>
 ```
 **Example:**
-```
+```sh
 hadoop fs -tail /user/saurzcode/dir1/abc.txt
 ```
 
 ## 10. Display the aggregate length of a file.
 
 **Usage:**
-```
+```sh
 hadoop fs -du <path>
 ```
 **Example:**
-```
+```sh
 hadoop fs -du /user/saurzcode/dir1/abc.txt
 ```
 

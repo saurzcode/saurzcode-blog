@@ -66,3 +66,9 @@ highlighter: rouge
 
 exclude:
   - Gemfile.lock
+
+# Social usernames for developer blog
+# Used in layouts for social follow buttons
+
+twitter_username: saurzcode
+github_username: saurzcode

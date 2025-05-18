@@ -3,7 +3,7 @@ id: 273
 title: 'String Interning &#8211; What ,Why and When ?'
 date: '2014-05-19T10:41:07-07:00'
 author: saurzcode
-layout: post
+layout: medium
 guid: 'https://saurzcode.in//?p=273'
 permalink: /2014/05/string-interning-what-why-and-when/
 geo_public:
@@ -25,20 +25,24 @@ tags:
     - Technology
 ---
 
-<em><strong>What is String Interning </strong></em>
+## What is String Interning
 
 String Interning is a method of storing only one copy of each distinct String Value, which must be immutable.
-<p style="color: #333333;">In Java <code style="color: #333333;">String</code> class has a <code style="color: #333333;">public</code> method <code style="color: #333333;">intern()</code> that returns a canonical representation for the string object. Java's <code style="color: #333333;">String</code> class privately maintains a pool of strings, where <code style="color: #333333;">String</code> literals are automatically interned.</p>
 
-<blockquote>
-<p style="color: #333333;"><em>When the <code style="color: #333333;">intern()</code> method is invoked on a <code style="color: #333333;">String</code> object it looks the string contained by this <code style="color: #333333;">String</code> object in the pool, if the string is found there then the string from the pool is returned. Otherwise, this <code style="color: #333333;">String</code> object is added to the pool and a reference to this <code style="color: #333333;">String</code> object is returned.</em></p>
-</blockquote>
-<p style="color: #333333;">The <code style="color: #333333;">intern()</code> method helps in comparing two <code style="color: #333333;">String</code> objects with <code style="color: #333333;">==</code> operator by looking into the pre-existing pool of string literals, no doubt it is faster than <code style="color: #333333;">equals()</code> method. <span style="color: #333333;">The pool of strings in Java is maintained for saving space and for faster comparisons.</span><strong><span style="color: #333333;"> </span></strong>Normally Java programmers are advised to use <code style="color: #333333;">equals()</code>, not <code style="color: #333333;">==</code>, to compare two strings. This is because <code style="color: #333333;">==</code> operator compares memory locations, while <code style="color: #333333;">equals()</code> method compares the content stored in two objects.</p>
-<p style="color: #333333;"><em><strong>Why and When to Intern ?</strong></em></p>
-<p style="color: #333333;">Thought Java automatically interns all Remember that we only need to intern strings when they are not constants, and we want to be able to quickly compare them to other interned strings. The <code style="color: #333333;">intern() </code>method should be used on strings constructed with <code style="color: #333333;">new String()</code> in order to compare them by <code style="color: #333333;">==</code> operator.</p>
-<p style="color: #333333;">Let's take a look at the following Java program to understand the <em>intern()</em> behavior.</p>
+In Java, the `String` class has a `public` method `intern()` that returns a canonical representation for the string object. Java's `String` class privately maintains a pool of strings, where `String` literals are automatically interned.
 
-<pre class="lang:java decode:true">public class TestString {
+> When the `intern()` method is invoked on a `String` object it looks the string contained by this `String` object in the pool, if the string is found there then the string from the pool is returned. Otherwise, this `String` object is added to the pool and a reference to this `String` object is returned.
+
+The `intern()` method helps in comparing two `String` objects with `==` operator by looking into the pre-existing pool of string literals, no doubt it is faster than `equals()` method. The pool of strings in Java is maintained for saving space and for faster comparisons. Normally Java programmers are advised to use `equals()`, not `==`, to compare two strings. This is because `==` operator compares memory locations, while `equals()` method compares the content stored in two objects.
+
+### Why and When to Intern?
+
+Though Java automatically interns all string literals, remember that we only need to intern strings when they are not constants, and we want to be able to quickly compare them to other interned strings. The `intern()` method should be used on strings constructed with `new String()` in order to compare them by `==` operator.
+
+Let's take a look at the following Java program to understand the `intern()` behavior.
+
+```java
+public class TestString {
  
     public static void main(String[] args) {
         String s1 = "Test";
@@ -70,4 +74,5 @@ true
 true
 true
 true
-true</pre>
+true
+```
