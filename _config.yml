@@ -21,7 +21,7 @@
 title: SaurzCode
 email: mail2saurzcode@gmail.com
 description: >-
-  Big Data and Spark tutorials.
+  Big Data, Spark , ML and Data Engineering.
 baseurl: "/"
 url: "https://saurzcode.in"
 read_time: true
@@ -50,7 +50,8 @@ defaults:
 #theme: minimal-mistakes-jekyll
 #remote_theme: wowthemesnet/mediumish-theme-jekyll
 #theme: just-the-docs
-theme: jekyll-theme-so-simple
+#theme: jekyll-theme-so-simple
+remote_theme: "mmistakes/so-simple-theme@3.2.0"
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
