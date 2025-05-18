@@ -102,3 +102,18 @@ exclude:
 
 twitter_username: saurzcode
 github_username: saurzcode
+
+
+copyright: "This site is made with <3 by *me, myself, and I*."
+
+
+footer_links:
+  - title: X
+    url: https://x.com/saurzcode
+    icon: fab fa-twitter-square
+  - title: GitHub
+    url: https://github.com/saurzcode
+    icon: fab fa-github-square
+  - title: Feed
+    url: atom.xml
+    icon: fas fa-rss-square
