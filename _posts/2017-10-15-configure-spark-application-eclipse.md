@@ -72,7 +72,7 @@ If running on Windows, you need Hadoop binaries in Windows format. `winutils.exe
 
 - [Download winutils.exe](http://public-repo-1.hortonworks.com/hdp-win-alpha/winutils.exe)
 - Place it at: `C:/hadoop/bin/winutils.exe`
-- See [this guide]({{site.baseurl}}/2019/09/running-spark-application-on-windows/) for more details.
+- See [this guide](/assets/uploads//2019/09/running-spark-application-on-windows/) for more details.
 
 ---
 

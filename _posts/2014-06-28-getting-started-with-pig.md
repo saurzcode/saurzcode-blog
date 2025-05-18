@@ -36,7 +36,7 @@ Through the User Defined Functions (UDF) facility in Pig, it can invoke code in 
 
 ## Architecture
 
-[![Pig Architecture]({{site.baseurl}}/assets/uploads/2014/06/pig-achitecture.jpg)]({{site.baseurl}}/assets/uploads/2014/06/pig-achitecture.jpg)
+[![Pig Architecture](/assets/uploads/2014/06/pig-achitecture.jpg)
 
 ## How It is being Used?
 

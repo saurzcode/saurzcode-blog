@@ -35,7 +35,7 @@ For both the steps below let's assume following tree structure of folders that e
 - **Original repository with subdirectories:** `https://github.com/USER/REPOSITORY-A.GIT`
 - **Sub-directory to be migrated to the new repository:** `folder-b`
 
-![git sub-directory structure]({{site.baseurl}}/assets/uploads/2019/09/Screenshot-2019-09-15-at-2.05.39-PM.png)
+![git sub-directory structure](/assets/uploads/2019/09/Screenshot-2019-09-15-at-2.05.39-PM.png)
 
 ## Approach#1 - Moving along with branches and tags and commit history.
 

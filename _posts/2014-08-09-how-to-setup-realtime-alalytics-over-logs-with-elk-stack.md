@@ -55,7 +55,7 @@ Kibana is a user friendly way to view, search and visualize your log data, which
 
 Logstash is essentially a pipelining tool. In a basic, centralized installation a logstash agent, known as the shipper, will read input from one to many input sources and output that text wrapped in a JSON message to a broker. Typically Redis, the broker, caches the messages until another logstash agent, known as the collector, picks them up, and sends them to another output. In the common example this output is Elasticsearch, where the messages will be indexed and stored for searching. The Elasticsearch store is accessed via the Kibana web application which allows you to visualize and search through the logs. The entire system is scalable. Many different shippers may be running on many different hosts, watching log files and shipping the messages off to a cluster of brokers. Then many collectors can be reading those messages and writing them to an Elasticsearch cluster.
 
-![Realtime Analytics for logs using ELK Stack]({{site.baseurl}}/assets/uploads/2014/08/logstash1-e1407584364173.png)
+![Realtime Analytics for logs using ELK Stack](/assets/uploads/2014/08/logstash1-e1407584364173.png)
 
 **How do I fetch useful information out of logs?**
 
@@ -63,7 +63,7 @@ Fetching useful information from logs is one of the most important parts of this
 
 **A bit more about Logstash**
 
-![Realtime Analytics over Logs using ELK Stack]({{site.baseurl}}/assets/uploads/2014/08/grok-300x168.png)
+![Realtime Analytics over Logs using ELK Stack](/assets/uploads/2014/08/grok-300x168.png)
 
 **Filters**
 

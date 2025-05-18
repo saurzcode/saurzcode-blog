@@ -21,7 +21,7 @@ tags:
     - hive
 ---
 
-![Sort By vs Order By vs Group By vs Cluster By in Hive]{{site.baseurl}}/assets/uploads/2015/01/images.jpg)
+![Sort By vs Order By vs Group By vs Cluster By in Hive]/assets/uploads/2015/01/images.jpg)
 
 # What is Hive Strict Mode?
 

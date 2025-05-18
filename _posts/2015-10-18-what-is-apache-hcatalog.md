@@ -56,7 +56,7 @@ Managing data storage and metadata in Hadoop can be complex, especially when usi
 - Exposes a **REST API** for external systems to access metadata
 - Built on top of the **Hive Metastore**
 
-![HCatalog Overview]({{site.baseurl}}/assets/uploads/2015/10/Capture.png)
+![HCatalog Overview](/assets/uploads/2015/10/Capture.png)
 
 ---
 

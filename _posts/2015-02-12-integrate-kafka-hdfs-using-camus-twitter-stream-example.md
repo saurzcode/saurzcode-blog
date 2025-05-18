@@ -226,7 +226,7 @@ hadoop jar camus-example-0.1.0-SNAPSHOT-shaded.jar com.linkedin.camus.etl.kafka.
 
 If successful, you should see records in HDFS at the path specified in `etl.destination.path` (e.g., `/user/hduser/topics/`).
 
-![Camus Kafka HDFS Pipeline]({{site.baseurl}}/assets/uploads/2015/02/camus_kafka_hdfs.png)
+![Camus Kafka HDFS Pipeline](/assets/uploads/2015/02/camus_kafka_hdfs.png)
 
 ## Troubleshooting & Tips
 
