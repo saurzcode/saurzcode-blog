@@ -57,6 +57,12 @@ plugins:
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-remote-theme
+
+google_analytics: G-XBR6KYY2X7
+
+disqus:
+  shortname: saurzcode
+
   
 #- jekyll-lunr-js-search # for search        
 
