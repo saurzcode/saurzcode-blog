@@ -21,5 +21,10 @@ ampforwp-amp-on-off:
     - default
 classic-editor-remember:
     - classic-editor
+
+layout: page
+title: About
+permalink: /about/
 ---
 
+**Saurabh Chhajed** is a Senior Data and Machine Learning Engineer with a passion for leveraging emerging technologies to drive impactful solutions. He has contributed to the development of data products and machine learning–based recommendation systems for some of the world’s leading investment banks, credit card companies, and manufacturing enterprises. A strong advocate for open-source technologies, Saurabh believes in their transformative role in shaping the future of technology. He regularly shares insights through articles on Big Data, Hadoop, Apache Spark, and Machine Learning.
