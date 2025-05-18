@@ -23,6 +23,7 @@ tags:
 
 A practical, developer-focused guide to distributed training and inference with CatBoost on Apache Spark, including code examples and best practices.
 
+<!--more-->
 ---
 
 ## Table of Contents

@@ -26,7 +26,7 @@ tags:
 # Integrate Kafka with HDFS using Camus (Twitter Stream Example)
 
 A step-by-step guide to building a Kafka-to-HDFS data pipeline using [Camus](https://github.com/linkedin/camus) and a Twitter stream. This guide is aimed at developers looking for a practical, detailed walkthrough.
-
+<!--more-->
 ---
 
 ## Table of Contents

@@ -24,6 +24,8 @@ tags:
 
 If you regret putting that git sub-directory inside a git repository and thinking about moving it out of the current repository to its own repository, you have come to the right place!
 
+<!--more-->
+
 In this post, we will see step by step approach to give a new home to that git sub-directory. I know the biggest worry when we are trying to do something like this is, if you will be able to get all the history of commits, all branches, tags, etc. intact while migrating the sub-directory. Don't worry about that! This post got you covered.
 
 Below, I will provide you with 2 approaches, first, *to move the sub-directory along with all the commits with all its branches and tags* and second, *to move just with commit history to master*, if you don't care about the branches. Let's get started -

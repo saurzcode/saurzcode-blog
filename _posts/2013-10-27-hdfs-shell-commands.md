@@ -36,7 +36,7 @@ tags:
 ---
 
 So you already know what *Hadoop* is? Why it is used for? What problems you can solve with it? And you want to know how you can deal with files on *HDFS*? Don't worry, you are in the right place.
-
+<!--more-->
 In this article I will present **Top 10 basic Hadoop HDFS operations managed through shell commands** which are useful to manage files on *HDFS* clusters. For testing purposes, you can invoke these commands using either some of the VMs from *Cloudera*, *Hortonworks*, etc., or if you have your own setup of a pseudo-distributed cluster.
 
 Let's get started.

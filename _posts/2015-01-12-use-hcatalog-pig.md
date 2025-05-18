@@ -25,7 +25,7 @@ tags:
 # Using HCatalog with Pig
 
 This post is a step by step guide on running HCatalog and using HCatalog with Apache Pig:
-
+<!--more-->
 **Assumptions:**
 
 Pig and Hive are installed and tested with basic modes.

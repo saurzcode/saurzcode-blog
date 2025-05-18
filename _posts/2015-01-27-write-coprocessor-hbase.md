@@ -23,7 +23,7 @@ tags:
 # What is Coprocessor in HBase?
 
 Coprocessor is a mechanism which helps to move computations closer to the data in HBase. It is like a Mapreduce framework to distribute tasks across the cluster.
-
+<!--more-->
 You can think of them like either Aspects in Java where it intercepts code before and after some critical operations and executes some user supplied behavior or Triggers or Stored Procedures in RDBMS which gets executed at run time and near to the data.
 
 Coprocessor functionality helps to run a custom code directly on the region server which gives following benefits:

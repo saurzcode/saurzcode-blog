@@ -28,7 +28,7 @@ tags:
 ## What is String Interning
 
 String Interning is a method of storing only one copy of each distinct String Value, which must be immutable.
-
+<!--more-->
 In Java, the `String` class has a `public` method `intern()` that returns a canonical representation for the string object. Java's `String` class privately maintains a pool of strings, where `String` literals are automatically interned.
 
 > When the `intern()` method is invoked on a `String` object it looks the string contained by this `String` object in the pool, if the string is found there then the string from the pool is returned. Otherwise, this `String` object is added to the pool and a reference to this `String` object is returned.

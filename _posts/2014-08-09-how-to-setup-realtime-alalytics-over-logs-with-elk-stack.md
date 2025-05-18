@@ -34,7 +34,7 @@ tags:
 ### What is the ELK stack?
 
 The ELK stack consists of open source tools **ElasticSearch**, **Logstash**, and **Kibana**. These three provide a fully working real-time data analytics tool for getting wonderful information sitting on your data.
-
+<!--more-->
 **ElasticSearch**
 
 ElasticSearch, built on top of Apache Lucene, is a search engine with focus on real-time analysis of the data, and is based on the RESTful architecture. It provides standard full text search functionality and powerful search based on query. ElasticSearch is document-oriented/based and you can store everything you want as JSON. This makes it powerful, simple and flexible.

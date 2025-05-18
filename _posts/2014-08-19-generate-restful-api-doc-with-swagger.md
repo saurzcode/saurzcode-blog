@@ -27,7 +27,7 @@ tags:
 
 **Swagger** is based on the **OPEN API specification** and is a complete framework for describing, producing, consuming, and visualizing RESTful web services by effectively mapping all the resources and operations associated with it.  
 The goal of Swagger is to enable client and documentation systems to update at the same pace as the server. The documentation of methods, parameters, and models are tightly integrated into the server code, allowing APIs to always stay in sync.
-
+<!--more-->
 ![Swagger]({{site.baseurl}}/assets/uploads/2014/08/swagger-logo-horizontal.png)
 
 ### Why is Swagger useful?

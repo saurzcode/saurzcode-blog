@@ -31,7 +31,7 @@ tags:
 ## What is Apache Pig?
 
 Apache Pig is a high level scripting language that is used with Apache Hadoop. It enables data analysts to write complex data transformations without knowing Java. Its simple SQL-like scripting language is called Pig Latin, and appeals to developers already familiar with scripting languages and SQL. Pig Scripts are converted into MapReduce Jobs which run on data stored in HDFS (refer to the diagram below).
-
+<!--more-->
 Through the User Defined Functions (UDF) facility in Pig, it can invoke code in many languages like JRuby, Jython and Java. You can also embed Pig scripts in other languages. The result is that you can use it as a component to build larger and more complex applications that tackle real business problems.
 
 ## Architecture

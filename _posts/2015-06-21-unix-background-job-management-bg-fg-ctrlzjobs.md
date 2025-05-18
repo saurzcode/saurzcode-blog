@@ -25,7 +25,7 @@ tags:
 # Unix Job Control Commands: `bg`, `fg`, `Ctrl+Z`, `jobs`
 
 A practical guide for developers and data engineers to manage long-running jobs in Unix, especially useful when working with Hadoop or other big data tools.
-
+<!--more-->
 ---
 
 ## Table of Contents

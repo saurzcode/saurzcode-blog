@@ -26,7 +26,7 @@ tags:
 # What is Hive Strict Mode?
 
 Hive Strict Mode (`hive.mapred.mode=strict`) enables Hive to restrict certain performance intensive operations. Such as:
-
+<!--more-->
 - It restricts queries of partitioned tables without a **WHERE** clause.
 
 ```vim

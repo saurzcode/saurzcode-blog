@@ -23,7 +23,7 @@ tags:
 # DataFrame Operations in Spark using Scala
 
 A comprehensive, developer-friendly guide to common DataFrame operations in Apache Spark using Scala, with code examples and explanations for each join type.
-
+<!--more-->
 ---
 
 ## Table of Contents

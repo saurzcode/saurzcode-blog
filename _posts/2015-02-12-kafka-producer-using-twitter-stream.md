@@ -27,7 +27,7 @@ tags:
 # How-To: Write a Kafka Producer using Twitter Stream (Twitter HBC Client)
 
 A step-by-step guide to building a Kafka producer that streams live tweets using Twitter's Hosebird Client (HBC) and publishes them to a Kafka topic. This is a practical, developer-focused walkthrough with code, configuration, and troubleshooting tips.
-
+<!--more-->
 ---
 
 ## Table of Contents

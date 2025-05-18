@@ -28,7 +28,7 @@ tags:
 ## What is Apache CXF?
 
 Apache CXF is an open source services framework. CXF helps you build and develop services using frontend programming APIs, like JAX-WS and JAX-RS. These services can speak a variety of protocols such as SOAP, XML/HTTP, RESTful HTTP, or CORBA and work over a variety of transports such as HTTP, JMS etc.
-
+<!--more-->
 ## How CXF Works?
 
 As you can see [here](http://java.dzone.com/articles/apache-cxf-how-message), as how CXF service calls are processed, most of the functionality in the Apache CXF runtime is implemented by interceptors. Every endpoint created by the Apache CXF runtime has potential interceptor chains for processing messages. The interceptors in these chains are responsible for transforming messages between the raw data transported across the wire and the Java objects handled by the endpoint's implementation code.

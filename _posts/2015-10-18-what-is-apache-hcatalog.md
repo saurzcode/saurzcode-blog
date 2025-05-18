@@ -24,19 +24,21 @@ tags:
 # What is Apache HCatalog?
 
 A developer-friendly introduction to Apache HCatalog, its architecture, features, and how it fits into the Hadoop ecosystem.
-
+<!--more-->
 ---
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
-2. [What is HCatalog?](#what-is-hcatalog)
-3. [Key Features](#key-features)
-4. [How HCatalog Works](#how-hcatalog-works)
-5. [Supported File Formats](#supported-file-formats)
-6. [HCatalog Architecture](#hcatalog-architecture)
-7. [Integration with Other Tools](#integration-with-other-tools)
-8. [References](#references)
+- [What is Apache HCatalog?](#what-is-apache-hcatalog)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [What is HCatalog?](#what-is-hcatalog)
+  - [Key Features](#key-features)
+  - [How HCatalog Works](#how-hcatalog-works)
+  - [Supported File Formats](#supported-file-formats)
+  - [HCatalog Architecture](#hcatalog-architecture)
+  - [Integration with Other Tools](#integration-with-other-tools)
+  - [References](#references)
 
 ---
 

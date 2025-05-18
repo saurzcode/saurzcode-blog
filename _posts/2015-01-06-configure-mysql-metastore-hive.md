@@ -27,7 +27,7 @@ tags:
 # How to Configure MySQL Metastore for Hive
 
 Hive by default comes with Derby as its metastore storage, which is suited only for testing purposes and in most of the production scenarios it is recommended to use MySQL as a metastore. This is a step by step guide on How to Configure MySQL Metastore for Hive in place of Derby Metastore (Default).
-
+<!--more-->
 **Assumptions:** Basic knowledge of Unix is assumed and also It's assumed that Hadoop and Hive configurations are in place. Hive with default metastore Derby is properly configured and tested out.
 
 1. Install MySQL:

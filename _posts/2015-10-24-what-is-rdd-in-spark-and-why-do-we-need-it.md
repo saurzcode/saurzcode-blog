@@ -24,7 +24,7 @@ tags:
 # What is RDD in Spark? And Why Do We Need It?
 
 A developer-friendly guide to understanding Resilient Distributed Datasets (RDDs) in Apache Spark, their properties, and why they are fundamental for fast, fault-tolerant distributed computing.
-
+<!--more-->
 ---
 
 ## Table of Contents
