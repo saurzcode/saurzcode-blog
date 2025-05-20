@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saurabh Chhajed - Data & AI Engineer</title>
+    <style>
+        :root {
+            --primary-color: #0e76a8;
+            --secondary-color: #292b2c;
+            --accent-color: #5cb85c;
+            --light-bg: #f8f9fa;
+            --dark-bg: #343a40;
+            --text-light: #f8f9fa;
+            --text-dark: #212529;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .profile-name {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        
+        .profile-location {
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .profile-location svg {
+            width: 1rem;
+            height: 1rem;
+        }
+        
+        nav {
+            background-color: var(--secondary-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .nav-list {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-list li a {
+            display: block;
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-list li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            font-weight: 300;
+        }
+        
+        .summary-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+        }
+        
+        .summary-list {
+            list-style-type: none;
+        }
+        
+        .summary-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .summary-list li:before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .experience-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .job-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .company {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+        }
+        
+        .date {
+            color: var(--secondary-color);
+            font-style: italic;
+        }
+        
+        .responsibilities {
+            list-style-type: none;
+        }
+        
+        .responsibilities li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .responsibilities li:before {
+            content: "→";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+        }
+        
+        .tech-stack {
+            font-style: italic;
+            color: var(--secondary-color);
+            margin: 1rem 0;
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-category {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+        }
+        
+        .skill-category-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .skill-list {
+            list-style-type: none;
+        }
+        
+        .skill-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skill-list li:before {
+            content: "✓";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+        }
+        
+        .education-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+        }
+        
+        .education-details {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .institution {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .degree {
+            margin-top: 0.5rem;
+        }
+        
+        .achievements {
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+        
+        .certifications-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+        }
+        
+        .certification-list {
+            list-style-type: none;
+        }
+        
+        .certification-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .certification-list li:before {
+            content: "🏆";
+            position: absolute;
+            left: 0;
+        }
+        
+        .awards-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+        }
+        
+        .awards-list {
+            list-style-type: none;
+        }
+        
+        .awards-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .awards-list li:before {
+            content: "🌟";
+            position: absolute;
+            left: 0;
+        }
+        
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            margin-bottom: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+            background-color: var(--accent-color);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-list {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .nav-list li {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .experience-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .education-details {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header id="home">
+        <div class="container header-content">
+            <h1 class="profile-name">Saurabh Chhajed</h1>
+            <p class="profile-title">Lead Data & AI Engineer</p>
+            <p class="profile-location">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                Hyderabad, Telangana, India
+            </p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <ul class="nav-list">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#summary">Summary</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#awards">Awards</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Summary Section -->
+    <section id="summary">
+        <div class="container">
+            <h2 class="section-title">Professional Summary</h2>
+            <div class="summary-content">
+                <ul class="summary-list">
+                    <li>Seasoned Big Data Analytics and Machine Learning Engineer with 15+ years of expertise in developing and leading teams to build cloud-based and on-premise big data platforms and ML solutions, specializing in distributed processing on AWS, GCP and other cloud platforms.</li>
+                    <li>Good knowledge of application development in Big Data Ecosystem (Hadoop, MapReduce, Spark, Trino, Hive, Airflow) and Cloud-Native Computing Technologies (Docker, Kubernetes) etc.</li>
+                    <li>Hands on experience developing web and large scale data processing applications in Java, Scala and Python.</li>
+                    <li>Good knowledge on the end to end machine learning model training, optimization, monitoring and deployments, both offline and online models for recommender systems.</li>
+                    <li>Good knowledge of computer algorithms and data structures and various data processing frameworks and design patterns.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            
+            <!-- Thoughtworks -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="job-title">Lead Data/AI Engineer</h3>
+                        <p class="company">Thoughtworks India Pvt Ltd, Hyderabad, India</p>
+                    </div>
+                    <p class="date">Oct 2024 - Present</p>
+                </div>
+                <p><strong>Client:</strong> Leading U.S. Home Improvement Retailer</p>
+                <ul class="responsibilities">
+                    <li>Spearheaded architecture and delivery of a scalable Promotion Analytics Engine, driving campaign insights and analytics based on 20+ financial parameters.</li>
+                    <li>Developed robust, production-grade, DBT models based ETL pipelines combining PySpark and BigQuery for batch and near-real-time transformations.</li>
+                    <li>Integrated LightGBM regression models via BigQuery ML to enable accurate volume forecasting.</li>
+                    <li>Led a team of 10 engineers, overseeing design, architecture, and code reviews ensuring quality and scalability.</li>
+                    <li>Collaborated across various stakeholders – Product, Data Science, and Architects.</li>
+                </ul>
+            </div>
+            
+            <!-- Salesforce -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="job-title">Lead Data Engineer (LMTS)</h3>
+                        <p class="company">Salesforce India Pvt Ltd, Hyderabad, India</p>
+                    </div>
+                    <p class="date">June 2022 - Sept 2024</p>
+                </div>
+                <p>Salesforce's Unified Intelligence Platform (UIP) is an enterprise-scale internal data lake and analytics ecosystem, facilitating petabyte-scale data ingestion, exploration, transformation, and visualization.</p>
+                <p class="tech-stack">AWS EMR | S3 | Airflow | Spark | Scala | Python | Kubernetes | Docker | Trino | Iceberg | Jupyter Notebooks</p>
+                <ul class="responsibilities">
+                    <li>Led the architecture and development of a metadata-driven ingestion pipeline processing petabytes of data, integrating Kafka, Spark, Scala, Trino, and Airflow for scalable batch and streaming ingestion.</li>
+                    <li>Designed GDPR-compliant data leak scanners with sampling techniques, cutting scanning costs by 40%.</li>
+                    <li>Built a high-throughput Leak Management Pipeline cleaning leaked PII data across 3000+ record types and several PBs of data.</li>
+                    <li>Engineered an advanced tokenization service securing sensitive identifiers while enabling efficient analytics.</li>
+                    <li>Developed Airflow Operators and frameworks to streamline ingestion and exploration workflows.</li>
+                    <li>Implemented system monitoring and alerting with Grafana and PagerDuty for real-time system visibility.</li>
+                    <li>Created a workload analytics dashboard using Apache Superset, optimizing Spark cluster resource utilization by ~20%.</li>
+                    <li>Led a team of 5 engineers, driving design reviews, code quality initiatives, and operational improvements.</li>
+                </ul>
+            </div>
+            
+            <!-- American Express -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="job-title">Lead Data/ML Engineer</h3>
+                        <p class="company">American Express (via Impetus Technologies Inc.), Phoenix, Arizona, USA</p>
+                    </div>
+                    <p class="date">Dec 2014 - June 2022</p>
+                </div>
+                <ul class="responsibilities">
+                    <li>Architected and built a merchant recommender system using an ensemble of CatBoost, collaborative filtering, and Word2Vec models on Spark, enhancing Amex marketing personalization.</li>
+                    <li>Developed end-to-end ML pipelines: feature extraction, model training, hyperparameter tuning (distributed grid search), monitoring, and deployment to online scoring systems.</li>
+                    <li>Reduced hyperparameter tuning time by 40% through distributed Spark-based optimization.</li>
+                    <li>Designed and deployed microservices-based model serving architecture for real-time, geo-personalized merchant recommendations.</li>
+                    <li>Built Model/Feature Monitoring solutions to track GINI, PSI, and accuracy metrics, ensuring model health.</li>
+                    <li>Spearheaded development of an online offer personalization engine with Hadoop, Hive, MapRDB, and Elasticsearch, improving campaign launch speed by 50%.</li>
+                    <li>Collaborated cross-functionally with Product, Data Science, and Marketing teams using Agile/SAFe methodologies.</li>
+                </ul>
+            </div>
+            
+            <!-- JP Morgan -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="job-title">Application Developer</h3>
+                        <p class="company">JP Morgan Chase & Co., India</p>
+                    </div>
+                    <p class="date">Aug 2012 - Dec 2014</p>
+                </div>
+                <ul class="responsibilities">
+                    <li>Developed a multi-clustered distributed data management platform for high availability, low-latency processing.</li>
+                    <li>Built real-time Search and Analytics solutions using ELK Stack (Elasticsearch, Logstash, Kibana).</li>
+                    <li>Designed real-time order update systems using distributed caching (Gemfire).</li>
+                    <li>Evangelized code quality tools (Sonar, Jira, Crucible), improving team code health.</li>
+                    <li>Conducted a Hadoop PoC for analyzing cross-application usage patterns.</li>
+                    <li>Worked on Messaging products, providing end to end integration between many business-critical applications involving app. 2-3 million message exchanges daily.</li>
+                    <li>Exposure to Multithreading and Java performance tuning methodologies involving GC algorithms and tuning.</li>
+                </ul>
+            </div>
+            
+            <!-- GE -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="job-title">Systems Engineer</h3>
+                        <p class="company">General Electric (GE) Company (TCS), India</p>
+                    </div>
+                    <p class="date">Nov 2009 - July 2012</p>
+                </div>
+                <ul class="responsibilities">
+                    <li>Led re-architecture of a large-scale ASP/IIS application to a Java/Spring microservices framework.</li>
+                    <li>Designed and developed RESTful APIs consumed by multiple clients.</li>
+                    <li>Improved critical business process execution time by 50%, saving $30,000.</li>
+                    <li>Optimized database queries and developed complex PL/SQL procedures.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Big Data Platforms</h3>
+                    <ul class="skill-list">
+                        <li>Spark Core/ML/Streaming</li>
+                        <li>Trino</li>
+                        <li>Hive</li>
+                        <li>Hadoop</li>
+                        <li>Apache Iceberg</li>
+                        <li>Airflow</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Cloud Platforms</h3>
+                    <ul class="skill-list">
+                        <li>AWS (EMR, EC2, S3, IAM etc.)</li>
+                        <li>GCP (BigQuery, Dataproc, Cloud Composer, Storage etc.)</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Programming</h3>
+                    <ul class="skill-list">
+                        <li>Java</li>
+                        <li>Scala</li>
+                        <li>Python</li>
+                        <li>SQL</li>
+                        <li>PL/SQL</li>
+                        <li>Shell Scripting</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Distributed Systems</h3>
+                    <ul class="skill-list">
+                        <li>Kubernetes</li>
+                        <li>Docker</li>
+                        <li>Microservices Architecture</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Data Security</h3>
+                    <ul class="skill-list">
+                        <li>Tokenization</li>
+                        <li>GDPR Compliance</li>
+                        <li>Leak Management Pipelines</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Additional Technologies</h3>
+                    <ul class="skill-list">
+                        <li>Elasticsearch</li>
+                        <li>HBase</li>
+                        <li>MapRDB</li>
+                        <li>Pivotal Gemfire</li>
+                        <li>Apache Superset</li>
+                        <li>DBT</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="skill-category-title">DevOps & CI/CD</h3>
+                    <ul class="skill-list">
+                        <li>Jenkins</li>
+                        <li>Maven</li>
+                        <li>Gradle</li>
+                        <li>Terraform</li>
+                        <li>Git</li>
+                        <li>JIRA</li>
+                        <li>Hashicorp Vault</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-container">
+                <div class="education-details">
+                    <div>
+                        <h3 class="institution">Institute of Engineering and Technology, Indore, MP</h3>
+                        <p class="degree">B.E. in Computer Science Engineering</p>
+                    </div>
+                    <p class="date">2009</p>
+                </div>
+                <p class="achievements">Top 1% of batch</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications">
+        <div class="container">
+            <h2 class="section-title">Certifications & Publications</h2>
+            <div class="certifications-container">
+                <ul class="certification-list">
+                    <li>GCP Certified Professional Data Engineer</li>
+                    <li>Cloudera Certified Hadoop Developer</li>
+                    <li>MapR Certified Spark Developer</li>
+                    <li>Authored a book on ELK (Elasticsearch, Logstash and Kibana) for PacktPub</li>
+                    <li>Performed technical review for multiple Bigdata and ML books for PacktPub</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards">
+        <div class="container">
+            <h2 class="section-title">Awards & Accolades</h2>
+            <div class="awards-container">
+                <ul class="awards-list">
+                    <li>Outstanding Employee of the Year among 1500+ in the Big Data group</li>
+                    <li>DZone Most Valuable Blogger (Top 5%) for contributions on web tech, big data, and open source</li>
+                    <li>Top Performer in TCS Initial Learning Program (400+ trainees)</li>
+                    <li>5× TCS Gems "On the Spot" awardee for exceptional performance and client recognition</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container footer-content">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p>Feel free to reach out for opportunities or collaboration</p>
+            </div>
+            <div class="social-links">
+                <a href="#" title="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <a href="#" title="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="#" title="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+            </div>
+            <p class="copyright">&copy; 2025 Saurabh Chhajed. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
