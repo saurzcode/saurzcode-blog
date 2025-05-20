@@ -136,4 +136,3 @@ excerpt_separator: "<!--more-->"
 related_posts:
   limit: 3  # Number of related posts to show
   min_common_tags: 1  # Minimum number of common tags to qualify as related
-
