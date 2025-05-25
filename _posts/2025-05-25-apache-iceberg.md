@@ -22,6 +22,7 @@ In this post, we’ll break down:
 - A call to action for your next data platform decision
 
 ---
+<!--more-->
 
 ## What Is Apache Iceberg?
 
