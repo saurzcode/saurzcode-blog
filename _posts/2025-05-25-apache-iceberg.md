@@ -2,7 +2,7 @@
 layout: post
 title: "Unlocking Data Lakes with Apache Iceberg: The Open Table Format Revolutionizing Analytics"
 date: 2025-05-25
-categories: [Big Data, Apache Iceberg, Data Engineering]
+categories: [big-data, Apache-Iceberg, Data-Engineering]
 tags: [Apache Iceberg, data lakes, open table format, big data, data architecture]
 description: Learn how Apache Iceberg is transforming data lakes with its open table format, robust architecture, and seamless support for big data engines like Spark, Trino, and Flink.
 ---
