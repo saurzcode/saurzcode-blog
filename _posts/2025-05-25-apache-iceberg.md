@@ -158,7 +158,3 @@ PARTITIONED BY (bucket(16, id))
 If you’re building or re-architecting your data platform, don’t settle for outdated table formats.
 
 Apache Iceberg is the open, scalable, and reliable foundation your modern data stack needs.
-
-👉 Try it out with Spark or Trino today.
-👉 Join the Apache Iceberg community on GitHub.
-👉 Check out vendors like Dremio, Tabular, or Snowflake for managed solutions.
