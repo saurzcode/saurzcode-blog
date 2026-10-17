@@ -48,12 +48,6 @@ defaults:
       layout: post
       comments: true
       share: true
-  # Default social share image (og:image / Twitter card) for all pages.
-  # Individual posts can override with `image:` in their front matter.
-  - scope:
-      path: ""
-    values:
-      image: "/assets/uploads/logo3.png"
 
 # Build settings
 #theme: minimal-mistakes-jekyll
