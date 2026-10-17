@@ -11,6 +11,13 @@
         Add metadata for search engines and social networks if jekyll-seo-tag plugin is enabled
       {% endcomment %}
       {% include head-seo.html %}
+      {% comment %}
+        Fallback social share image for pages that do not set `image:` in front matter.
+        Avoids a global front-matter default, which the theme renders as a hero image.
+      {% endcomment %}
+      {% unless page.image %}
+        <meta property="og:image" content="{{ '/assets/uploads/logo3.png' | absolute_url }}">
+      {% endunless %}
     {% else %}
       <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
       <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
@@ -52,4 +59,4 @@
     {%- endif -%}
   
     {% include head-custom.html %}
-  </head>
+</head>
