@@ -22,6 +22,7 @@ tags:
     - hive
     - metastore
     - mysql
+description: "Hive by default comes with Derby as its metastore storage, which is suited only for testing purposes and in most of the production scenarios it is."
 ---
 
 
