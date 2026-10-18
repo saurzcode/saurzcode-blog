@@ -22,6 +22,7 @@ tags:
     - kafka
     - storm
     - twitter
+description: "A step-by-step guide to building a Kafka producer that streams live tweets using Twitter\u2019s Hosebird Client (HBC) and publishes them to a Kafka topic. This."
 ---
 
 
