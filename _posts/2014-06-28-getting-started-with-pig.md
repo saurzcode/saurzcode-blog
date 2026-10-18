@@ -26,6 +26,7 @@ tags:
     - hdfs
     - Pig
     - 'Pig Latin'
+description: "What is Apache Pig? Apache Pig is a high level scripting language that is used with Apache Hadoop. It enables data analysts to write complex data."
 ---
 
 ## What is Apache Pig?
