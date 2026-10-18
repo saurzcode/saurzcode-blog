@@ -38,6 +38,8 @@ google_fonts:
 skin: "/assets/css/skins/default.css"
 locale: en-US
 logo: "/assets/uploads/logo.png"
+# Default social/structured-data image. page-image.html skips it so it never renders as a hero banner.
+default_image: /assets/uploads/logo3.png
 
 
 category_archive_path: "/categories/#"
@@ -52,6 +54,7 @@ defaults:
       layout: post
       comments: true
       share: true
+      image: /assets/uploads/logo3.png
 
 # Build settings
 #theme: minimal-mistakes-jekyll
