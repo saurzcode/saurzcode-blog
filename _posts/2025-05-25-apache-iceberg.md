@@ -4,7 +4,7 @@ title: "Unlocking Data Lakes with Apache Iceberg: The Open Table Format Revoluti
 date: 2025-05-25
 categories: [big-data, Apache-Iceberg, Data-Engineering]
 tags: [Apache Iceberg, data lakes, open table format, big data, data architecture]
-description: Learn how Apache Iceberg is transforming data lakes with its open table format, robust architecture, and seamless support for big data engines like Spark, Trino, and Flink.
+description: "Learn how Apache Iceberg's open table format brings ACID tables, schema evolution and time travel to data lakes, with support for Spark, Trino and Flink."
 ---
 
 ## Why Apache Iceberg is the Game-Changer Your Data Lake Needs
@@ -158,3 +158,10 @@ PARTITIONED BY (bucket(16, id))
 If you’re building or re-architecting your data platform, don’t settle for outdated table formats.
 
 Apache Iceberg is the open, scalable, and reliable foundation your modern data stack needs.
+
+## Related reading
+
+- [Streaming from Kafka into an Iceberg Lakehouse, End to End]({% post_url 2026-10-17-streaming-kafka-to-iceberg-lakehouse %})
+- [The Small-Files Problem: A Field Guide]({% post_url 2026-10-18-small-files-field-guide %})
+- [MCP for Data Engineers: Connecting AI Agents to Your Iceberg Lakehouse]({% post_url 2026-10-18-mcp-for-data-engineers-iceberg-lakehouse %})
+- [HDFS vs Object Storage: Deep Dive for Big Data Processing in the Cloud]({% post_url 2025-05-18-hdfs-vs-object-storage %})
