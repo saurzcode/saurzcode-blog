@@ -5,6 +5,7 @@ date: 2025-05-18
 categories: big-data cloud storage
 tags: [HDFS, Object Storage, Spark, Big Data, Cloud, Data Engineering]
 excerpt_separator: <!--more-->
+description: "With the rise of cloud-native data architectures and serverless computing, data engineers face a crucial decision when designing big data pipelines: HDFS."
 ---
 
 With the rise of cloud-native data architectures and serverless computing, data engineers face a crucial decision when designing big data pipelines: **HDFS or Object Storage?** This decision impacts performance, scalability, fault tolerance, and cost. In this post, we’ll conduct a deep technical analysis of both storage systems and explore how they align with modern big data processing patterns on the cloud.
@@ -181,7 +182,12 @@ HDFS laid the foundation for scalable big data systems, but the demands of elast
 
 ---
 
+## Related reading
+
+- [Unlocking Data Lakes with Apache Iceberg: The Open Table Format Revolutionizing Analytics]({% post_url 2025-05-25-apache-iceberg %})
+- [Streaming from Kafka into an Iceberg Lakehouse, End to End]({% post_url 2026-10-17-streaming-kafka-to-iceberg-lakehouse %})
+- [The Small-Files Problem: A Field Guide]({% post_url 2026-10-18-small-files-field-guide %})
+
 ## 💬 Let's Discuss
 
 Have you migrated from HDFS to Object Storage? Are you dealing with atomic rename issues or tuning Spark for S3? Share your experiences or questions in the comments section!
-
