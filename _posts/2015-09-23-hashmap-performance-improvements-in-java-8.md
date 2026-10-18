@@ -18,7 +18,6 @@ tags:
     - java8
 ---
 
-# HashMap Performance Improvements in Java 8
 
 A developer-focused look at how Java 8 improved the performance of `HashMap` under high-collision scenarios, with code examples and practical explanations.
 <!--more-->

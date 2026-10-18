@@ -1,0 +1,19 @@
+# SaurzCode
+
+> Big Data, Spark, ML and Data Engineering — a technical blog by Saurabh Chhajed.
+
+SaurzCode (https://saurzcode.in) publishes practical, code-first tutorials on big data,
+Apache Spark, Apache Kafka, Apache Iceberg, lakehouse architectures, and data engineering.
+
+## Featured posts
+
+- [Streaming from Kafka into an Iceberg Lakehouse, End to End](https://saurzcode.in/big-data/apache-iceberg/apache-kafka/spark/data-engineering/streaming-kafka-to-iceberg-lakehouse/): build a Kafka → Spark Structured Streaming → Iceberg pipeline with exactly-once semantics.
+- [Why Apache Iceberg is the Game-Changer Your Data Lake Needs](https://saurzcode.in/big-data/apache-iceberg/data-engineering/apache-iceberg/): Iceberg architecture, features, and real-world use cases.
+- [HDFS vs Object Storage](https://saurzcode.in/big-data/cloud/storage/hdfs-vs-object-storage/): deep technical comparison for cloud-native data architectures.
+- [How to Train and Score CatBoost Model on Spark](https://saurzcode.in/2021/05/how-to-train-and-score-catboost-model-on-spark/): distributed training and inference with CatBoost on Apache Spark.
+
+## More
+
+- All posts: https://saurzcode.in/posts/
+- Sitemap: https://saurzcode.in/sitemap.xml
+- About the author: https://saurzcode.in/about/
