@@ -23,6 +23,7 @@ tags:
     - java
     - soap
     - webservice
+description: "What is Apache CXF? Apache CXF is an open source services framework. CXF helps you build and develop services using frontend programming APIs, like JAX-WS."
 ---
 
 ## What is Apache CXF?
