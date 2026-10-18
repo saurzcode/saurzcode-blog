@@ -25,6 +25,7 @@ tags:
     - 'Learning Elk Stack'
     - PacktPub
     - 'Saurabh Chhajed'
+description: "Learning ELK Stack I am writing this post to announce the general availability of my book on ELK stack titled \u201c Learning ELK Stack \u201c with PacktPub."
 ---
 
 ## Learning ELK Stack
