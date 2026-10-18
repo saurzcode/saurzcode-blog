@@ -17,6 +17,7 @@ tags:
     - bigdata
     - spark
     - 'spark interview'
+description: "Skipped Stages in Spark UI You must have come across various scenarios where you see a DAG like below, where you see a few stages shows greyed out with a."
 ---
 
 ## Skipped Stages in Spark UI

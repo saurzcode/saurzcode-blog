@@ -19,6 +19,7 @@ tags:
     - hadoop
     - rdd
     - spark
+description: "A developer-friendly guide to understanding Resilient Distributed Datasets (RDDs) in Apache Spark, their properties, and why they are fundamental for."
 ---
 
 

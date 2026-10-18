@@ -4,7 +4,7 @@ title: "MCP for Data Engineers: Connecting AI Agents to Your Iceberg Lakehouse"
 date: 2026-10-18
 categories: [Data-Engineering, AI]
 tags: [Model Context Protocol, MCP, Apache Iceberg, PyIceberg, AI agents, Claude, data engineering, lakehouse]
-description: Build a Model Context Protocol (MCP) server over your Apache Iceberg catalog with PyIceberg and the official MCP Python SDK - so Claude and other AI agents can browse namespaces, inspect schemas, and preview tables. Fully working, tested code included.
+description: "Build an MCP server over your Apache Iceberg catalog with PyIceberg and the MCP Python SDK so Claude and other AI agents can browse and query tables."
 ---
 
 ## Your AI Agent Can't See Your Lakehouse - Let's Fix That
@@ -289,6 +289,12 @@ The pattern here is small but shifts how you work with a lakehouse: the catalog 
 If you've followed this series - [Iceberg as the table format](https://saurzcode.in/big-data/apache-iceberg/data-engineering/apache-iceberg/), [streaming Kafka events into a table](https://saurzcode.in/big-data/apache-iceberg/apache-kafka/spark/data-engineering/streaming-kafka-to-iceberg-lakehouse/), and now agents over the catalog - the next piece is the layer that makes it all multi-engine: the **Iceberg REST Catalog**. Deep dive next week: one catalog, many engines, with Spark and Trino/Flink side by side.
 
 ---
+
+## Related reading
+
+- [Unlocking Data Lakes with Apache Iceberg: The Open Table Format Revolutionizing Analytics]({% post_url 2025-05-25-apache-iceberg %})
+- [The Small-Files Problem: A Field Guide]({% post_url 2026-10-18-small-files-field-guide %})
+- [HDFS vs Object Storage: Deep Dive for Big Data Processing in the Cloud]({% post_url 2025-05-18-hdfs-vs-object-storage %})
 
 ## 💬 Let's Discuss
 

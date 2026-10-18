@@ -275,6 +275,12 @@ Small files are not a moral failing — they're the natural output of a healthy 
 
 Are you compacting on a schedule, or only when queries get slow? Binpack or sort — which strategy do you reach for first? And what's the worst small-files incident you've seen in production? Share your setup or war stories in the comments!
 
+## Related reading
+
+- [Unlocking Data Lakes with Apache Iceberg: The Open Table Format Revolutionizing Analytics]({% post_url 2025-05-25-apache-iceberg %})
+- [MCP for Data Engineers: Connecting AI Agents to Your Iceberg Lakehouse]({% post_url 2026-10-18-mcp-for-data-engineers-iceberg-lakehouse %})
+- [HDFS vs Object Storage: Deep Dive for Big Data Processing in the Cloud]({% post_url 2025-05-18-hdfs-vs-object-storage %})
+
 ## Additional Details
 
 - **Description:** A field guide to diagnosing, preventing, and fixing the small-files problem in Spark + Apache Iceberg lakehouse tables — with real numbers, working SQL, and a maintenance checklist.

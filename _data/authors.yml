@@ -1,0 +1,10 @@
+saurzcode:
+  name: Saurabh Chhajed
+  url: https://saurzcode.in/about/
+  links:
+    - title: GitHub
+      url: https://github.com/saurzcode
+      icon: fab fa-github-square
+    - title: X
+      url: https://x.com/saurzcode
+      icon: fab fa-twitter-square

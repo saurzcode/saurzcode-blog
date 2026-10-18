@@ -33,6 +33,7 @@ tags:
     - 'high availability'
     - scalable
     - storage
+description: "So you already know what Hadoop is? Why it is used for? What problems you can solve with it? And you want to know how you can deal with files on HDFS?."
 ---
 
 So you already know what *Hadoop* is? Why it is used for? What problems you can solve with it? And you want to know how you can deal with files on *HDFS*? Don't worry, you are in the right place.
@@ -204,4 +205,3 @@ hadoop fs -du /user/saurzcode/dir1/abc.txt
 Please comment on which of these commands you found most useful while dealing with Hadoop /HDFS.
 
 Reference: [https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HDFSCommands.html](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HDFSCommands.html)
-

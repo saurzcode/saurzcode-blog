@@ -4,7 +4,7 @@ title: "Streaming from Kafka into an Iceberg Lakehouse, End to End"
 date: 2026-10-17
 categories: [big-data, Apache-Iceberg, Apache-Kafka, Spark, Data-Engineering]
 tags: [Apache Kafka, Apache Iceberg, Spark Structured Streaming, lakehouse, data engineering, streaming]
-description: Build a production-style streaming pipeline from Apache Kafka into an Apache Iceberg lakehouse using Spark Structured Streaming - with working code, exactly-once semantics, and table maintenance tips.
+description: "Stream Apache Kafka into an Apache Iceberg lakehouse with Spark Structured Streaming: working code, exactly-once writes and table maintenance tips."
 ---
 
 ## From Kafka Topics to a Lakehouse Table, the Right Way
@@ -259,6 +259,13 @@ The pipeline we built - Kafka topic, Spark Structured Streaming, Iceberg table -
 > If your streaming data still lands as raw files and waits for a batch job to become queryable, a Kafka-to-Iceberg pipeline is the highest-leverage upgrade you can make to your platform.
 
 ---
+
+## Related reading
+
+- [Unlocking Data Lakes with Apache Iceberg: The Open Table Format Revolutionizing Analytics]({% post_url 2025-05-25-apache-iceberg %})
+- [The Small-Files Problem: A Field Guide]({% post_url 2026-10-18-small-files-field-guide %})
+- [MCP for Data Engineers: Connecting AI Agents to Your Iceberg Lakehouse]({% post_url 2026-10-18-mcp-for-data-engineers-iceberg-lakehouse %})
+- [HDFS vs Object Storage: Deep Dive for Big Data Processing in the Cloud]({% post_url 2025-05-18-hdfs-vs-object-storage %})
 
 ## 💬 Let's Discuss
 

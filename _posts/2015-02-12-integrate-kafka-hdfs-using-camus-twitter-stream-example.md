@@ -21,6 +21,7 @@ tags:
     - kafka
     - kafka-hdfs
     - linkedin
+description: "A step-by-step guide to building a Kafka-to-HDFS data pipeline using Camus and a Twitter stream. This guide is aimed at developers looking for a."
 ---
 
 

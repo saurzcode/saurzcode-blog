@@ -19,11 +19,12 @@ tags:
     - hadoop
     - hbase
     - hive
+description: "![Sort By vs Order By vs Group By vs Cluster By in Hive]/assets/uploads/2015/01/images.jpg) What is Hive Strict Mode? Hive Strict Mode."
 ---
 
 ![Sort By vs Order By vs Group By vs Cluster By in Hive]/assets/uploads/2015/01/images.jpg)
 
-# What is Hive Strict Mode?
+## What is Hive Strict Mode?
 
 Hive Strict Mode (`hive.mapred.mode=strict`) enables Hive to restrict certain performance intensive operations. Such as:
 <!--more-->
