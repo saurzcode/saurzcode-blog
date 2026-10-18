@@ -33,6 +33,7 @@ tags:
     - 'sort by'
     - spark
     - 'spark sql'
+description: "In Apache Hive HQL, you can decide to order or sort your data differently based on ordering and distribution requirement. In this post we will look at how."
 ---
 
 In Apache Hive HQL, you can decide to order or sort your data differently based on ordering and distribution requirement. In this post we will look at how **SORT BY**, **ORDER BY**, **DISTRIBUTE BY** and **CLUSTER BY** behave differently in Hive. Let's get started -
