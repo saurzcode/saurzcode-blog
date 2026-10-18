@@ -23,6 +23,7 @@ tags:
     - ELK
     - Kibana
     - LogStash
+description: "Once we know something, we find it hard to imagine what it was like not to know it. \u2014 Chip & Dan Heath, Authors of Made to Stick, Switch What is the ELK."
 ---
 
 > Once we know something, we find it hard to imagine what it was like not to know it.
