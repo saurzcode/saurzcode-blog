@@ -18,7 +18,6 @@ tags:
     - MultithreadedMapper
 ---
 
-# How to Use MultiThreadedMapper in MapReduce
 
 A practical, developer-focused guide to using Hadoop's `MultithreadedMapper` for parallelizing map tasks and improving performance in CPU-bound jobs.
 <!--more-->

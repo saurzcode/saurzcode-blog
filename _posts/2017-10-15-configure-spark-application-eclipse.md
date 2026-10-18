@@ -26,7 +26,6 @@ tags:
     - spark
 ---
 
-# How to Configure Spark Application (Scala and Java 8 Version with Maven) in Eclipse
 
 A step-by-step, developer-friendly guide to setting up Apache Spark applications in Eclipse/Scala IDE using Maven, with both Java and Scala examples.
 <!--more-->

@@ -21,7 +21,6 @@ tags:
     - winutils.exe
 ---
 
-# Spark – How to Run Spark Applications on Windows
 
 A step-by-step, developer-friendly guide to running Apache Spark applications on Windows, including configuration, environment setup, and troubleshooting tips.
 <!--more-->

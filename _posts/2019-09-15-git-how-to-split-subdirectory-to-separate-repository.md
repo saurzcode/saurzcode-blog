@@ -20,7 +20,6 @@ tags:
     - split
 ---
 
-# GIT Split Sub-Directory to Repositories
 
 If you regret putting that git sub-directory inside a git repository and thinking about moving it out of the current repository to its own repository, you have come to the right place!
 

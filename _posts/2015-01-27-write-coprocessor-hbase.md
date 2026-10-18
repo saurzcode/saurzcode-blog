@@ -20,7 +20,6 @@ tags:
     - hbase
     - hdfs
 ---
-# What is Coprocessor in HBase?
 
 Coprocessor is a mechanism which helps to move computations closer to the data in HBase. It is like a Mapreduce framework to distribute tasks across the cluster.
 <!--more-->

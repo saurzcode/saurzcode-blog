@@ -28,7 +28,6 @@ tags:
     - 'Java Interview'
     - JVM
 ---
-# Understanding the `finalize` Method in Java
 
 `finalize` method in the `Object` class is often a point of discussion regarding whether it should be used or not. Below are some important pointers on the `finalize` method:
 <!--more-->

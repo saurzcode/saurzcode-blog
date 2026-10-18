@@ -21,7 +21,6 @@ tags:
     - hive
 ---
 
-# What is Apache HCatalog?
 
 A developer-friendly introduction to Apache HCatalog, its architecture, features, and how it fits into the Hadoop ecosystem.
 <!--more-->

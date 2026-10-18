@@ -20,6 +20,10 @@
 
 title: SaurzCode
 email: mail2saurzcode@gmail.com
+author:
+  name: Saurabh Chhajed
+  email: mail2saurzcode@gmail.com
+  url: https://saurzcode.in
 description: >-
   Big Data, Spark , ML and Data Engineering.
 baseurl: "/"
