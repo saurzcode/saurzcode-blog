@@ -19,6 +19,7 @@ tags:
     - hadoop
     - hbase
     - hdfs
+description: "Coprocessor is a mechanism which helps to move computations closer to the data in HBase. It is like a Mapreduce framework to distribute tasks across the."
 ---
 
 Coprocessor is a mechanism which helps to move computations closer to the data in HBase. It is like a Mapreduce framework to distribute tasks across the cluster.
