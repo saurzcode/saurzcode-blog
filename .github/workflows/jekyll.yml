@@ -29,7 +29,11 @@ concurrency:
 jobs:
   # Build job
   build:
-    runs-on: ubuntu-latest
+    # Pinned to ubuntu-24.04: ubuntu-latest moved to ubuntu-26.04, which the pinned
+    # setup-ruby (v1.207.0) does not recognize and where ruby-builder provides no
+    # CRuby 3.1 builds. This exact runner + action + Ruby 3.1 combination is the
+    # last known-green configuration (run 40258399504, 2026-10-26).
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
